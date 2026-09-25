@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ICP Dossier</title>
+<meta name="description" content="ICP dossier synthesised from a synthetic CRM export of 60 accounts: the account profile, the buying group, segments, anti-ICP, verbatim language, pains, desires and triggers.">
+<style>
+:root{
+  --bg:#f7f6f3; --surface:#ffffff; --surface-2:#f0eee9; --text:#1c1b19; --muted:#5f5b53;
+  --border:#dedad2; --accent:#1f5f8b; --accent-soft:#e3eef6;
+  --good:#2f6b3a; --good-soft:#e4f0e6; --warn:#8a5a00; --warn-soft:#f7ecd6;
+  --bad:#9b2c2c; --bad-soft:#f6e1e1; --quote:#2a2926;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#141413; --surface:#1d1c1a; --surface-2:#262522; --text:#ecebe7; --muted:#a8a49b;
+    --border:#34322e; --accent:#7ab6de; --accent-soft:#1d2f3c;
+    --good:#8fcf99; --good-soft:#1c2e20; --warn:#e3b865; --warn-soft:#352a14;
+    --bad:#ef9a9a; --bad-soft:#3a1f1f; --quote:#f3f2ee;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#141413; --surface:#1d1c1a; --surface-2:#262522; --text:#ecebe7; --muted:#a8a49b;
+  --border:#34322e; --accent:#7ab6de; --accent-soft:#1d2f3c;
+  --good:#8fcf99; --good-soft:#1c2e20; --warn:#e3b865; --warn-soft:#352a14;
+  --bad:#ef9a9a; --bad-soft:#3a1f1f; --quote:#f3f2ee;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--text);
+  font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif}
+.wrap{max-width:1080px;margin:0 auto;padding:32px 16px 80px}
+header.top{border-bottom:1px solid var(--border);padding-bottom:20px;margin-bottom:8px}
+.eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 6px}
+h1{font-size:30px;line-height:1.2;margin:0 0 10px;letter-spacing:-.01em}
+h2{font-size:22px;margin:48px 0 6px;letter-spacing:-.01em}
+h3{font-size:16px;margin:28px 0 8px}
+h2 + .lede{margin-top:0}
+p{margin:0 0 12px}
+.lede{color:var(--muted);max-width:760px}
+.notice{background:var(--warn-soft);color:var(--text);border:1px solid var(--border);border-left:4px solid var(--warn);
+  padding:10px 14px;border-radius:6px;font-size:14px;margin:16px 0 0}
+nav.toc{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:14px;margin:14px 0 0}
+nav.toc a{color:var(--accent);text-decoration:none}
+nav.toc a:hover{text-decoration:underline}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:18px 20px;margin:14px 0}
+.icp-hero{border-left:5px solid var(--accent)}
+.icp-name{font-size:24px;font-weight:700;margin:0 0 6px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin:16px 0 4px}
+.stat{background:var(--surface-2);border-radius:8px;padding:10px 12px}
+.stat b{display:block;font-size:22px;line-height:1.2}
+.stat span{font-size:13px;color:var(--muted)}
+.tbl{overflow-x:auto;margin:10px 0;border:1px solid var(--border);border-radius:8px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:13.5px}
+th,td{text-align:left;vertical-align:top;padding:8px 10px;border-bottom:1px solid var(--border)}
+th{background:var(--surface-2);font-weight:600;font-size:12.5px;color:var(--muted);white-space:nowrap}
+tr:last-child td{border-bottom:0}
+td.num{white-space:nowrap;font-variant-numeric:tabular-nums}
+.tag{display:inline-block;font-size:11.5px;font-weight:600;padding:1px 7px;border-radius:999px;white-space:nowrap}
+.yes{background:var(--good-soft);color:var(--good)}
+.part{background:var(--warn-soft);color:var(--warn)}
+.no{background:var(--bad-soft);color:var(--bad)}
+.tier{font-size:11.5px;color:var(--muted)}
+.rule{background:var(--accent-soft);border-radius:8px;padding:12px 14px;margin:12px 0}
+.rule code{font:13px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.seg h3{margin-top:0}
+.seg .meta{font-size:13px;color:var(--muted);margin-bottom:8px}
+.seg.anti{border-left:5px solid var(--bad)}
+.seg.below{border-left:5px solid var(--warn)}
+.seg.hold{border-left:5px solid var(--muted)}
+ul{margin:6px 0 12px;padding-left:20px}
+li{margin:3px 0}
+blockquote{margin:10px 0;padding:8px 14px;border-left:3px solid var(--border);color:var(--quote)}
+blockquote p{margin:0;font-size:15px}
+blockquote cite{display:block;font-style:normal;font-size:12.5px;color:var(--muted);margin-top:3px}
+.qgroup h3{margin-top:22px}
+.blank{color:var(--muted);font-style:italic}
+.small{font-size:13px;color:var(--muted)}
+footer{margin-top:56px;padding-top:16px;border-top:1px solid var(--border);font-size:13px;color:var(--muted)}
+@media (max-width:600px){h1{font-size:25px} h2{font-size:20px} .card{padding:14px}}
+@media print{body{background:#fff} .card,.tbl{break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <p class="eyebrow">ICP dossier · Pass 1 · Global managed connectivity (Internet, SD-WAN, SASE)</p>
+  <h1>Who stays and grows: the ICP from 60 won and lost accounts</h1>
+  <p class="lede">Built from <code>data/</code>: 60 accounts (40 won, 20 lost), 162 contacts, 48 public signals,
+  plus call notes, win/loss interviews and reviews. A best customer is a won account whose current ARR is
+  at least 1.5x the ACV it signed. The cut sits in a natural gap: best customers run from 1.58x to 2.40x,
+  the next group tops out at 1.24x.</p>
+  <p class="notice"><b>Synthetic data.</b> Every company, person, quote and number here is fictitious and was
+  generated for this demo from written business assumptions, so the ICP can only confirm those assumptions.
+  This page shows the method, not any real market.</p>
+  <nav class="toc" aria-label="Sections">
+    <a href="#icp">The ICP</a><a href="#buying-group">Buying group</a><a href="#rule">Targeting rule</a>
+    <a href="#segments">Segments and anti-ICP</a><a href="#words">Their words</a>
+    <a href="#pdt">Pains, desires, triggers</a><a href="#gaps">Gaps and checks</a><a href="#accounts">Best accounts</a>
+  </nav>
+</header>
+
+<!-- ================= ICP ================= -->
+<section id="icp">
+<h2>The ICP</h2>
+<div class="card icp-hero">
+  <p class="icp-name">The Patchwork Multinational</p>
+  <p>A company with 40 to 140 physical sites spread across 12 to 35 countries, still running a legacy MPLS
+  contract or a patchwork of regional carriers and local ISPs. A network leader at director level owns the
+  mess personally and the CIO signs. Something has just changed the footprint or the contract clock: an
+  acquisition in new countries, an announced country expansion or an MPLS renewal inside 12 months.</p>
+  <p class="small">The name comes from a best customer's own description of their network: "a patchwork of local
+  ISPs we picked up country by country" (Harwick Biosciences, discovery call).</p>
+  <div class="stats">
+    <div class="stat"><b>17 of 40</b><span>won accounts are best customers</span></div>
+    <div class="stat"><b>81%</b><span>of current ARR (£11.0m of £13.5m)</span></div>
+    <div class="stat"><b>1.91x</b><span>median ARR/ACV, vs 1.12x for average customers</span></div>
+    <div class="stat"><b>214 days</b><span>median sales cycle, vs 324 for average customers</span></div>
+  </div>
+</div>
+
+<h3>Account level: what separates the best customers</h3>
+<p class="small">Best = 17 won, ARR ≥ 1.5x ACV. Average = 15 won, ARR 1.0x to 1.24x. Churned or contracted = 8 won, ARR now below ACV (5 at zero). Lost = 20.</p>
+<div class="tbl"><table>
+<thead><tr><th>Trait</th><th>Best (17)</th><th>Average (15)</th><th>Churned / contracted (8)</th><th>Lost (20)</th><th>Separates?</th></tr></thead>
+<tbody>
+<tr><td><b>Countries with sites</b></td><td class="num">12–35 (median 22)</td><td class="num">7–15 (median 12)</td><td class="num">3–4</td><td class="num">1–106 (median 9.5)</td><td><span class="tag yes">Yes</span> Clean split from average and churned. Lost deals sit on both sides of the band.</td></tr>
+<tr><td><b>Sites</b></td><td class="num">40–140 (median 93)</td><td class="num">17–59 (median 41)</td><td class="num">11–39</td><td class="num">4–1,143</td><td><span class="tag yes">Yes</span> Same pattern as countries.</td></tr>
+<tr><td><b>Current network</b></td><td>Legacy MPLS, no SD-WAN (8) · MPLS + local ISPs (6) · Multiple regional carriers (3)</td><td>Mixed. Includes all 3 accounts with in-house SD-WAN</td><td>Single national carrier (8 of 8)</td><td>Global tier-1 MPLS (4), single national (5), rest mixed</td><td><span class="tag yes">Yes</span> Zero best customers on a single national carrier, a global tier-1 MPLS or in-house SD-WAN.</td></tr>
+<tr><td><b>Employees</b></td><td class="num">2,110–16,610 (median 8,170)</td><td class="num">1,040–6,880 (median 3,040)</td><td class="num">640–4,080</td><td class="num">300–113,140</td><td><span class="tag part">Partly</span> Separates from average and churned, not from lost deals in the same footprint (6,650–10,980).</td></tr>
+<tr><td><b>How they came in</b></td><td>ABM intent (8) · Partner referral (6) · Event (3)</td><td>Inbound content (5), Outbound SDR (5), ABM (3), Event (2)</td><td>RFP / tender (6), pricing page (2)</td><td>RFP / tender (6), mixed</td><td><span class="tag yes">Yes</span> Partner referral: 6 of 6 became best. Inbound content, outbound SDR, RFP and pricing page: 0 of 31.</td></tr>
+<tr><td><b>Intent stage at creation</b></td><td>Consideration or later (16 known). None at Awareness</td><td>5 of 11 known at Awareness</td><td>Decision or Purchase</td><td>Mostly Consideration or Decision</td><td><span class="tag part">Partly</span> "Not at Awareness" separates from average. Late stage alone does not: churned tenders arrive late too.</td></tr>
+<tr><td><b>Before pipeline</b></td><td>Trigger on file for 14 of 17 (enrichment), 16 of 17 with calls and interviews</td><td>Cloud migration (3), one renewal, one expansion</td><td>Price-led public tender (3)</td><td>New CISO (3), network lead left (2), tender (4), global merger (2)</td><td><span class="tag yes">Yes</span> The type of trigger separates. See <a href="#pdt">triggers</a>.</td></tr>
+<tr><td><b>Industry</b></td><td>Logistics (5), Manufacturing (5), Retail (3), Food &amp; beverage (2), Life sciences (2)</td><td>Spread across 7 industries</td><td>Manufacturing, retail, hospitality, prof. services</td><td>Manufacturing (7), mixed</td><td><span class="tag no">No</span> Manufacturing appears in every segment. All best customers run physical sites (warehouses, plants, stores, breweries, labs), but 3 to 6 accounts per industry is too few for a rule.</td></tr>
+<tr><td><b>HQ country</b></td><td>BE, FR, NL, IT, US, CH, DE, DK</td><td>Mostly DK, SE, BE</td><td>Mixed</td><td>Mixed</td><td><span class="tag no">No</span> Not a targeting trait.</td></tr>
+</tbody></table></div>
+</section>
+
+<!-- ================= BUYING GROUP ================= -->
+<section id="buying-group">
+<h3>Buying group: who champions, who decides, who blocks</h3>
+<p class="small">Counts are accounts, from <code>contacts.csv</code>. "Why they buy" uses only words from calls, interviews and reviews at best-customer accounts.</p>
+<div class="tbl"><table>
+<thead><tr><th>Role</th><th>Titles at best accounts</th><th>Best (17)</th><th>The rest</th><th>Why this role buys, in their words</th></tr></thead>
+<tbody>
+<tr>
+  <td><b>Champion</b><br><span class="small">Network owner, IT, Director</span></td>
+  <td>Head of Network (6) · Global Network Lead (6) · Head of Network Infrastructure (4) · Head of IT Infrastructure (1)</td>
+  <td class="num"><b>17 of 17</b></td>
+  <td>Average: 11 of 15 champions are manager-level IT Ops or IT Service. Lost: 15 of 20 had no champion at all. Churned/contracted: 0 of 8.</td>
+  <td>Carries the carrier sprawl personally and runs the project. "My team spends more time on procurement than on the network." "I wrote the business case myself."</td>
+</tr>
+<tr>
+  <td><b>Decision maker</b><br><span class="small">IT, C-level</span></td>
+  <td>Chief Information Officer</td>
+  <td class="num"><b>16 of 17</b><br><span class="small">Hollin: not recorded</span></td>
+  <td>Average: Finance decides in 7 of 15 (Finance Director 5, CFO 2). Churned/contracted: Procurement decides in 8 of 8.</td>
+  <td>Signs the network owner's case and wants something to show the board: "site by site, green or red". "The CIO signed because the numbers were mine, not a vendor's."</td>
+</tr>
+<tr>
+  <td><b>Evaluator: security</b><br><span class="small">Security, Director or C-level</span></td>
+  <td>Head of Information Security (5) · CISO (4)</td>
+  <td class="num">9 of 17<br><span class="small">always evaluator</span></td>
+  <td>Average: 0 of 15 involved. Lost: involved in 7 of 20, blocker in 3.</td>
+  <td>Wants SASE later without a second procurement. Security is "phase two, but it's coming". "Is security on your roadmap or on mine?"</td>
+</tr>
+<tr>
+  <td><b>Evaluator: procurement</b><br><span class="small">Procurement, Manager</span></td>
+  <td>Category Manager - Technology (5) · IT Procurement Manager (4)</td>
+  <td class="num">9 of 17<br><span class="small">always evaluator</span></td>
+  <td>Decision maker in 8 of 8 churned/contracted and 6 of 20 lost.</td>
+  <td>Checks the terms late in the cycle. At Harwick, procurement "only joined for the last 10 minutes, asked about contract length". Price "has to be defensible, not cheapest" (Moravia call, speaker not recorded). No procurement quote on file beyond these.</td>
+</tr>
+<tr>
+  <td><b>Blocker</b></td>
+  <td class="blank">None recorded</td>
+  <td class="num">0 of 17</td>
+  <td>3 lost deals, all security (CISO 2, Head of Information Security 1), where security owned the budget.</td>
+  <td class="blank">No blocker quote at best accounts. The block pattern lives in the <a href="#seg-hold">hold segment</a>.</td>
+</tr>
+</tbody></table></div>
+<p>The pattern: <b>network owner champions, CIO signs, security and procurement evaluate.</b> When procurement
+or finance signs, the account churns or stays flat. When security owns the budget, or nobody owns the network,
+the deal is lost, even at accounts with the right footprint.</p>
+</section>
+
+<!-- ================= RULE ================= -->
+<section id="rule">
+<h3>Targeting rule (for the account list and routing)</h3>
+<div class="rule">
+<p><b>1. Footprint (builds the list):</b> <code>countries_with_sites 12–35 AND site_count 40–140 AND current_network_setup IN (Legacy MPLS no SD-WAN, MPLS + local ISPs, Multiple regional carriers)</code></p>
+<p style="margin:0"><b>2. Buying group (qualifies it):</b> <code>a director-level network owner is the champion</code> (Head of Network, Global Network Lead, Head of Network Infrastructure, Head of IT Infrastructure)</p>
+</div>
+<div class="tbl"><table>
+<thead><tr><th>Rule</th><th>Accounts matched</th><th>Best</th><th>Average</th><th>Lost</th><th>Best customers caught</th></tr></thead>
+<tbody>
+<tr><td>Footprint only</td><td class="num">25</td><td class="num">17</td><td class="num">3</td><td class="num">5</td><td class="num">17 of 17</td></tr>
+<tr><td>Footprint + network-owner champion</td><td class="num">18</td><td class="num">17</td><td class="num">1</td><td class="num">0</td><td class="num">17 of 17</td></tr>
+</tbody></table></div>
+<p class="small">All 5 lost deals inside the footprint had no network-owner champion. The one average account left
+(Alder Power, ACC-0025) has a Global Network Lead as champion but the CFO decided, which fits the average pattern.
+<b>These numbers are in-sample:</b> the rule was fitted and measured on the same 60 accounts, so treat 17 of 18 as
+optimistic until it is tested on new accounts.</p>
+</section>
+
+<!-- ================= SEGMENTS ================= -->
+<section id="segments">
+<h2>Segments and anti-ICP</h2>
+<p class="lede">Every account in the export lands in one group. The segments below the ICP are kept; the anti-ICP is excluded from targeting and routing.</p>
+
+<div class="grid2">
+  <div class="card seg below">
+    <h3>Segment 2: One-bill consolidators</h3>
+    <div class="meta">15 won accounts · ARR 1.04x to 1.24x · median ACV £149k · <b>keep, lower priority</b></div>
+    <ul>
+      <li>7 to 15 countries, 17 to 59 sites. Includes the 3 accounts already running in-house SD-WAN.</li>
+      <li>Champion is manager-level IT Ops or IT Service (11 of 15). Finance decides in 7 of 15.</li>
+      <li>Came in through inbound content, outbound SDR, ABM or events; 5 of 11 known were at Awareness.</li>
+      <li>They buy one invoice, not a network change: "I want fewer invoices." "Finance wants one bill. That's the project."</li>
+    </ul>
+    <p class="small"><b>Action:</b> serve through content and nurture. No ABM spend, no SDR sequences built for them.</p>
+  </div>
+
+  <div class="card seg hold" id="seg-hold">
+    <h3>Segment 3: Right footprint, wrong buying group</h3>
+    <div class="meta">6 lost accounts · £2.1m ACV lost · <b>hold, re-engage on a change</b></div>
+    <ul>
+      <li><b>Security-led (3):</b> Brennan, Stellan, Radley. A new CISO and a board-level zero-trust programme came before pipeline in all 3; security blocked. "Security first, network second."</li>
+      <li><b>No network owner (3):</b> Halden, Quarry, Bramwell. No network lead champion; at Halden and Quarry the Head of Network had left and was not backfilled. "I didn't have a network person to run the project, and I wasn't going to run it myself."</li>
+      <li>5 of the 6 match the footprint rule (Radley has 11 countries). Footprint alone would target them.</li>
+    </ul>
+    <p class="small"><b>Action:</b> keep off active routing. Re-engage when a network leader is hired. Each sub-group is 3 accounts: an anecdote, not a pattern.</p>
+  </div>
+</div>
+
+<h3>Anti-ICP: exclude from targeting and routing</h3>
+<div class="grid2">
+  <div class="card seg anti">
+    <h3>Domestic price buyers</h3>
+    <div class="meta">13 accounts on a single national carrier · 3 contracted, 5 churned, 5 lost · 0 retained at signed value</div>
+    <ul>
+      <li>1 to 4 countries, almost all sites in one country. Procurement or finance decides. No network-owner champion: at most an IT Manager.</li>
+      <li>Came in through a price-led tender or the pricing page, or small inbound (4 to 8 sites).</li>
+      <li>£531k signed at the 5 churned accounts, £0 left. The 3 contracted accounts fell from £218k to £134k.</li>
+      <li>"Price per store. The global part wasn't really relevant, we're almost all in Italy."</li>
+    </ul>
+    <p class="small"><b>Exclude:</b> <code>current_network_setup = Single national carrier</code> or <code>countries_with_sites ≤ 4</code>.</p>
+  </div>
+
+  <div class="card seg anti">
+    <h3>Incumbent re-bid tenders</h3>
+    <div class="meta">12 accounts from RFP / tender · 6 lost, 5 churned, 1 contracted · 0 retained at signed value</div>
+    <ul>
+      <li>Tender with price as the main criterion, incumbent invited to re-bid. Procurement decides.</li>
+      <li>Holds for multi-country tenders too (Calder 7 countries, Ostrava 8, Nesbury 6): all lost on price.</li>
+      <li>"The incumbent will match. They always do."</li>
+    </ul>
+    <p class="small"><b>Exclude from routing:</b> <code>lead_source = RFP / tender</code> where the incumbent re-bids and price per site is the award criterion.</p>
+  </div>
+
+  <div class="card seg anti">
+    <h3>Global fully managed WAN</h3>
+    <div class="meta">4 lost accounts · £8.7m ACV lost · all to a tier-1 global carrier</div>
+    <ul>
+      <li>415 to 1,143 sites, 64 to 106 countries, 30,620 to 113,140 employees, on a global tier-1 MPLS.</li>
+      <li>They want one provider to run the whole WAN including LAN, Wi-Fi and hardware.</li>
+      <li>"You were honest that it's not what you do."</li>
+      <li>4 accounts: an anecdote, but all 4 lost for the same stated reason.</li>
+    </ul>
+    <p class="small"><b>Exclude:</b> <code>current_network_setup = Global MPLS from tier-1 carrier</code> or <code>site_count &gt; 400</code>.</p>
+  </div>
+</div>
+</section>
+
+<!-- ================= WORDS ================= -->
+<section id="words">
+<h2>Their words</h2>
+<p class="lede">Verbatim from call notes, win/loss interviews and reviews, grammar and lowercase kept as written. ICP
+quotes come from 14 of the 17 best accounts; the other 3 have nothing on file (see <a href="#gaps">gaps</a>).</p>
+
+<div class="qgroup">
+<h3>Carrier sprawl</h3>
+<blockquote><p>"I have eleven carriers, eleven contracts, eleven support numbers. When a lab in Poland goes down I don't even know who to call first."</p><cite>Sam Walsh, Head of Network · Harwick Biosciences · discovery call</cite></blockquote>
+<blockquote><p>"Every new country is a new carrier negotiation. My team spends more time on procurement than on the network."</p><cite>Pablo Rossi, Head of Network Infrastructure · Kestrel Retail Group · discovery call</cite></blockquote>
+<blockquote><p>"Labs in 24 countries and I stopped being a part-time procurement manager. That's the real ROI."</p><cite>Tom Bauer, Head of Network · Whitmore Labs · review</cite></blockquote>
+<blockquote><p>"a patchwork of local ISPs we picked up country by country"</p><cite>Harwick Biosciences · discovery call · speaker not recorded</cite></blockquote>
+
+<h3>Acquired sites and new sites</h3>
+<blockquote><p>"The acquisition closed in March. Their network is still a black box to us in September."</p><cite>Mia Wagner, Head of Network · Moravia Logistics · discovery call</cite></blockquote>
+<blockquote><p>"We didn't pick the cheapest. We picked the one who could take the acquired sites off my plate in one go."</p><cite>Mia Wagner, Head of Network · Moravia Logistics · win interview</cite></blockquote>
+<blockquote><p>"went from 11 carriers to one contract and one portal. the two sites we acquired last year were live in 6 weeks, used to take us 4 months"</p><cite>Sam Walsh, Head of Network · Harwick Biosciences · review</cite></blockquote>
+
+<h3>Coverage where carriers don't go</h3>
+<blockquote><p>"My problem isn't bandwidth, it's coverage. I need someone who can get a line into a depot in Kazakhstan and support it."</p><cite>Lucia Jansen, Head of Network Infrastructure · Jorvik Freight · discovery call</cite></blockquote>
+<blockquote><p>"31 countries, a lot of them breweries in places with one decent ISP if you're lucky. Coverage was the whole decision."</p><cite>Lars Hughes, Global Network Lead · Glenmoor Brewing · win interview</cite></blockquote>
+<blockquote><p>"The ERP go-live depends on the plants being online properly. Right now half of them run on business broadband with no SLA."</p><cite>Mia Weber, Global Network Lead · Orwell Industries · discovery call</cite></blockquote>
+
+<h3>The deadline</h3>
+<blockquote><p>"The MPLS renewal is the deadline. If we don't have a plan by Q3 we roll over for another three years by default."</p><cite>Hannah Conti, Head of Network Infrastructure · Juniper Distribution · demo</cite></blockquote>
+<blockquote><p>"Our MPLS was up for renewal. Without a deadline we'd never have moved."</p><cite>Martin Nielsen, Head of Network Infrastructure · Rosmer Engineering · win interview</cite></blockquote>
+
+<h3>What they wanted instead</h3>
+<blockquote><p>"33 countries, one number to call. We added SD-WAN in year two and SASE in year three. Grew with us."</p><cite>Julia Evans, Global Network Lead · Drummond Brewing · review</cite></blockquote>
+<blockquote><p>"Finally I can see every store's connection in one place. Took us a year to add SASE on top but the security team is happy now."</p><cite>Anna Andersson, Head of Network · Mereford Brands · review</cite></blockquote>
+<blockquote><p>"they wanted to run our whole WAN. We only needed the internet layer done properly."</p><cite>Ben Andersson, Head of Network · Varne Distribution · win interview, on the tier-1 carrier</cite></blockquote>
+<blockquote><p>"I wrote the business case myself. The CIO signed because the numbers were mine, not a vendor's."</p><cite>Ben Andersson, Head of Network · Varne Distribution · win interview</cite></blockquote>
+<blockquote><p>"The partner who introduced you had already done our SAP rollout. That trust carried over."</p><cite>Martin Nielsen, Head of Network Infrastructure · Rosmer Engineering · win interview</cite></blockquote>
+
+<h3>The CIO and security, in the same room</h3>
+<blockquote><p>"site by site, green or red"</p><cite>Hugo Doyle, CIO · Juniper Distribution · demo, on the dashboard he wants for the board</cite></blockquote>
+<blockquote><p>"phase two, but it's coming"</p><cite>Rafael Lindberg, Head of Information Security · Juniper Distribution · demo, on security</cite></blockquote>
+<blockquote><p>"Is security on your roadmap or on mine?"</p><cite>Daniel Muller, CISO · Zeller Components · demo</cite></blockquote>
+
+<h3>Where it fell short (best customers)</h3>
+<blockquote><p>"Europe was smooth. Brazil and Indonesia took 12+ weeks to provision, which hurt two store openings. Support was good once it was live."</p><cite>David Walsh, Global Network Lead · Ulvik Retail Group · review</cite></blockquote>
+<blockquote><p>"Migration off MPLS done before the renewal date, which was the whole point. Portal reporting is good, the API is less mature than promised."</p><cite>Hannah Conti, Head of Network Infrastructure · Juniper Distribution · review</cite></blockquote>
+
+<h3>For contrast: how the rest talk</h3>
+<div class="grid2">
+<div>
+<p class="small"><b>One-bill consolidators</b></p>
+<blockquote><p>"Honestly we could manage country by country, it's just tiring. I want fewer invoices."</p><cite>Anna Keller, IT Operations Manager · Faring Advisory · call</cite></blockquote>
+<blockquote><p>"Finance liked one contract. For me it was fine, not life-changing. We're mostly in the Nordics anyway."</p><cite>Zoe Moreau, IT Service Manager · Tamsin Retail Group · interview</cite></blockquote>
+<blockquote><p>"It works. For 9 countries I'm not sure we needed a global provider, but finance is happy with one bill."</p><cite>Nora Dubois, IT Service Manager · Everard Industries · review</cite></blockquote>
+</div>
+<div>
+<p class="small"><b>Anti-ICP and hold</b></p>
+<blockquote><p>"Send me the price per site. The technical people have already signed off on the spec."</p><cite>David Evans, Category Manager - Technology · Corvane Resorts (churned) · call</cite></blockquote>
+<blockquote><p>"The incumbent will match. They always do."</p><cite>Marco Visser, IT Procurement Manager · Nesbury Advisory (lost) · call</cite></blockquote>
+<blockquote><p>"I'm not buying a network and then bolting security on. Security first, network second."</p><cite>Freya Garcia, CISO · Brennan Engineering (lost) · demo</cite></blockquote>
+<blockquote><p>"I liked it. But I didn't have a network person to run the project, and I wasn't going to run it myself."</p><cite>Elena Ferrari, CIO · Quarry Industries (lost) · loss interview</cite></blockquote>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ================= PAINS DESIRES TRIGGERS ================= -->
+<section id="pdt">
+<h2>Pains, desires and triggers</h2>
+
+<div class="grid2">
+<div class="card">
+<h3 style="margin-top:0">Pains</h3>
+<ul>
+  <li><b>Too many carriers, and the network team doing procurement.</b> Harwick, Kestrel, Whitmore.</li>
+  <li><b>New and acquired sites take months to connect.</b> 3 to 4 months at Harwick; Kestrel's stores go live late because the line isn't ready (call notes); Moravia's acquired network a "black box" six months on.</li>
+  <li><b>Sites in countries the big carriers skip.</b> Jorvik, Glenmoor.</li>
+  <li><b>Sites with no SLA holding up a bigger programme.</b> Orwell's ERP go-live.</li>
+  <li><b>A renewal that rolls over by default.</b> Juniper, Rosmer.</li>
+</ul>
+</div>
+<div class="card">
+<h3 style="margin-top:0">Desires</h3>
+<ul>
+  <li><b>One contract, one portal, one number to call.</b> Harwick, Moravia, Drummond.</li>
+  <li><b>Seeing every site in one place.</b> Mereford; the Juniper CIO's "green or red" board view.</li>
+  <li><b>Security added later, without re-procuring.</b> Juniper, Zeller, then delivered at Mereford and Drummond.</li>
+  <li><b>The internet layer done properly, not the whole WAN outsourced.</b> Varne.</li>
+  <li><b>A price they can defend, not the cheapest.</b> Moravia.</li>
+  <li><b>References from their own industry.</b> Orwell asked for manufacturing; Moravia decided on a logistics reference call.</li>
+</ul>
+</div>
+</div>
+
+<h3>Triggers: what happened before the account entered pipeline</h3>
+<p class="small">From <code>enrichment.csv</code> (no web search: the companies are fictitious), read against each account's <code>created_date</code>. Only signals dated before pipeline creation count as triggers.</p>
+<div class="tbl"><table>
+<thead><tr><th>Signal before pipeline</th><th>Best (17)</th><th>Average (15)</th><th>Churned / contracted (8)</th><th>Lost (20)</th><th>Lead time at best</th><th>Confidence tiers (best)</th><th>Read</th></tr></thead>
+<tbody>
+<tr><td><b>Acquisition adding sites in new countries</b></td><td class="num">7</td><td class="num">0</td><td class="num">0</td><td class="num">2</td><td class="num">183–267 days</td><td>Confirmed 7</td><td><span class="tag yes">Trigger</span> The 2 lost are global mergers at tier-1-sized accounts (anti-ICP).</td></tr>
+<tr><td><b>Network contract renewal within 12 months</b></td><td class="num">6<br><span class="small">+2 from calls</span></td><td class="num">1</td><td class="num">0</td><td class="num">0</td><td class="num">77–238 days</td><td>Likely 4 · Inferred 2</td><td><span class="tag yes">Trigger</span> Juniper (demo call) and Rosmer (interview) add 2 more.</td></tr>
+<tr><td><b>Announced expansion into new countries</b></td><td class="num">5</td><td class="num">1</td><td class="num">0</td><td class="num">0</td><td class="num">80–299 days</td><td>Confirmed 5</td><td><span class="tag yes">Trigger</span></td></tr>
+<tr><td><b>ERP / SAP rollout through an SI partner</b></td><td class="num">2<br><span class="small">calls only</span></td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="blank">not on file</td><td class="blank">not in enrichment</td><td><span class="tag part">Anecdote</span> Orwell, Rosmer. Both came via partner referral.</td></tr>
+<tr><td><b>Public cloud migration announced</b></td><td class="num">0</td><td class="num">3</td><td class="num">0</td><td class="num">0</td><td></td><td></td><td><span class="tag no">Not a trigger</span> Only at average customers.</td></tr>
+<tr><td><b>New CISO, zero-trust board priority</b></td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">3</td><td></td><td></td><td><span class="tag no">Anti-trigger</span> All 3 lost to a security-led SASE vendor.</td></tr>
+<tr><td><b>Head of Network left, not backfilled</b></td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">2</td><td></td><td></td><td><span class="tag no">Anti-trigger</span> Both stalled at the CIO.</td></tr>
+<tr><td><b>Price-led tender / incumbent re-bid</b></td><td class="num">0</td><td class="num">0</td><td class="num">3</td><td class="num">4</td><td></td><td></td><td><span class="tag no">Anti-trigger</span> 7 of 7 churned or lost.</td></tr>
+</tbody></table></div>
+<p><b>Watch window:</b> at best accounts the trigger came 77 to 299 days before the opportunity was created. A signal
+seen today means pipeline in roughly 3 to 10 months. 14 of 17 best accounts had at least one trigger in enrichment,
+16 of 17 counting calls and interviews. Jorvik Freight has none on file.</p>
+
+<h3>After the sale: expansion signals, not triggers</h3>
+<p>Signals dated after pipeline creation do not explain why an account bought. At best accounts they line up with
+growth: new countries opened (8 accounts: Moravia, Mereford, Ulvik, Rosmer, Drummond, Marlowe, Zeller, Whitmore)
+and SASE / zero-trust hiring (3: Ingram, Mereford, Zeller). Customer words match: SASE added in year two or three at
+Mereford and Drummond, a SASE review after 12 months agreed at Zeller. Recent ones to act on for expansion: Marlowe
+opened 5 countries (May 2026), Ingram hiring a SASE architect (May 2026), Whitmore opened 2 countries (Aug 2026).</p>
+</section>
+
+<!-- ================= GAPS ================= -->
+<section id="gaps">
+<h2>Gaps and cross-checks</h2>
+<div class="card">
+<h3 style="margin-top:0">Left blank on purpose</h3>
+<ul>
+  <li><b>No words on file for 3 best accounts:</b> Ingram Manufacturing (ACC-0003), Hollin Logistics (ACC-0006), Marlowe Components (ACC-0050). They count in the numbers; nothing is said about their motivation.</li>
+  <li><b>Hollin Logistics</b> has one contact (Global Network Lead, champion). No decision maker recorded and no intent stage.</li>
+  <li><b>Jorvik Freight</b>: no pre-pipeline trigger in enrichment or calls.</li>
+  <li><b>Blocker at best accounts:</b> none recorded, so none described.</li>
+  <li><b>Procurement's own reasons:</b> only two thin mentions on file. Not enough to write this role's motivation.</li>
+  <li>9 of 15 average accounts and 7 of 20 lost accounts have no call, interview or review.</li>
+</ul>
+<h3>Cross-checks against the calls</h3>
+<ul>
+  <li><b>Matches:</b> footprints quoted on calls and reviews match the CRM for Harwick (63 sites, 22 countries), Moravia (27), Glenmoor (31), Drummond (33), Whitmore (24), Jorvik (42 sites, 31 countries), Orwell (140, 21). Halden's call notes record the profile as a fit, consistent with it landing in the hold segment rather than the anti-ICP.</li>
+  <li><b>Mismatch, Kestrel Retail Group:</b> Pablo Rossi says stores are in "about 40 countries"; the CRM says 35. Could be growth through franchise deals since the record was set. Check before using 35 in any list.</li>
+  <li><b>Timing, Moravia Logistics:</b> Mia Wagner describes a September call after a March acquisition close, but the opportunity ran February to July 2021. The call date is not on file, so this cannot be reconciled from the data.</li>
+  <li><b>Triggers from calls, not enrichment:</b> Juniper's MPLS renewal and Rosmer's renewal and SAP rollout only appear in calls and interviews. Enrichment under-reports renewals.</li>
+</ul>
+<h3>Limits</h3>
+<ul>
+  <li><b>Synthetic and circular:</b> the data was generated from assumptions, so this confirms them by design.</li>
+  <li><b>Small sample:</b> 60 accounts. Global fully managed WAN (4), security-led (3) and no network owner (3) are anecdotes.</li>
+  <li><b>In-sample rule:</b> the 17 of 18 targeting precision is fitted and measured on the same data.</li>
+</ul>
+</div>
+</section>
+
+<!-- ================= BEST ACCOUNTS ================= -->
+<section id="accounts">
+<h2>The 17 best accounts</h2>
+<p class="lede">Sorted by ARR/ACV. These are the reference accounts for the list build and the lookalike logic.</p>
+<div class="tbl"><table>
+<thead><tr><th>Account</th><th>Industry</th><th>Sites / countries</th><th>Network at signing</th><th>Came in via</th><th>ACV → ARR</th><th>x</th><th>Champion</th><th>Trigger before pipeline</th></tr></thead>
+<tbody>
+<tr><td>Drummond Brewing<br><span class="tier">ACC-0048 · DE</span></td><td>Food &amp; beverage</td><td class="num">50 / 33</td><td>Multiple regional carriers</td><td>ABM intent</td><td class="num">£166k → £399k</td><td class="num">2.40</td><td>Global Network Lead</td><td>Expansion into 6 countries announced <span class="tier">Confirmed</span></td></tr>
+<tr><td>Moravia Logistics<br><span class="tier">ACC-0023 · CH</span></td><td>Logistics</td><td class="num">105 / 27</td><td>MPLS + local ISPs</td><td>ABM intent</td><td class="num">£374k → £877k</td><td class="num">2.34</td><td>Head of Network</td><td>Acquisition in Iberia <span class="tier">Confirmed</span></td></tr>
+<tr><td>Mereford Brands<br><span class="tier">ACC-0024 · FR</span></td><td>Retail</td><td class="num">40 / 15</td><td>MPLS + local ISPs</td><td>ABM intent</td><td class="num">£136k → £296k</td><td class="num">2.18</td><td>Head of Network</td><td>MPLS renewal &lt;12 months <span class="tier">Inferred</span></td></tr>
+<tr><td>Varne Distribution<br><span class="tier">ACC-0057 · US</span></td><td>Logistics</td><td class="num">127 / 15</td><td>Legacy MPLS, no SD-WAN</td><td>Event</td><td class="num">£410k → £860k</td><td class="num">2.10</td><td>Head of Network</td><td>MPLS renewal <span class="tier">Likely</span> · Nordic acquisition <span class="tier">Confirmed</span></td></tr>
+<tr><td>Harwick Biosciences<br><span class="tier">ACC-0002 · IT</span></td><td>Life sciences</td><td class="num">63 / 22</td><td>MPLS + local ISPs</td><td>ABM intent</td><td class="num">£203k → £412k</td><td class="num">2.03</td><td>Head of Network</td><td>Expansion into 3 countries announced <span class="tier">Confirmed</span></td></tr>
+<tr><td>Kestrel Retail Group<br><span class="tier">ACC-0021 · BE</span></td><td>Retail</td><td class="num">123 / 35</td><td>Legacy MPLS, no SD-WAN</td><td>ABM intent</td><td class="num">£436k → £878k</td><td class="num">2.01</td><td>Head of Network Infrastructure</td><td>Nordic acquisition <span class="tier">Confirmed</span> · MPLS renewal <span class="tier">Likely</span></td></tr>
+<tr><td>Rosmer Engineering<br><span class="tier">ACC-0044 · BE</span></td><td>Manufacturing</td><td class="num">126 / 18</td><td>Legacy MPLS, no SD-WAN</td><td>Partner referral</td><td class="num">£495k → £985k</td><td class="num">1.99</td><td>Head of Network Infrastructure</td><td>Nordic acquisition <span class="tier">Confirmed</span> · renewal (interview)</td></tr>
+<tr><td>Jorvik Freight<br><span class="tier">ACC-0047 · NL</span></td><td>Logistics</td><td class="num">42 / 31</td><td>Multiple regional carriers</td><td>Partner referral</td><td class="num">£180k → £354k</td><td class="num">1.97</td><td>Head of Network Infrastructure</td><td class="blank">none on file</td></tr>
+<tr><td>Glenmoor Brewing<br><span class="tier">ACC-0039 · NL</span></td><td>Food &amp; beverage</td><td class="num">56 / 31</td><td>Legacy MPLS, no SD-WAN</td><td>Event</td><td class="num">£260k → £496k</td><td class="num">1.91</td><td>Global Network Lead</td><td>Acquisition in Iberia <span class="tier">Confirmed</span></td></tr>
+<tr><td>Juniper Distribution<br><span class="tier">ACC-0014 · BE</span></td><td>Logistics</td><td class="num">114 / 25</td><td>Legacy MPLS, no SD-WAN</td><td>Partner referral</td><td class="num">£541k → £980k</td><td class="num">1.81</td><td>Head of Network Infrastructure</td><td>MPLS ends in 9 months (demo call)</td></tr>
+<tr><td>Ulvik Retail Group<br><span class="tier">ACC-0037 · FR</span></td><td>Retail</td><td class="num">89 / 17</td><td>MPLS + local ISPs</td><td>ABM intent</td><td class="num">£404k → £717k</td><td class="num">1.77</td><td>Global Network Lead</td><td>Expansion into 3 countries announced <span class="tier">Confirmed</span></td></tr>
+<tr><td>Orwell Industries<br><span class="tier">ACC-0036 · FR</span></td><td>Manufacturing</td><td class="num">140 / 21</td><td>Legacy MPLS, no SD-WAN</td><td>Partner referral</td><td class="num">£621k → £1,099k</td><td class="num">1.77</td><td>Global Network Lead</td><td>ERP rollout via SI partner (call)</td></tr>
+<tr><td>Zeller Components<br><span class="tier">ACC-0051 · DK</span></td><td>Manufacturing</td><td class="num">115 / 18</td><td>Legacy MPLS, no SD-WAN</td><td>ABM intent</td><td class="num">£398k → £695k</td><td class="num">1.75</td><td>Head of Network</td><td>MPLS renewal <span class="tier">Likely</span> · 5 new countries <span class="tier">Confirmed</span></td></tr>
+<tr><td>Whitmore Labs<br><span class="tier">ACC-0055 · US</span></td><td>Life sciences</td><td class="num">50 / 24</td><td>Legacy MPLS, no SD-WAN</td><td>ABM intent</td><td class="num">£161k → £279k</td><td class="num">1.73</td><td>Head of Network</td><td>MPLS renewal <span class="tier">Likely</span></td></tr>
+<tr><td>Marlowe Components<br><span class="tier">ACC-0050 · NL</span></td><td>Manufacturing</td><td class="num">93 / 12</td><td>MPLS + local ISPs</td><td>Event</td><td class="num">£415k → £690k</td><td class="num">1.66</td><td>Head of IT Infrastructure</td><td>4 new countries <span class="tier">Confirmed</span> · Central Europe acquisition <span class="tier">Confirmed</span></td></tr>
+<tr><td>Hollin Logistics<br><span class="tier">ACC-0006 · IT</span></td><td>Logistics</td><td class="num">72 / 22</td><td>MPLS + local ISPs</td><td>Partner referral</td><td class="num">£291k → £466k</td><td class="num">1.60</td><td>Global Network Lead</td><td>Acquired forwarder with depots in 8 countries <span class="tier">Confirmed</span></td></tr>
+<tr><td>Ingram Manufacturing<br><span class="tier">ACC-0003 · BE</span></td><td>Manufacturing</td><td class="num">102 / 32</td><td>Multiple regional carriers</td><td>Partner referral</td><td class="num">£350k → £552k</td><td class="num">1.58</td><td>Global Network Lead</td><td>Regional carrier renewals &lt;12 months <span class="tier">Inferred</span></td></tr>
+</tbody></table></div>
+</section>
+
+<footer>
+  Sources: data/accounts.csv, contacts.csv, enrichment.csv, call-notes.md, win-loss-interviews.md, reviews.md. All synthetic.
+  Method adapted from the icp-synthesis skill by Nick Christensen (MIT License, see THIRD-PARTY-NOTICES.md).
+  Next step: BUILD-PROMPT-2-CAMPAIGN.md reads this page.
+</footer>
+
+</div>
+</body>
+</html>
