@@ -1,0 +1,163 @@
+contact_id,account_id,full_name,job_title,department,seniority,buying_role
+CON-0001,ACC-0001,Anna Keller,IT Operations Manager,IT,Manager,Champion
+CON-0002,ACC-0001,Katrin Evans,Finance Director,Finance,Director,Decision maker
+CON-0003,ACC-0002,Sam Walsh,Head of Network,IT,Director,Champion
+CON-0004,ACC-0002,Niels Bauer,Chief Information Officer,IT,C-level,Decision maker
+CON-0005,ACC-0002,Mark Dubois,IT Procurement Manager,Procurement,Manager,Evaluator
+CON-0006,ACC-0003,Alice Mulder,Global Network Lead,IT,Director,Champion
+CON-0007,ACC-0003,Nora Mulder,Chief Information Officer,IT,C-level,Decision maker
+CON-0008,ACC-0003,Laura Kowalski,Head of Information Security,Security,Director,Evaluator
+CON-0009,ACC-0004,Ines Marino,IT Operations Manager,IT,Manager,Champion
+CON-0010,ACC-0004,Rosa Schmidt,Finance Director,Finance,Director,Decision maker
+CON-0011,ACC-0004,Felix Greco,IT Procurement Manager,Procurement,Manager,Evaluator
+CON-0012,ACC-0005,Nora Dubois,IT Service Manager,IT,Manager,Champion
+CON-0013,ACC-0005,Anna Svensson,Finance Director,Finance,Director,Decision maker
+CON-0014,ACC-0006,Anouk Weber,Global Network Lead,IT,Director,Champion
+CON-0015,ACC-0007,Freya Muller,Chief Information Officer,IT,C-level,Decision maker
+CON-0016,ACC-0007,Niels Mulder,Head of Network,IT,Director,Evaluator
+CON-0017,ACC-0007,Pieter Byrne,Category Manager - Technology,Procurement,Manager,Evaluator
+CON-0018,ACC-0007,Eva Weber,Chief Information Security Officer,Security,C-level,Evaluator
+CON-0019,ACC-0008,Jonas Andersson,IT Service Manager,IT,Manager,Champion
+CON-0020,ACC-0008,David de Vries,Chief Information Officer,IT,C-level,Decision maker
+CON-0021,ACC-0009,David Evans,Category Manager - Technology,Procurement,Manager,Decision maker
+CON-0022,ACC-0009,Nora Ruiz,IT Service Manager,IT,Manager,Evaluator
+CON-0023,ACC-0010,Chloe Doyle,IT Operations Manager,IT,Manager,Champion
+CON-0024,ACC-0010,Ryan Hughes,Chief Information Officer,IT,C-level,Decision maker
+CON-0025,ACC-0010,Rosa Olsen,IT Procurement Manager,Procurement,Manager,Evaluator
+CON-0026,ACC-0011,Marco Byrne,IT Manager,IT,Manager,Champion
+CON-0027,ACC-0011,Julia Laurent,Finance Director,Finance,Director,Decision maker
+CON-0028,ACC-0012,Emma Taylor,Category Manager - Technology,Procurement,Manager,Decision maker
+CON-0029,ACC-0012,Ben Girard,IT Manager,IT,Manager,Evaluator
+CON-0030,ACC-0013,Luca Walsh,IT Procurement Manager,Procurement,Manager,Decision maker
+CON-0031,ACC-0013,Mia Berg,IT Manager,IT,Manager,Evaluator
+CON-0032,ACC-0013,Pieter Brennan,Finance Director,Finance,Director,Evaluator
+CON-0033,ACC-0014,Hannah Conti,Head of Network Infrastructure,IT,Director,Champion
+CON-0034,ACC-0014,Hugo Doyle,Chief Information Officer,IT,C-level,Decision maker
+CON-0035,ACC-0014,Rafael Lindberg,Head of Information Security,Security,Director,Evaluator
+CON-0036,ACC-0014,Anouk Novak,Category Manager - Technology,Procurement,Manager,Evaluator
+CON-0037,ACC-0015,Anna Berg,IT Service Manager,IT,Manager,Champion
+CON-0038,ACC-0015,Niels Olsen,Chief Information Officer,IT,C-level,Decision maker
+CON-0039,ACC-0016,Zoe Moreau,IT Service Manager,IT,Manager,Champion
+CON-0040,ACC-0016,Sara Berg,Finance Director,Finance,Director,Decision maker
+CON-0041,ACC-0017,Anna Bakker,IT Manager,IT,Manager,Champion
+CON-0042,ACC-0017,Freya Mulder,Chief Financial Officer,Finance,C-level,Decision maker
+CON-0043,ACC-0018,Clara Hughes,Category Manager - Technology,Procurement,Manager,Decision maker
+CON-0044,ACC-0018,Elena Novak,IT Manager,IT,Manager,Evaluator
+CON-0045,ACC-0018,Freya Evans,Finance Director,Finance,Director,Evaluator
+CON-0046,ACC-0019,Ryan Laurent,Chief Information Officer,IT,C-level,Decision maker
+CON-0047,ACC-0019,Anouk Fischer,IT Service Manager,IT,Manager,Evaluator
+CON-0048,ACC-0019,Freya Garcia,Chief Information Security Officer,Security,C-level,Blocker
+CON-0049,ACC-0020,Lucia Svensson,IT Infrastructure Director,IT,Director,Champion
+CON-0050,ACC-0020,Sam Andersson,Chief Information Officer,IT,C-level,Decision maker
+CON-0051,ACC-0021,Pablo Rossi,Head of Network Infrastructure,IT,Director,Champion
+CON-0052,ACC-0021,Ingrid Mulder,Chief Information Officer,IT,C-level,Decision maker
+CON-0053,ACC-0021,Niels Lindberg,Head of Information Security,Security,Director,Evaluator
+CON-0054,ACC-0022,Mark Berg,IT Infrastructure Director,IT,Director,Champion
+CON-0055,ACC-0022,Pablo Olsen,Chief Information Officer,IT,C-level,Decision maker
+CON-0056,ACC-0023,Mia Wagner,Head of Network,IT,Director,Champion
+CON-0057,ACC-0023,Freya Walsh,Chief Information Officer,IT,C-level,Decision maker
+CON-0058,ACC-0023,Erik Keller,Chief Information Security Officer,Security,C-level,Evaluator
+CON-0059,ACC-0023,Emma Smit,Category Manager - Technology,Procurement,Manager,Evaluator
+CON-0060,ACC-0024,Anna Andersson,Head of Network,IT,Director,Champion
+CON-0061,ACC-0024,Adam Wagner,Chief Information Officer,IT,C-level,Decision maker
+CON-0062,ACC-0024,Jonas Walsh,Head of Information Security,Security,Director,Evaluator
+CON-0063,ACC-0025,Ines Fischer,Global Network Lead,IT,Director,Champion
+CON-0064,ACC-0025,Katrin Mulder,Chief Financial Officer,Finance,C-level,Decision maker
+CON-0065,ACC-0026,Rafael Marino,Category Manager - Technology,Procurement,Manager,Decision maker
+CON-0066,ACC-0026,Anouk de Vries,IT Service Manager,IT,Manager,Evaluator
+CON-0067,ACC-0027,Lucia Garcia,Chief Information Officer,IT,C-level,Decision maker
+CON-0068,ACC-0027,Marco Moreau,IT Service Manager,IT,Manager,Evaluator
+CON-0069,ACC-0027,Lotte Conti,Chief Information Security Officer,Security,C-level,Blocker
+CON-0070,ACC-0028,Erik Moreau,Chief Information Officer,IT,C-level,Decision maker
+CON-0071,ACC-0028,Maria Jansen,IT Service Manager,IT,Manager,Evaluator
+CON-0072,ACC-0028,Anna Lefevre,Category Manager - Technology,Procurement,Manager,Evaluator
+CON-0073,ACC-0029,Zoe Jansen,Chief Information Officer,IT,C-level,Decision maker
+CON-0074,ACC-0029,Henrik Marino,Global Network Lead,IT,Director,Evaluator
+CON-0075,ACC-0029,Sophie Muller,Category Manager - Technology,Procurement,Manager,Evaluator
+CON-0076,ACC-0029,Ingrid Ferrari,Head of Information Security,Security,Director,Evaluator
+CON-0077,ACC-0030,Jonas Mulder,Chief Information Officer,IT,C-level,Decision maker
+CON-0078,ACC-0030,Pieter Peters,IT Service Manager,IT,Manager,Evaluator
+CON-0079,ACC-0031,Martin Keller,IT Operations Manager,IT,Manager,Champion
+CON-0080,ACC-0031,Stefan Smit,Chief Information Officer,IT,C-level,Decision maker
+CON-0081,ACC-0031,Mark Laurent,IT Procurement Manager,Procurement,Manager,Evaluator
+CON-0082,ACC-0032,Henrik Nielsen,Head of Network,IT,Director,Champion
+CON-0083,ACC-0032,Adam de Vries,Chief Information Officer,IT,C-level,Decision maker
+CON-0084,ACC-0033,Sam Bakker,Chief Information Officer,IT,C-level,Decision maker
+CON-0085,ACC-0033,Pablo Brennan,Global Network Lead,IT,Director,Evaluator
+CON-0086,ACC-0033,Ben Bakker,IT Procurement Manager,Procurement,Manager,Evaluator
+CON-0087,ACC-0033,Rosa Lefevre,Chief Information Security Officer,Security,C-level,Evaluator
+CON-0088,ACC-0034,Marco Visser,IT Procurement Manager,Procurement,Manager,Decision maker
+CON-0089,ACC-0034,Lucia Petit,IT Service Manager,IT,Manager,Evaluator
+CON-0090,ACC-0034,James Ferrari,Finance Director,Finance,Director,Evaluator
+CON-0091,ACC-0035,Daniel de Vries,IT Operations Manager,IT,Manager,Champion
+CON-0092,ACC-0035,Katrin Martinez,Chief Financial Officer,Finance,C-level,Decision maker
+CON-0093,ACC-0036,Mia Weber,Global Network Lead,IT,Director,Champion
+CON-0094,ACC-0036,Victor Schmidt,Chief Information Officer,IT,C-level,Decision maker
+CON-0095,ACC-0037,David Walsh,Global Network Lead,IT,Director,Champion
+CON-0096,ACC-0037,Katrin Rossi,Chief Information Officer,IT,C-level,Decision maker
+CON-0097,ACC-0037,Stefan Hughes,Chief Information Security Officer,Security,C-level,Evaluator
+CON-0098,ACC-0037,Jonas Weber,Category Manager - Technology,Procurement,Manager,Evaluator
+CON-0099,ACC-0038,Ryan Conti,Chief Information Officer,IT,C-level,Decision maker
+CON-0100,ACC-0038,Elena Martinez,Head of Network Infrastructure,IT,Director,Evaluator
+CON-0101,ACC-0038,Pablo Hansen,Category Manager - Technology,Procurement,Manager,Evaluator
+CON-0102,ACC-0038,Sam Muller,Head of Information Security,Security,Director,Evaluator
+CON-0103,ACC-0039,Lars Hughes,Global Network Lead,IT,Director,Champion
+CON-0104,ACC-0039,Lucia Hofmann,Chief Information Officer,IT,C-level,Decision maker
+CON-0105,ACC-0040,Rosa Kowalski,IT Manager,IT,Manager,Champion
+CON-0106,ACC-0040,Daniel Hansen,Finance Director,Finance,Director,Decision maker
+CON-0107,ACC-0041,James Lefevre,IT Procurement Manager,Procurement,Manager,Decision maker
+CON-0108,ACC-0041,Ryan Greco,IT Manager,IT,Manager,Evaluator
+CON-0109,ACC-0042,Freya Roux,IT Procurement Manager,Procurement,Manager,Decision maker
+CON-0110,ACC-0042,Niels Roux,IT Service Manager,IT,Manager,Evaluator
+CON-0111,ACC-0043,Victor Taylor,IT Procurement Manager,Procurement,Manager,Decision maker
+CON-0112,ACC-0043,Pieter Hughes,IT Manager,IT,Manager,Evaluator
+CON-0113,ACC-0043,David Smit,Finance Director,Finance,Director,Evaluator
+CON-0114,ACC-0044,Martin Nielsen,Head of Network Infrastructure,IT,Director,Champion
+CON-0115,ACC-0044,Niels Jansen,Chief Information Officer,IT,C-level,Decision maker
+CON-0116,ACC-0044,Victor Petit,Head of Information Security,Security,Director,Evaluator
+CON-0117,ACC-0045,Laura Fernandez,Chief Information Officer,IT,C-level,Decision maker
+CON-0118,ACC-0045,Ingrid Conti,IT Service Manager,IT,Manager,Evaluator
+CON-0119,ACC-0045,Luca Garcia,Head of Information Security,Security,Director,Blocker
+CON-0120,ACC-0046,Anouk Evans,Category Manager - Technology,Procurement,Manager,Decision maker
+CON-0121,ACC-0046,Anna Kowalski,IT Manager,IT,Manager,Evaluator
+CON-0122,ACC-0046,Rafael Byrne,Finance Director,Finance,Director,Evaluator
+CON-0123,ACC-0047,Lucia Jansen,Head of Network Infrastructure,IT,Director,Champion
+CON-0124,ACC-0047,Emma Brennan,Chief Information Officer,IT,C-level,Decision maker
+CON-0125,ACC-0047,Sam Byrne,IT Procurement Manager,Procurement,Manager,Evaluator
+CON-0126,ACC-0048,Julia Evans,Global Network Lead,IT,Director,Champion
+CON-0127,ACC-0048,Chloe Olsen,Chief Information Officer,IT,C-level,Decision maker
+CON-0128,ACC-0048,Lars Laurent,Chief Information Security Officer,Security,C-level,Evaluator
+CON-0129,ACC-0049,Oliver Petit,IT Operations Manager,IT,Manager,Champion
+CON-0130,ACC-0049,Elena Taylor,Finance Director,Finance,Director,Decision maker
+CON-0131,ACC-0049,Lotte Laurent,IT Procurement Manager,Procurement,Manager,Evaluator
+CON-0132,ACC-0050,Ines Lindberg,Head of IT Infrastructure,IT,Director,Champion
+CON-0133,ACC-0050,Jonas Evans,Chief Information Officer,IT,C-level,Decision maker
+CON-0134,ACC-0050,Lotte Berg,IT Procurement Manager,Procurement,Manager,Evaluator
+CON-0135,ACC-0051,Lotte Svensson,Head of Network,IT,Director,Champion
+CON-0136,ACC-0051,Rosa Hofmann,Chief Information Officer,IT,C-level,Decision maker
+CON-0137,ACC-0051,Daniel Muller,Chief Information Security Officer,Security,C-level,Evaluator
+CON-0138,ACC-0051,Katrin Visser,Category Manager - Technology,Procurement,Manager,Evaluator
+CON-0139,ACC-0052,Nora Garcia,IT Procurement Manager,Procurement,Manager,Decision maker
+CON-0140,ACC-0052,Maria Moreau,IT Manager,IT,Manager,Evaluator
+CON-0141,ACC-0052,Chloe Dubois,Finance Director,Finance,Director,Evaluator
+CON-0142,ACC-0053,Sophie Andersson,Category Manager - Technology,Procurement,Manager,Decision maker
+CON-0143,ACC-0053,Lotte Keller,Head of Network,IT,Director,Champion
+CON-0144,ACC-0054,Victor Romano,Category Manager - Technology,Procurement,Manager,Decision maker
+CON-0145,ACC-0054,David Clarke,IT Operations Manager,IT,Manager,Evaluator
+CON-0146,ACC-0054,Hugo Jansen,Finance Director,Finance,Director,Evaluator
+CON-0147,ACC-0055,Tom Bauer,Head of Network,IT,Director,Champion
+CON-0148,ACC-0055,Anouk Jansen,Chief Information Officer,IT,C-level,Decision maker
+CON-0149,ACC-0055,Mia Ferrari,IT Procurement Manager,Procurement,Manager,Evaluator
+CON-0150,ACC-0056,Anouk Hofmann,Category Manager - Technology,Procurement,Manager,Decision maker
+CON-0151,ACC-0056,Niels Hughes,IT Service Manager,IT,Manager,Evaluator
+CON-0152,ACC-0056,Adam Rossi,Finance Director,Finance,Director,Evaluator
+CON-0153,ACC-0057,Ben Andersson,Head of Network,IT,Director,Champion
+CON-0154,ACC-0057,Elena Berg,Chief Information Officer,IT,C-level,Decision maker
+CON-0155,ACC-0057,Marco Taylor,Category Manager - Technology,Procurement,Manager,Evaluator
+CON-0156,ACC-0058,Lotte Greco,IT Service Manager,IT,Manager,Champion
+CON-0157,ACC-0058,Anouk Keller,Chief Information Officer,IT,C-level,Decision maker
+CON-0158,ACC-0059,Ben Ferrari,IT Manager,IT,Manager,Champion
+CON-0159,ACC-0059,Sophie Wagner,Finance Director,Finance,Director,Decision maker
+CON-0160,ACC-0060,Elena Ferrari,Chief Information Officer,IT,C-level,Decision maker
+CON-0161,ACC-0060,Alice Lefevre,IT Service Manager,IT,Manager,Evaluator
+CON-0162,ACC-0060,Luca Fischer,IT Procurement Manager,Procurement,Manager,Evaluator

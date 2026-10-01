@@ -1,0 +1,49 @@
+account_id,signal_type,signal_date,detail,source,confidence
+ACC-0002,new_countries,2022-04-04,Announced expansion into 3 new countries over the next two years,Annual report,Confirmed
+ACC-0003,network_contract_renewal,2023-05-22,Main regional carrier contracts due for renewal within 12 months,Job posting (network lead role mentions MPLS exit),Inferred
+ACC-0003,security_leadership,2026-05-17,Hiring for SASE / zero-trust architect role,Job posting,Likely
+ACC-0004,network_contract_renewal,2019-09-30,Global MPLS contract with incumbent carrier due for renewal within 12 months,Job posting (network lead role mentions MPLS exit),Likely
+ACC-0006,acquisition,2021-12-27,Announced acquisition of a freight forwarder with depots in 8 countries,Press release,Confirmed
+ACC-0007,acquisition,2022-06-23,"Completed merger with a global peer, IT integration programme under way",Press release,Confirmed
+ACC-0009,tender_published,2021-04-06,"Public tender for national connectivity services, lowest price per site as main award criterion",Public procurement portal,Confirmed
+ACC-0012,tender_published,2021-08-27,"Public tender for national connectivity services, lowest price per site as main award criterion",Public procurement portal,Confirmed
+ACC-0019,security_leadership,2024-10-07,"New CISO appointed, zero-trust programme announced as board priority",Press release,Confirmed
+ACC-0021,acquisition,2020-11-17,"Announced acquisition of a specialist company in the Nordics, adding sites in several new countries",Press release,Confirmed
+ACC-0021,network_contract_renewal,2021-05-26,Global MPLS contract with incumbent carrier due for renewal within 12 months,Industry analyst note,Likely
+ACC-0022,cloud_migration,2020-08-27,Public cloud migration programme announced (ERP and warehouse systems),Conference talk by IT leadership,Confirmed
+ACC-0023,acquisition,2020-06-24,"Announced acquisition of a family-owned business in Iberia, adding sites in several new countries",Press release,Confirmed
+ACC-0023,new_countries,2022-08-02,Opened operations in 3 additional countries,LinkedIn company page,Confirmed
+ACC-0024,network_contract_renewal,2021-07-27,Global MPLS contract with incumbent carrier due for renewal within 12 months,Job posting (network lead role mentions MPLS exit),Inferred
+ACC-0024,security_leadership,2023-02-20,Hiring for SASE / zero-trust architect role,Job posting,Likely
+ACC-0024,new_countries,2023-10-09,Opened operations in 5 additional countries,Annual report,Confirmed
+ACC-0026,tender_published,2024-03-08,"Tender for WAN services, incumbent invited to re-bid",Public procurement portal,Confirmed
+ACC-0027,security_leadership,2022-03-15,"New CISO appointed, zero-trust programme announced as board priority",LinkedIn,Confirmed
+ACC-0028,network_leadership_change,2025-01-01,"Head of Network left the company, role not backfilled",LinkedIn,Likely
+ACC-0029,acquisition,2024-10-19,"Completed merger with a global peer, IT integration programme under way",Press release,Confirmed
+ACC-0032,cloud_migration,2024-03-29,Public cloud migration programme announced (ERP and warehouse systems),Conference talk by IT leadership,Likely
+ACC-0034,tender_published,2022-05-29,"Tender for WAN services, incumbent invited to re-bid",Public procurement portal,Confirmed
+ACC-0035,new_countries,2021-12-01,Announced expansion into 3 new countries over the next two years,Annual report,Confirmed
+ACC-0037,new_countries,2023-05-09,Announced expansion into 3 new countries over the next two years,Annual report,Confirmed
+ACC-0037,new_countries,2025-10-07,Opened operations in 2 additional countries,LinkedIn company page,Confirmed
+ACC-0039,acquisition,2022-10-03,"Announced acquisition of a family-owned business in Iberia, adding sites in several new countries",Press release,Confirmed
+ACC-0042,tender_published,2023-12-17,"Tender for WAN services, incumbent invited to re-bid",Public procurement portal,Confirmed
+ACC-0043,tender_published,2021-01-25,"Public tender for national connectivity services, lowest price per site as main award criterion",Public procurement portal,Confirmed
+ACC-0044,acquisition,2022-07-21,"Announced acquisition of a specialist company in the Nordics, adding sites in several new countries",Press release,Confirmed
+ACC-0044,new_countries,2024-05-01,Opened operations in 2 additional countries,LinkedIn company page,Likely
+ACC-0045,security_leadership,2023-08-22,"New CISO appointed, zero-trust programme announced as board priority",LinkedIn,Confirmed
+ACC-0048,new_countries,2019-11-29,Announced expansion into 6 new countries over the next two years,Annual report,Confirmed
+ACC-0048,new_countries,2022-06-04,Opened operations in 5 additional countries,LinkedIn company page,Likely
+ACC-0049,cloud_migration,2023-10-15,Public cloud migration programme announced (ERP and warehouse systems),Conference talk by IT leadership,Likely
+ACC-0050,new_countries,2023-06-15,Announced expansion into 4 new countries over the next two years,Annual report,Confirmed
+ACC-0050,acquisition,2023-07-24,"Announced acquisition of a smaller peer in Central Europe, adding sites in several new countries",Press release,Confirmed
+ACC-0050,new_countries,2026-05-19,Opened operations in 5 additional countries,Press release,Confirmed
+ACC-0051,network_contract_renewal,2023-01-08,Global MPLS contract with incumbent carrier due for renewal within 12 months,Industry analyst note,Likely
+ACC-0051,new_countries,2023-03-11,Announced expansion into 5 new countries over the next two years,Annual report,Confirmed
+ACC-0051,new_countries,2024-10-03,Opened operations in 2 additional countries,LinkedIn company page,Confirmed
+ACC-0051,security_leadership,2025-01-22,Hiring for SASE / zero-trust architect role,Job posting,Likely
+ACC-0053,tender_published,2024-02-17,"Tender for WAN services, incumbent invited to re-bid",Public procurement portal,Confirmed
+ACC-0055,network_contract_renewal,2023-07-02,Global MPLS contract with incumbent carrier due for renewal within 12 months,Job posting (network lead role mentions MPLS exit),Likely
+ACC-0055,new_countries,2026-08-15,Opened operations in 2 additional countries,Press release,Confirmed
+ACC-0057,network_contract_renewal,2021-07-29,Global MPLS contract with incumbent carrier due for renewal within 12 months,Industry analyst note,Likely
+ACC-0057,acquisition,2021-09-22,"Announced acquisition of a specialist company in the Nordics, adding sites in several new countries",Press release,Confirmed
+ACC-0060,network_leadership_change,2022-10-31,"Head of Network left the company, role not backfilled",LinkedIn,Likely

@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ICP Campaign Plan</title>
+<meta name="description" content="Example Google Search and LinkedIn campaign built on the ICP dossier, every asset scored against the ICP, plus the audience plan.">
+<style>
+:root{
+  --bg:#f7f6f3; --surface:#ffffff; --surface-2:#f0eee9; --text:#1c1b19; --muted:#5f5b53;
+  --border:#dedad2; --accent:#1f5f8b; --accent-soft:#e3eef6;
+  --good:#2f6b3a; --good-soft:#e4f0e6; --warn:#8a5a00; --warn-soft:#f7ecd6;
+  --bad:#9b2c2c; --bad-soft:#f6e1e1; --quote:#2a2926;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#141413; --surface:#1d1c1a; --surface-2:#262522; --text:#ecebe7; --muted:#a8a49b;
+    --border:#34322e; --accent:#7ab6de; --accent-soft:#1d2f3c;
+    --good:#8fcf99; --good-soft:#1c2e20; --warn:#e3b865; --warn-soft:#352a14;
+    --bad:#ef9a9a; --bad-soft:#3a1f1f; --quote:#f3f2ee;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#141413; --surface:#1d1c1a; --surface-2:#262522; --text:#ecebe7; --muted:#a8a49b;
+  --border:#34322e; --accent:#7ab6de; --accent-soft:#1d2f3c;
+  --good:#8fcf99; --good-soft:#1c2e20; --warn:#e3b865; --warn-soft:#352a14;
+  --bad:#ef9a9a; --bad-soft:#3a1f1f; --quote:#f3f2ee;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--text);
+  font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif}
+.wrap{max-width:1080px;margin:0 auto;padding:32px 16px 80px}
+header.top{border-bottom:1px solid var(--border);padding-bottom:20px;margin-bottom:8px}
+.eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 6px}
+h1{font-size:30px;line-height:1.2;margin:0 0 10px;letter-spacing:-.01em}
+h2{font-size:22px;margin:48px 0 6px;letter-spacing:-.01em}
+h3{font-size:16px;margin:28px 0 8px}
+h2 + .lede{margin-top:0}
+p{margin:0 0 12px}
+.lede{color:var(--muted);max-width:760px}
+.notice{background:var(--warn-soft);color:var(--text);border:1px solid var(--border);border-left:4px solid var(--warn);
+  padding:10px 14px;border-radius:6px;font-size:14px;margin:16px 0 0}
+nav.toc{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:14px;margin:14px 0 0}
+nav.toc a{color:var(--accent);text-decoration:none}
+nav.toc a:hover{text-decoration:underline}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:18px 20px;margin:14px 0}
+.icp-hero{border-left:5px solid var(--accent)}
+.icp-name{font-size:24px;font-weight:700;margin:0 0 6px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin:16px 0 4px}
+.stat{background:var(--surface-2);border-radius:8px;padding:10px 12px}
+.stat b{display:block;font-size:22px;line-height:1.2}
+.stat span{font-size:13px;color:var(--muted)}
+.tbl{overflow-x:auto;margin:10px 0;border:1px solid var(--border);border-radius:8px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:13.5px}
+th,td{text-align:left;vertical-align:top;padding:8px 10px;border-bottom:1px solid var(--border)}
+th{background:var(--surface-2);font-weight:600;font-size:12.5px;color:var(--muted);white-space:nowrap}
+tr:last-child td{border-bottom:0}
+td.num{white-space:nowrap;font-variant-numeric:tabular-nums}
+.tag{display:inline-block;font-size:11.5px;font-weight:600;padding:1px 7px;border-radius:999px;white-space:nowrap}
+.yes{background:var(--good-soft);color:var(--good)}
+.part{background:var(--warn-soft);color:var(--warn)}
+.no{background:var(--bad-soft);color:var(--bad)}
+.tier{font-size:11.5px;color:var(--muted)}
+.rule{background:var(--accent-soft);border-radius:8px;padding:12px 14px;margin:12px 0}
+.rule code{font:13px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.seg h3{margin-top:0}
+.seg .meta{font-size:13px;color:var(--muted);margin-bottom:8px}
+.seg.anti{border-left:5px solid var(--bad)}
+.seg.below{border-left:5px solid var(--warn)}
+.seg.hold{border-left:5px solid var(--muted)}
+ul{margin:6px 0 12px;padding-left:20px}
+li{margin:3px 0}
+blockquote{margin:10px 0;padding:8px 14px;border-left:3px solid var(--border);color:var(--quote)}
+blockquote p{margin:0;font-size:15px}
+blockquote cite{display:block;font-style:normal;font-size:12.5px;color:var(--muted);margin-top:3px}
+.qgroup h3{margin-top:22px}
+.blank{color:var(--muted);font-style:italic}
+.small{font-size:13px;color:var(--muted)}
+footer{margin-top:56px;padding-top:16px;border-top:1px solid var(--border);font-size:13px;color:var(--muted)}
+@media (max-width:600px){h1{font-size:25px} h2{font-size:20px} .card{padding:14px}}
+@media print{body{background:#fff} .card,.tbl{break-inside:avoid}}
+
+.sc{display:inline-flex;gap:4px;white-space:nowrap}
+.sc span{font:600 11.5px/1 ui-monospace,SFMono-Regular,Menlo,monospace;padding:3px 5px;border-radius:4px;background:var(--good-soft);color:var(--good)}
+.sc span.lo{background:var(--bad-soft);color:var(--bad)}
+td.copy{font-size:14px;color:var(--text)}
+tr.cut td.copy{color:var(--muted);text-decoration:line-through;text-decoration-color:var(--bad)}
+.why{font-size:12.5px;color:var(--bad);margin-top:3px}
+.fold{color:var(--muted);border-left:2px dashed var(--border);padding-left:6px;margin-left:2px}
+.role{border-left:5px solid var(--accent)}
+.reason{background:var(--surface-2);border-radius:8px;padding:10px 12px;font-size:14px;margin:6px 0 10px}
+.legend{font-size:13px;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+  <p class="eyebrow">Campaign · Pass 2 · built on output/icp-dossier.html</p>
+  <h1>Campaign for the Patchwork Multinational</h1>
+  <p class="lede">Google Search and LinkedIn copy for each role in the buying group, scored against the ICP, and the audience
+  plan that keeps the anti-ICP out. Brand and landing page are placeholders.</p>
+  <p class="notice"><b>Synthetic data.</b> The ICP, the customers quoted and the proof points are fictitious. In a real
+  campaign, every customer result used as proof needs that customer's permission.</p>
+  <nav class="toc" aria-label="Sections">
+    <a href="#brief">Brief and scoring</a><a href="#google">Google Search</a>
+    <a href="#li-champion">LinkedIn: network owner</a><a href="#li-cio">CIO</a><a href="#li-security">Security</a><a href="#li-procurement">Procurement</a>
+    <a href="#audiences">Audience plan</a><a href="#notes">Notes</a>
+  </nav>
+</header>
+
+<section id="brief">
+<h2>Brief and scoring</h2>
+<div class="grid2">
+<div class="card">
+<h3 style="margin-top:0">One page, one outcome</h3>
+<ul>
+<li><b>Brand:</b> Acme Networks (placeholder)</li>
+<li><b>Landing page:</b> <code>https://example.com/network-review</code> (placeholder)</li>
+<li><b>Outcome on the page:</b> book a 30-minute review that maps every carrier, contract and renewal date across your countries. <span class="small">Placeholder offer: confirm with sales before launch.</span></li>
+<li><b>Who it's for:</b> accounts with 40 to 140 sites in 12 to 35 countries on legacy MPLS or a carrier patchwork, where a director-level network owner runs the project.</li>
+<li><b>Real reasons to act now:</b> an acquisition adding countries, an MPLS renewal inside 12 months, an announced country expansion.</li>
+</ul>
+</div>
+<div class="card">
+<h3 style="margin-top:0">How every line was scored</h3>
+<ul>
+<li><b>W</b>ords: does it use the ICP's language, or marketer-speak? Words from the average segment or the anti-ICP score low: they are real, but they belong to the wrong buyer.</li>
+<li><b>O</b>utcome: does it lead with the result, or with the product?</li>
+<li><b>V</b>oice: no em dashes, no hype words, proof over claims, within character limits. A claim the data contradicts fails here.</li>
+<li><b>The gate:</b> any axis under 4 and the line is cut. Cut lines stay on the page, struck through, with the reason.</li>
+</ul>
+<div class="stats"><div class="stat"><b>41 of 60</b><span>assets passed the gate</span></div><div class="stat"><b>19</b><span>cut, each with a reason</span></div></div>
+</div>
+</div>
+<p class="legend">Score chips read W / O / V, each out of 5. Red chip = below the gate. Sources point to the quote or data point in the dossier each line is built on.</p>
+</section>
+
+<section id="google">
+<h2>Google Search: responsive search ad</h2>
+<p class="lede">Searchers here are mostly the network owner. Headlines mix pain, outcome, proof and urgency so Google can combine them; none needs another to make sense.</p>
+<h3>Headlines · 15 kept of 22 · max 30 characters</h3>
+<div class="tbl"><table><thead><tr><th></th><th>Headline</th><th>Chars</th><th>Angle</th><th>Source in the dossier</th><th>Score</th></tr></thead><tbody>
+<tr class=""><td class="num">✓</td><td class="copy">11 Carriers Down to One</td><td class="num">23/30</td><td>Proof</td><td class="small">Harwick review: &quot;went from 11 carriers to one contract&quot;</td><td><span class="sc"><span class="" title="Words">W5</span><span class="" title="Outcome">O5</span><span class="" title="Voice">V5</span></span></td></tr>
+<tr class=""><td class="num">✓</td><td class="copy">One Contract, Every Country</td><td class="num">27/30</td><td>Outcome</td><td class="small">Moravia call: single contract; Harwick review</td><td><span class="sc"><span class="" title="Words">W4</span><span class="" title="Outcome">O5</span><span class="" title="Voice">V5</span></span></td></tr>
+<tr class=""><td class="num">✓</td><td class="copy">33 Countries, One Number</td><td class="num">24/30</td><td>Proof</td><td class="small">Drummond review: &quot;33 countries, one number to call&quot;</td><td><span class="sc"><span class="" title="Words">W5</span><span class="" title="Outcome">O5</span><span class="" title="Voice">V5</span></span></td></tr>
+<tr class=""><td class="num">✓</td><td class="copy">Beat Your MPLS Renewal Date</td><td class="num">27/30</td><td>Urgency</td><td class="small">Trigger: MPLS renewal within 12 months (8 of 17 best)</td><td><span class="sc"><span class="" title="Words">W4</span><span class="" title="Outcome">O4</span><span class="" title="Voice">V5</span></span></td></tr>
+<tr class=""><td class="num">✓</td><td class="copy">Don&#x27;t Roll Over Your MPLS</td><td class="num">25/30</td><td>Urgency</td><td class="small">Juniper demo: &quot;we roll over for another three years by default&quot;</td><td><span class="sc"><span class="" title="Words">W5</span><span class="" title="Outcome">O4</span><span class="" title="Voice">V5</span></span></td></tr>
+<tr class=""><td class="num">✓</td><td class="copy">Acquired Sites Live in 6 Weeks</td><td class="num">30/30</td><td>Proof</td><td class="small">Harwick review: &quot;live in 6 weeks, used to take us 4 months&quot;</td><td><span class="sc"><span class="" title="Words">W5</span><span class="" title="Outcome">O5</span><span class="" title="Voice">V5</span></span></td></tr>
+<tr class=""><td class="num">✓</td><td class="copy">Less Procurement, More Network</td><td class="num">30/30</td><td>Pain</td><td class="small">Kestrel call: &quot;more time on procurement than on the network&quot;</td><td><span class="sc"><span class="" title="Words">W5</span><span class="" title="Outcome">O4</span><span class="" title="Voice">V5</span></span></td></tr>
+<tr class=""><td class="num">✓</td><td class="copy">Lines Where Big Carriers Won&#x27;t</td><td class="num">30/30</td><td>Outcome</td><td class="small">Jorvik call: &quot;the big carriers don&#x27;t want to know&quot;</td><td><span class="sc"><span class="" title="Words">W4</span><span class="" title="Outcome">O4</span><span class="" title="Voice">V5</span></span></td></tr>
+<tr class=""><td class="num">✓</td><td class="copy">Coverage, Not Just Bandwidth</td><td class="num">28/30</td><td>Pain</td><td class="small">Jorvik call: &quot;My problem isn&#x27;t bandwidth, it&#x27;s coverage&quot;</td><td><span class="sc"><span class="" title="Words">W5</span><span class="" title="Outcome">O4</span><span class="" title="Voice">V5</span></span></td></tr>
+<tr class=""><td class="num">✓</td><td class="copy">Every Site, Green or Red</td><td class="num">24/30</td><td>Outcome</td><td class="small">Juniper CIO: &quot;site by site, green or red&quot;</td><td><span class="sc"><span class="" title="Words">W5</span><span class="" title="Outcome">O5</span><span class="" title="Voice">V5</span></span></td></tr>
+<tr class=""><td class="num">✓</td><td class="copy">See Every Site in One Place</td><td class="num">27/30</td><td>Outcome</td><td class="small">Mereford review: &quot;see every store&#x27;s connection in one place&quot;</td><td><span class="sc"><span class="" title="Words">W5</span><span class="" title="Outcome">O5</span><span class="" title="Voice">V5</span></span></td></tr>
+<tr class=""><td class="num">✓</td><td class="copy">Internet Layer Done Properly</td><td class="num">28/30</td><td>Outcome</td><td class="small">Varne interview: &quot;the internet layer done properly&quot;</td><td><span class="sc"><span class="" title="Words">W5</span><span class="" title="Outcome">O4</span><span class="" title="Voice">V5</span></span></td></tr>
+<tr class=""><td class="num">✓</td><td class="copy">Acquired Network a Black Box?</td><td class="num">29/30</td><td>Pain</td><td class="small">Moravia call: &quot;Their network is still a black box&quot;</td><td><span class="sc"><span class="" title="Words">W5</span><span class="" title="Outcome">O4</span><span class="" title="Voice">V5</span></span></td></tr>
+<tr class=""><td class="num">✓</td><td class="copy">Defensible Price, Not Cheapest</td><td class="num">30/30</td><td>Outcome</td><td class="small">Moravia call: &quot;has to be defensible, not cheapest&quot;</td><td><span class="sc"><span class="" title="Words">W5</span><span class="" title="Outcome">O4</span><span class="" title="Voice">V5</span></span></td></tr>
+<tr class=""><td class="num">✓</td><td class="copy">SD-WAN Year 2, SASE Year 3</td><td class="num">26/30</td><td>Proof</td><td class="small">Drummond review: &quot;SD-WAN in year two and SASE in year three&quot;</td><td><span class="sc"><span class="" title="Words">W5</span><span class="" title="Outcome">O4</span><span class="" title="Voice">V5</span></span></td></tr>
+<tr class="cut"><td class="num">✕</td><td class="copy">Global Connectivity Provider<div class="why">Cut: Category label. Nobody in the calls, interviews or reviews talks like this, and it names the product, not the result.</div></td><td class="num">28/30</td><td>Outcome</td><td class="small">none</td><td><span class="sc"><span class="lo" title="Words">W2</span><span class="lo" title="Outcome">O2</span><span class="" title="Voice">V4</span></span></td></tr>
+<tr class="cut"><td class="num">✕</td><td class="copy">Best-in-Class Global SD-WAN<div class="why">Cut: Banned hype word (best-in-class) and a claim with no proof behind it.</div></td><td class="num">27/30</td><td>Authority</td><td class="small">none</td><td><span class="sc"><span class="lo" title="Words">W1</span><span class="lo" title="Outcome">O2</span><span class="lo" title="Voice">V1</span></span></td></tr>
+<tr class="cut"><td class="num">✕</td><td class="copy">Acme Networks: SD-WAN &amp; SASE<div class="why">Cut: Leads with the brand and the product list, not the buyer&#x27;s outcome.</div></td><td class="num">28/30</td><td>Authority</td><td class="small">none</td><td><span class="sc"><span class="lo" title="Words">W2</span><span class="lo" title="Outcome">O1</span><span class="lo" title="Voice">V3</span></span></td></tr>
+<tr class="cut"><td class="num">✕</td><td class="copy">One Bill, Fewer Invoices<div class="why">Cut: Real words, wrong people: this is how the flat one-bill consolidators talk. It would pull Segment 2, not the ICP.</div></td><td class="num">24/30</td><td>Outcome</td><td class="small">Faring, Wexford, Everard (average segment)</td><td><span class="sc"><span class="lo" title="Words">W2</span><span class="" title="Outcome">O4</span><span class="" title="Voice">V5</span></span></td></tr>
+<tr class="cut"><td class="num">✕</td><td class="copy">Cheapest Global Internet<div class="why">Cut: Price-led. Draws the domestic price buyers and tender shoppers, who make up 0 of 17 best customers.</div></td><td class="num">24/30</td><td>Outcome</td><td class="small">Anti-ICP (price buyers)</td><td><span class="sc"><span class="lo" title="Words">W1</span><span class="lo" title="Outcome">O3</span><span class="" title="Voice">V4</span></span></td></tr>
+<tr class="cut"><td class="num">✕</td><td class="copy">Every Store Live on Day One<div class="why">Cut: Unsupported claim. A best customer says Brazil and Indonesia took 12+ weeks and &quot;hurt two store openings&quot;.</div></td><td class="num">27/30</td><td>Proof</td><td class="small">Contradicted by Ulvik review</td><td><span class="sc"><span class="lo" title="Words">W3</span><span class="" title="Outcome">O5</span><span class="lo" title="Voice">V2</span></span></td></tr>
+<tr class="cut"><td class="num">✕</td><td class="copy">Built for 12 to 35 Countries<div class="why">Cut: Our segmentation language, not theirs. Keep it in the targeting, out of the copy.</div></td><td class="num">28/30</td><td>Outcome</td><td class="small">Dossier targeting rule</td><td><span class="sc"><span class="lo" title="Words">W2</span><span class="lo" title="Outcome">O3</span><span class="" title="Voice">V4</span></span></td></tr></tbody></table></div>
+<h3>Descriptions · 4 kept of 6 · max 90 characters</h3>
+<div class="tbl"><table><thead><tr><th></th><th>Description</th><th>Chars</th><th>Angle</th><th>Source in the dossier</th><th>Score</th></tr></thead><tbody>
+<tr class=""><td class="num">✓</td><td class="copy">Eleven carriers, eleven contracts? Move every country to one contract and one portal.</td><td class="num">85/90</td><td>Pain</td><td class="small">Harwick call and review</td><td><span class="sc"><span class="" title="Words">W5</span><span class="" title="Outcome">O5</span><span class="" title="Voice">V5</span></span></td></tr>
+<tr class=""><td class="num">✓</td><td class="copy">MPLS renewal due? Plan the exit before it rolls over by default. Book a 30-min review.</td><td class="num">86/90</td><td>Urgency</td><td class="small">Juniper demo; renewal trigger</td><td><span class="sc"><span class="" title="Words">W5</span><span class="" title="Outcome">O4</span><span class="" title="Voice">V5</span></span></td></tr>
+<tr class=""><td class="num">✓</td><td class="copy">One team&#x27;s acquired sites went live in 6 weeks. It used to take them 4 months.</td><td class="num">78/90</td><td>Proof</td><td class="small">Harwick review</td><td><span class="sc"><span class="" title="Words">W5</span><span class="" title="Outcome">O5</span><span class="" title="Voice">V5</span></span></td></tr>
+<tr class=""><td class="num">✓</td><td class="copy">Lines and support in the countries big carriers skip. Coverage, not just bandwidth.</td><td class="num">83/90</td><td>Outcome</td><td class="small">Jorvik call; Glenmoor interview</td><td><span class="sc"><span class="" title="Words">W5</span><span class="" title="Outcome">O4</span><span class="" title="Voice">V5</span></span></td></tr>
+<tr class="cut"><td class="num">✕</td><td class="copy">Acme delivers seamless, best-in-class SD-WAN and SASE for global enterprises.<div class="why">Cut: Two banned hype words, product-led, no proof.</div></td><td class="num">77/90</td><td>Authority</td><td class="small">none</td><td><span class="sc"><span class="lo" title="Words">W1</span><span class="lo" title="Outcome">O1</span><span class="lo" title="Voice">V1</span></span></td></tr>
+<tr class="cut"><td class="num">✕</td><td class="copy">One bill for finance and fewer invoices. Switch to a single global provider today.<div class="why">Cut: One-bill consolidator language. Targets the flat segment, not the ICP.</div></td><td class="num">82/90</td><td>Outcome</td><td class="small">Average segment</td><td><span class="sc"><span class="lo" title="Words">W2</span><span class="" title="Outcome">O4</span><span class="" title="Voice">V5</span></span></td></tr></tbody></table></div>
+</section>
+
+<section id="linkedin">
+<h2>LinkedIn: sponsored content by role</h2>
+<p class="lede">One message per role, built on the reason that role buys in the dossier. There is no copy for a blocker:
+none was recorded at best-customer accounts, and the security-led blockers belong to the hold segment, which is excluded.</p>
+<div class="card role" id="li-champion">
+<h3 style="margin-top:0">Champion: the network owner</h3>
+<div class="reason"><b>Why this role buys:</b> Owns the carrier sprawl personally, runs the project and writes the business case. Buys to stop doing procurement and get acquired and new sites live.</div>
+<p class="small">Introductory text · 3 kept of 4 · the dashed part sits after the 150-character "see more" fold</p>
+<div class="tbl"><table><thead><tr><th></th><th>Introductory text</th><th>Chars</th><th>Angle</th><th>Source in the dossier</th><th>Score</th></tr></thead><tbody>
+<tr class=""><td class="num">✓</td><td class="copy">Eleven carriers, eleven contracts, eleven support numbers. When a site goes down, do you even know who to call first? One head of network went from 11<span class="fold"> carriers to one contract and one portal. Map your carriers and renewal dates in a 30-minute review.</span></td><td class="num">250</td><td>Pain + proof</td><td class="small">Harwick call and review</td><td><span class="sc"><span class="" title="Words">W5</span><span class="" title="Outcome">O4</span><span class="" title="Voice">V5</span></span></td></tr>
+<tr class=""><td class="num">✓</td><td class="copy">The acquisition closed. Months later, their network is still a black box. Take the acquired sites off your plate in one go: one contract, one portal. <span class="fold">One team had two acquired sites live in 6 weeks, down from 4 months. Bring your site list to a 30-minute review.</span></td><td class="num">262</td><td>Urgency (acquisition)</td><td class="small">Moravia call and interview; Harwick review</td><td><span class="sc"><span class="" title="Words">W5</span><span class="" title="Outcome">O4</span><span class="" title="Voice">V5</span></span></td></tr>
+<tr class=""><td class="num">✓</td><td class="copy">Your MPLS renewal is the deadline. With no plan by then, the contract can roll over for another three years by default. One head of network infrastruc<span class="fold">ture finished the migration off MPLS before the renewal date. Book a 30-minute review to map your exit.</span></td><td class="num">253</td><td>Urgency (renewal)</td><td class="small">Juniper demo and review</td><td><span class="sc"><span class="" title="Words">W5</span><span class="" title="Outcome">O4</span><span class="" title="Voice">V5</span></span></td></tr>
+<tr class="cut"><td class="num">✕</td><td class="copy">Acme Networks is the global connectivity partner for modern enterprises, delivering Internet, SD-WAN and SASE in 100+ countries.<div class="why">Cut: Product-led, corporate-speak, and &quot;100+ countries&quot; is not in the data.</div></td><td class="num">128</td><td>Authority</td><td class="small">none</td><td><span class="sc"><span class="lo" title="Words">W1</span><span class="lo" title="Outcome">O1</span><span class="lo" title="Voice">V2</span></span></td></tr></tbody></table></div>
+<p class="small">Headlines · 3 kept of 4 · max 70 characters</p>
+<div class="tbl"><table><thead><tr><th></th><th>Headline</th><th>Chars</th><th>Angle</th><th>Source in the dossier</th><th>Score</th></tr></thead><tbody>
+<tr class=""><td class="num">✓</td><td class="copy">Stop being a part-time procurement manager</td><td class="num">42/70</td><td>Pain</td><td class="small">Whitmore review</td><td><span class="sc"><span class="" title="Words">W5</span><span class="" title="Outcome">O4</span><span class="" title="Voice">V5</span></span></td></tr>
+<tr class=""><td class="num">✓</td><td class="copy">Every new country shouldn&#x27;t mean a new carrier negotiation</td><td class="num">58/70</td><td>Pain</td><td class="small">Kestrel call</td><td><span class="sc"><span class="" title="Words">W5</span><span class="" title="Outcome">O4</span><span class="" title="Voice">V5</span></span></td></tr>
+<tr class=""><td class="num">✓</td><td class="copy">Get off MPLS before the renewal date, not after it rolls over</td><td class="num">61/70</td><td>Urgency</td><td class="small">Juniper demo and review</td><td><span class="sc"><span class="" title="Words">W5</span><span class="" title="Outcome">O5</span><span class="" title="Voice">V5</span></span></td></tr>
+<tr class="cut"><td class="num">✕</td><td class="copy">Transform your global network with Acme Networks<div class="why">Cut: Brand-first, and &quot;transform&quot; is marketer-speak with no result attached.</div></td><td class="num">48/70</td><td>Outcome</td><td class="small">none</td><td><span class="sc"><span class="lo" title="Words">W1</span><span class="lo" title="Outcome">O2</span><span class="lo" title="Voice">V3</span></span></td></tr></tbody></table></div>
+
+</div><div class="card role" id="li-cio">
+<h3 style="margin-top:0">Decision maker: the CIO</h3>
+<div class="reason"><b>Why this role buys:</b> Signs the business case the network owner wrote and wants a board-ready view of every site. Buys to avoid a three-year default roll-over and to see site status at a glance.</div>
+<p class="small">Introductory text · 3 kept of 4 · the dashed part sits after the 150-character "see more" fold</p>
+<div class="tbl"><table><thead><tr><th></th><th>Introductory text</th><th>Chars</th><th>Angle</th><th>Source in the dossier</th><th>Score</th></tr></thead><tbody>
+<tr class=""><td class="num">✓</td><td class="copy">Site by site, green or red. One view of every site&#x27;s connection that you can put in front of the board, with one contract and one portal behind it. Bo<span class="fold">ok a 30-minute review with your head of network.</span></td><td class="num">198</td><td>Outcome</td><td class="small">Juniper CIO; Mereford review</td><td><span class="sc"><span class="" title="Words">W5</span><span class="" title="Outcome">O5</span><span class="" title="Voice">V5</span></span></td></tr>
+<tr class=""><td class="num">✓</td><td class="copy">If nobody owns the plan by the MPLS renewal date, the contract can roll over for another three years by default. Ask your head of network for the date<span class="fold">. Then map the exit together in a 30-minute review.</span></td><td class="num">201</td><td>Urgency (renewal)</td><td class="small">Juniper demo</td><td><span class="sc"><span class="" title="Words">W5</span><span class="" title="Outcome">O4</span><span class="" title="Voice">V5</span></span></td></tr>
+<tr class=""><td class="num">✓</td><td class="copy">&quot;The CIO signed because the numbers were mine, not a vendor&#x27;s.&quot; That&#x27;s a head of network on replacing legacy MPLS across 127 sites in 15 countries. Yo<span class="fold">ur network lead builds the case. You sign one contract.</span></td><td class="num">205</td><td>Proof</td><td class="small">Varne interview; accounts.csv</td><td><span class="sc"><span class="" title="Words">W5</span><span class="" title="Outcome">O4</span><span class="" title="Voice">V5</span></span></td></tr>
+<tr class="cut"><td class="num">✕</td><td class="copy">Future-proof your enterprise with a digital-first network strategy built for the modern CIO.<div class="why">Cut: Corporate-speak with no customer words and no result. Fails the read-aloud test.</div></td><td class="num">92</td><td>Outcome</td><td class="small">none</td><td><span class="sc"><span class="lo" title="Words">W1</span><span class="lo" title="Outcome">O2</span><span class="lo" title="Voice">V2</span></span></td></tr></tbody></table></div>
+<p class="small">Headlines · 3 kept of 4 · max 70 characters</p>
+<div class="tbl"><table><thead><tr><th></th><th>Headline</th><th>Chars</th><th>Angle</th><th>Source in the dossier</th><th>Score</th></tr></thead><tbody>
+<tr class=""><td class="num">✓</td><td class="copy">Every site, green or red, on one screen for the board</td><td class="num">53/70</td><td>Outcome</td><td class="small">Juniper CIO</td><td><span class="sc"><span class="" title="Words">W5</span><span class="" title="Outcome">O5</span><span class="" title="Voice">V5</span></span></td></tr>
+<tr class=""><td class="num">✓</td><td class="copy">Your MPLS can roll over for three years unless someone owns the date</td><td class="num">68/70</td><td>Urgency</td><td class="small">Juniper demo</td><td><span class="sc"><span class="" title="Words">W5</span><span class="" title="Outcome">O4</span><span class="" title="Voice">V5</span></span></td></tr>
+<tr class=""><td class="num">✓</td><td class="copy">One contract, one portal, every country you operate in</td><td class="num">54/70</td><td>Outcome</td><td class="small">Harwick review; Moravia call</td><td><span class="sc"><span class="" title="Words">W4</span><span class="" title="Outcome">O5</span><span class="" title="Voice">V5</span></span></td></tr>
+<tr class="cut"><td class="num">✕</td><td class="copy">The CIO&#x27;s guide to global SD-WAN in 2026<div class="why">Cut: Educational content, not an outcome. Pulls readers, not buyers.</div></td><td class="num">40/70</td><td>Authority</td><td class="small">none</td><td><span class="sc"><span class="lo" title="Words">W2</span><span class="lo" title="Outcome">O2</span><span class="" title="Voice">V4</span></span></td></tr></tbody></table></div>
+
+</div><div class="card role" id="li-security">
+<h3 style="margin-top:0">Evaluator: security</h3>
+<div class="reason"><b>Why this role buys:</b> Evaluates, never owns the budget at ICP accounts. Wants security added later without starting over. Buys when SASE is on the roadmap, not bolted on.</div>
+<p class="small">Introductory text · 3 kept of 4 · the dashed part sits after the 150-character "see more" fold</p>
+<div class="tbl"><table><thead><tr><th></th><th>Introductory text</th><th>Chars</th><th>Angle</th><th>Source in the dossier</th><th>Score</th></tr></thead><tbody>
+<tr class=""><td class="num">✓</td><td class="copy">Security is phase two, but it&#x27;s coming. Start with the network, then add SD-WAN and SASE with the same provider when you&#x27;re ready. One brewer across 3<span class="fold">3 countries added SD-WAN in year two and SASE in year three.</span></td><td class="num">210</td><td>Outcome + proof</td><td class="small">Juniper demo; Drummond review</td><td><span class="sc"><span class="" title="Words">W5</span><span class="" title="Outcome">O4</span><span class="" title="Voice">V5</span></span></td></tr>
+<tr class=""><td class="num">✓</td><td class="copy">Is security on your roadmap or on mine? Settle it before the network contract is signed. One manufacturer started with connectivity and SD-WAN, and ag<span class="fold">reed a SASE review 12 months after.</span></td><td class="num">185</td><td>Pain</td><td class="small">Zeller demo</td><td><span class="sc"><span class="" title="Words">W5</span><span class="" title="Outcome">O4</span><span class="" title="Voice">V5</span></span></td></tr>
+<tr class=""><td class="num">✓</td><td class="copy">One retailer can now see every store&#x27;s connection in one place. SASE went on top a year later, and their security team is happy now. Network first, th<span class="fold">en security, with one provider.</span></td><td class="num">181</td><td>Proof</td><td class="small">Mereford review</td><td><span class="sc"><span class="" title="Words">W5</span><span class="" title="Outcome">O4</span><span class="" title="Voice">V5</span></span></td></tr>
+<tr class="cut"><td class="num">✕</td><td class="copy">Zero trust built in from day one. Security first, network second.<div class="why">Cut: These are the words of the security-led buyers we lost 3 of 3 times. Wrong buyer, and a claim the data can&#x27;t back.</div></td><td class="num">65</td><td>Outcome</td><td class="small">Brennan (lost, hold segment)</td><td><span class="sc"><span class="lo" title="Words">W2</span><span class="lo" title="Outcome">O3</span><span class="lo" title="Voice">V2</span></span></td></tr></tbody></table></div>
+<p class="small">Headlines · 3 kept of 4 · max 70 characters</p>
+<div class="tbl"><table><thead><tr><th></th><th>Headline</th><th>Chars</th><th>Angle</th><th>Source in the dossier</th><th>Score</th></tr></thead><tbody>
+<tr class=""><td class="num">✓</td><td class="copy">Network now, SASE with the same provider when you&#x27;re ready</td><td class="num">58/70</td><td>Outcome</td><td class="small">Drummond and Mereford reviews</td><td><span class="sc"><span class="" title="Words">W4</span><span class="" title="Outcome">O5</span><span class="" title="Voice">V5</span></span></td></tr>
+<tr class=""><td class="num">✓</td><td class="copy">Security is phase two. Make sure phase two is on the roadmap</td><td class="num">60/70</td><td>Pain</td><td class="small">Juniper demo; Zeller demo</td><td><span class="sc"><span class="" title="Words">W5</span><span class="" title="Outcome">O4</span><span class="" title="Voice">V5</span></span></td></tr>
+<tr class=""><td class="num">✓</td><td class="copy">SD-WAN in year two, SASE in year three, one provider</td><td class="num">52/70</td><td>Proof</td><td class="small">Drummond review</td><td><span class="sc"><span class="" title="Words">W5</span><span class="" title="Outcome">O4</span><span class="" title="Voice">V5</span></span></td></tr>
+<tr class="cut"><td class="num">✕</td><td class="copy">The #1 SASE platform for zero trust<div class="why">Cut: Unprovable ranking claim, and it courts the security-led buyers in the hold segment.</div></td><td class="num">35/70</td><td>Authority</td><td class="small">none</td><td><span class="sc"><span class="lo" title="Words">W1</span><span class="lo" title="Outcome">O2</span><span class="lo" title="Voice">V1</span></span></td></tr></tbody></table></div>
+
+</div><div class="card role" id="li-procurement">
+<h3 style="margin-top:0">Evaluator: procurement</h3>
+<div class="reason"><b>Why this role buys:</b> Joins late and checks the terms. The dossier has little procurement language: &quot;has to be defensible, not cheapest&quot; and a question about contract length. Copy here is thin by design.</div>
+<p class="small">Introductory text · 2 kept of 4 · the dashed part sits after the 150-character "see more" fold</p>
+<div class="tbl"><table><thead><tr><th></th><th>Introductory text</th><th>Chars</th><th>Angle</th><th>Source in the dossier</th><th>Score</th></tr></thead><tbody>
+<tr class=""><td class="num">✓</td><td class="copy">The price has to be defensible, not cheapest. One contract across every country gives you one set of terms to benchmark, instead of one per carrier.</td><td class="num">148</td><td>Outcome</td><td class="small">Moravia call</td><td><span class="sc"><span class="" title="Words">W5</span><span class="" title="Outcome">O4</span><span class="" title="Voice">V5</span></span></td></tr>
+<tr class=""><td class="num">✓</td><td class="copy">Eleven carriers means eleven contracts and eleven renewal dates to track. One contract means one renewal date and one supplier to review.</td><td class="num">137</td><td>Pain</td><td class="small">Harwick call (champion&#x27;s words)</td><td><span class="sc"><span class="" title="Words">W4</span><span class="" title="Outcome">O4</span><span class="" title="Voice">V5</span></span></td></tr>
+<tr class="cut"><td class="num">✕</td><td class="copy">Your network team has written the requirements. What lands on your desk is one contract, one contract length and one renewal date across every country.<div class="why">Cut: Mostly our words. The one procurement signal (contract length) is a note, not a quote. Not enough to reach 4.</div></td><td class="num">151</td><td>Outcome</td><td class="small">Harwick call (contract length); Juniper demo</td><td><span class="sc"><span class="lo" title="Words">W3</span><span class="" title="Outcome">O4</span><span class="" title="Voice">V5</span></span></td></tr>
+<tr class="cut"><td class="num">✕</td><td class="copy">Save up to 30% on global connectivity costs.<div class="why">Cut: Invented number, and a price lead that pulls tender shoppers.</div></td><td class="num">44</td><td>Proof</td><td class="small">none</td><td><span class="sc"><span class="lo" title="Words">W1</span><span class="lo" title="Outcome">O3</span><span class="lo" title="Voice">V1</span></span></td></tr></tbody></table></div>
+<p class="small">Headlines · 2 kept of 4 · max 70 characters</p>
+<div class="tbl"><table><thead><tr><th></th><th>Headline</th><th>Chars</th><th>Angle</th><th>Source in the dossier</th><th>Score</th></tr></thead><tbody>
+<tr class=""><td class="num">✓</td><td class="copy">Defensible, not cheapest: one contract for every country</td><td class="num">56/70</td><td>Outcome</td><td class="small">Moravia call</td><td><span class="sc"><span class="" title="Words">W5</span><span class="" title="Outcome">O4</span><span class="" title="Voice">V5</span></span></td></tr>
+<tr class=""><td class="num">✓</td><td class="copy">One contract, one renewal date, every country</td><td class="num">45/70</td><td>Outcome</td><td class="small">Harwick review; Moravia call</td><td><span class="sc"><span class="" title="Words">W4</span><span class="" title="Outcome">O4</span><span class="" title="Voice">V5</span></span></td></tr>
+<tr class="cut"><td class="num">✕</td><td class="copy">Eleven contracts or one: which is easier to defend?<div class="why">Cut: Opens on a question, not a result. Close, but under the gate.</div></td><td class="num">51/70</td><td>Pain</td><td class="small">Harwick call; Moravia call</td><td><span class="sc"><span class="" title="Words">W4</span><span class="lo" title="Outcome">O3</span><span class="" title="Voice">V5</span></span></td></tr>
+<tr class="cut"><td class="num">✕</td><td class="copy">Cut your network costs today<div class="why">Cut: Price-led and generic. Draws the anti-ICP.</div></td><td class="num">28/70</td><td>Outcome</td><td class="small">none</td><td><span class="sc"><span class="lo" title="Words">W1</span><span class="lo" title="Outcome">O3</span><span class="lo" title="Voice">V3</span></span></td></tr></tbody></table></div>
+<p class="small"><b>Gap:</b> Only 2 intros and 2 headlines pass. The dossier does not hold enough procurement language to write a third honestly, so there isn&#x27;t one.</p>
+</div>
+</section>
+
+<section id="audiences">
+<h2>Audience plan</h2>
+
+<h3>LinkedIn account list</h3>
+<div class="card">
+<p><b>Net-new accounts in the data: 0.</b> The ICP rule (footprint plus a network-owner champion) matches 18 accounts in the
+CRM, and all 18 are current customers: the 17 best customers and Alder Power. They are the model for the list, not the list itself.
+No companies are invented here. The new-logo list has to be built from a firmographic data source with the spec below.</p>
+<div class="tbl"><table><thead><tr><th>Filter</th><th>Value</th><th>Why (from the dossier)</th></tr></thead><tbody>
+<tr><td><b>Countries with sites</b></td><td>12 to 35</td><td>Best customers 12–35. Average 7–15, churned 3–4.</td></tr>
+<tr><td><b>Sites</b></td><td>40 to 140</td><td>Best customers 40–140. The global fully managed anti-ICP starts at 415.</td></tr>
+<tr><td><b>Current network</b></td><td>Legacy MPLS without SD-WAN, MPLS plus local ISPs, or several regional carriers</td><td>0 best customers on a single national carrier, a global tier-1 MPLS or in-house SD-WAN. This needs technographic data or discovery: flag accounts where it is unknown.</td></tr>
+<tr><td><b>Employees</b></td><td>about 2,000 to 17,000 (proxy only)</td><td>Best customers 2,110–16,610. Does not separate from lost deals, so never the only filter. LinkedIn's company-size buckets are too coarse to replace the uploaded list.</td></tr>
+<tr><td><b>Industry</b></td><td>No filter</td><td>Industry does not separate. All best customers run physical sites: warehouses, plants, stores, breweries, labs.</td></tr>
+<tr><td><b>Buying group check</b></td><td>A Head of Network, Global Network Lead, Head of Network Infrastructure or Head of IT Infrastructure is on LinkedIn at the account</td><td>17 of 17 best customers had one. All 5 lost deals inside the footprint did not. No network owner = hold segment: don't upload.</td></tr>
+</tbody></table></div>
+<p><b>Priority tier A:</b> matches the spec and shows a trigger in the last 3 to 10 months (acquisition adding countries, MPLS renewal inside
+12 months, announced country expansion). At best customers the trigger came 77 to 299 days before pipeline. <b>Tier B:</b> matches the spec, no trigger seen yet.</p>
+<p class="small">Separate from this campaign: an expansion campaign for current best customers with fresh post-sale signals (Marlowe opened 5 countries in May 2026, Ingram hiring a SASE architect since May 2026, Whitmore opened 2 countries in Aug 2026).</p>
+</div>
+
+<h3>Job titles per role</h3>
+<div class="tbl"><table><thead><tr><th>Role</th><th>Job titles</th><th>Function</th><th>Seniority</th><th>Budget weight</th></tr></thead><tbody>
+<tr><td><b>Network owner</b> (champion)</td><td>Head of Network · Global Network Lead · Head of Network Infrastructure · Head of IT Infrastructure</td><td>Information Technology</td><td>Director</td><td>Highest: present at 17 of 17 best accounts, runs the project</td></tr>
+<tr><td><b>CIO</b> (decision maker)</td><td>Chief Information Officer</td><td>Information Technology</td><td>CXO</td><td>High: signs at 16 of 17</td></tr>
+<tr><td><b>Security</b> (evaluator)</td><td>Chief Information Security Officer · Head of Information Security</td><td>Information Technology</td><td>Director, CXO</td><td>Medium: involved at 9 of 17</td></tr>
+<tr><td><b>Procurement</b> (evaluator)</td><td>Category Manager - Technology · IT Procurement Manager</td><td>Purchasing</td><td>Manager</td><td>Lowest: joins late, and only 2 + 2 assets passed</td></tr>
+<tr><td class="blank">Not targeted</td><td>IT Operations Manager · IT Service Manager · IT Manager · Finance Director · CFO</td><td></td><td></td><td>These champion or decide at the flat one-bill accounts and at the small domestic lost deals, not at the ICP</td></tr>
+</tbody></table></div>
+
+<h3>LinkedIn exclusions (from the anti-ICP)</h3>
+<div class="tbl"><table><thead><tr><th>Exclude</th><th>How</th><th>Accounts in the CRM</th></tr></thead><tbody>
+<tr><td><b>Current customers</b></td><td>Company list upload, new-logo campaigns only</td><td>All 40 won accounts</td></tr>
+<tr><td><b>Domestic price buyers</b></td><td>Rule: single national carrier, or 4 or fewer countries with sites</td><td>Corvane Resorts, Kirkby Consulting, Elstree Engineering, Castell Components, Garrow Hotels, Penrose Retail Group, Pellam Brands, Thornbury Retail Group, Delmont Renewables, Norland Advisory, Lowther Hotels, Istra Industries, Iverson Studios</td></tr>
+<tr><td><b>Incumbent re-bid tenders</b></td><td>Rule: price-led tender with the incumbent re-bidding. Route out, don't chase</td><td>Calder Financial, Nesbury Advisory, Ostrava Manufacturing, Ashgrove Components, Larchmont Brands (plus the tender accounts already listed above)</td></tr>
+<tr><td><b>Global fully managed WAN</b></td><td>Rule: more than 400 sites, or a global tier-1 MPLS</td><td>Kelder Brands, Uxley Energy, Fenwick Components, Falkner Financial</td></tr>
+<tr><td><b>Hold: right footprint, wrong buying group</b></td><td>Rule: new CISO with a board zero-trust mandate in the last 12 months, or Head of Network role vacant</td><td>Brennan Engineering, Stellan Components, Radley Biosciences (security-led) · Halden Distribution, Quarry Industries, Bramwell Engineering (no network owner: re-add when one is hired)</td></tr>
+</tbody></table></div>
+
+<h3>Google keywords</h3>
+<div class="grid2">
+<div>
+<p class="small"><b>Seeds</b> (phrase match), from the ICP's words and triggers</p>
+<div class="tbl"><table><thead><tr><th>Keyword</th><th>From</th></tr></thead><tbody>
+<tr><td>mpls renewal · mpls contract renewal</td><td>Renewal trigger; Juniper, Rosmer</td></tr>
+<tr><td>mpls exit · replace mpls · mpls replacement</td><td>Enrichment: network lead job postings mention "MPLS exit"</td></tr>
+<tr><td>migrate off mpls</td><td>Juniper review: "Migration off MPLS"</td></tr>
+<tr><td>consolidate network carriers · too many telecom carriers</td><td>Harwick call, Kestrel call</td></tr>
+<tr><td>one contract global internet · single provider multiple countries</td><td>Moravia call, Harwick review</td></tr>
+<tr><td>connect acquired sites · network integration after acquisition</td><td>Acquisition trigger; Moravia, Harwick</td></tr>
+<tr><td>internet for remote depots · connectivity remote sites abroad</td><td>Jorvik call, Glenmoor interview</td></tr>
+<tr><td>network status dashboard all sites</td><td>Juniper CIO, Mereford review</td></tr>
+<tr><td>add sase to sd-wan</td><td>Drummond and Mereford reviews</td></tr>
+</tbody></table></div>
+</div>
+<div>
+<p class="small"><b>Negatives</b>, from the anti-ICP</p>
+<div class="tbl"><table><thead><tr><th>Negative</th><th>Keeps out</th></tr></thead><tbody>
+<tr><td>cheapest · cheap · lowest price · price per site</td><td>Domestic price buyers: "Send me the price per site."</td></tr>
+<tr><td>tender · rfp · public procurement</td><td>Incumbent re-bid tenders: 12 of 12 churned, contracted or lost</td></tr>
+<tr><td>home broadband · broadband deals · residential · small business</td><td>Small domestic accounts (4 to 8 sites)</td></tr>
+<tr><td>comparison · compare providers</td><td>"Found you on a comparison page. Probably overkill for us"</td></tr>
+<tr><td>managed lan · managed wifi · wifi installation · network hardware · fully managed wan</td><td>Global fully managed WAN: "including the kit inside the building"</td></tr>
+<tr><td>zero trust platform · ztna vendor</td><td>Security-led buyers (hold). Plain "sase" stays live for ICP security evaluators</td></tr>
+<tr><td class="small">jobs · careers · salary · certification · course</td><td class="small">Standard hygiene, not from the dossier</td></tr>
+</tbody></table></div>
+</div>
+</div>
+</section>
+
+<section id="notes">
+<h2>Notes before launch</h2>
+<div class="card">
+<ul>
+<li><b>Placeholders:</b> brand, landing page and the 30-minute review offer all need confirming. Every asset points to that one page.</li>
+<li><b>Proof permissions:</b> lines built on a customer's words or numbers (11 carriers to one, 6 weeks instead of 4 months, 33 countries, SD-WAN then SASE) need that customer's sign-off in a real campaign.</li>
+<li><b>Claims kept out on purpose:</b> fast provisioning everywhere (Ulvik: 12+ weeks in Brazil and Indonesia), API depth (Juniper: "less mature than promised"), full WAN and hardware management (not what the product does), security-first positioning (lost 3 of 3).</li>
+<li><b>Roll-over wording:</b> the three-year default roll-over is one customer's contract, so the copy says "can roll over", not "will".</li>
+<li><b>Procurement is thin:</b> only 2 intros and 2 headlines passed. The fix is procurement voices in the next win/loss interviews, not more copy.</li>
+<li><b>In-sample:</b> the targeting rule was fitted on the same 60 accounts it was measured on. Expect lower precision on the first external list.</li>
+</ul>
+</div>
+</section>
+
+<footer>
+Built from output/icp-dossier.html with skills/ad-copy and voice/voice-rules.md. All data synthetic. Adapted from the ad-copy
+skill by Nick Christensen (MIT License, see THIRD-PARTY-NOTICES.md).
+</footer>
+</div>
+</body>
+</html>

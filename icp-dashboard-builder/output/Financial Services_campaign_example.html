@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ICP Campaign</title>
+<meta name="description" content="Example campaign built on the Stack Consolidators ICP: scored Google Search RSA and LinkedIn copy per buying-group role, plus the audience plan.">
+<style>
+:root {
+  --bg: #f7f6f3; --surface: #ffffff; --surface-2: #f0eee9; --text: #1c1b19; --muted: #5f5b53; --faint: #8a857b;
+  --line: #dedad2; --accent: #1f5f8b; --accent-soft: #e3eef6; --good: #1e6b45; --good-soft: #e2f1e8;
+  --warn: #8a5a00; --warn-soft: #fbf0d9; --bad: #a3332b; --bad-soft: #f8e4e2;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #151514; --surface: #1e1e1c; --surface-2: #262623; --text: #ecebe7; --muted: #b1ada4; --faint: #8b877e;
+    --line: #36352f; --accent: #7fb7df; --accent-soft: #1b2c38; --good: #7fcfa2; --good-soft: #17291f;
+    --warn: #e6b65c; --warn-soft: #2d2412; --bad: #ee8f86; --bad-soft: #321a18;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #151514; --surface: #1e1e1c; --surface-2: #262623; --text: #ecebe7; --muted: #b1ada4; --faint: #8b877e;
+  --line: #36352f; --accent: #7fb7df; --accent-soft: #1b2c38; --good: #7fcfa2; --good-soft: #17291f;
+  --warn: #e6b65c; --warn-soft: #2d2412; --bad: #ee8f86; --bad-soft: #321a18;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--bg); color: var(--text);
+  font: 16px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, "Helvetica Neue", Arial, sans-serif; }
+.wrap { max-width: 1080px; margin: 0 auto; padding: 32px 16px 80px; }
+.eyebrow { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+h1 { font-size: clamp(28px, 5vw, 40px); line-height: 1.15; margin: 6px 0 10px; letter-spacing: -.01em; }
+h2 { font-size: 24px; margin: 56px 0 6px; letter-spacing: -.01em; }
+h3 { font-size: 18px; margin: 2px 0 2px; }
+h4 { font-size: 15px; margin: 22px 0 4px; }
+p { max-width: 75ch; }
+.lede { color: var(--muted); max-width: 72ch; margin: 0 0 16px; }
+.meta { font-size: 14px; color: var(--muted); }
+.small { font-size: 13px; color: var(--muted); }
+code { font-size: 13px; background: var(--surface-2); padding: 1px 5px; border-radius: 4px; }
+.banner { background: var(--warn-soft); border: 1px solid var(--line); border-left: 4px solid var(--warn);
+  border-radius: 8px; padding: 12px 14px; font-size: 14px; margin: 16px 0 0; }
+nav.toc { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+nav.toc a { font-size: 13px; color: var(--accent); text-decoration: none; background: var(--accent-soft); padding: 4px 10px; border-radius: 999px; }
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; margin: 20px 0 0; }
+.tile { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px; }
+.tile .n { font-size: 28px; font-weight: 700; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.tile .l { font-size: 13px; color: var(--muted); margin-top: 4px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px 20px; }
+.rubric { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+.rubric .card h3 { font-size: 16px; }
+.rubric ul { padding-left: 18px; margin: 8px 0 0; font-size: 14px; }
+.table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); margin: 8px 0 14px; }
+table { border-collapse: collapse; width: 100%; font-size: 14px; }
+th, td { text-align: left; vertical-align: top; padding: 9px 10px; border-bottom: 1px solid var(--line); }
+th { background: var(--surface-2); font-weight: 600; font-size: 13px; white-space: nowrap; }
+tr:last-child td { border-bottom: 0; }
+td.num { font-variant-numeric: tabular-nums; white-space: nowrap; color: var(--muted); }
+td.idx { color: var(--faint); }
+td.copy { min-width: 280px; font-size: 15px; }
+td.sco { text-align: center; }
+.src { font-size: 12px; color: var(--faint); margin-top: 3px; }
+.why { font-size: 13px; color: var(--bad); margin-top: 4px; }
+tr.cut td { background: var(--bad-soft); }
+tr.cut s { color: var(--muted); }
+.fold { color: var(--text); }
+.more { color: var(--faint); }
+.sc { display: inline-block; min-width: 24px; padding: 1px 6px; border-radius: 6px; font-weight: 700; font-size: 13px; font-variant-numeric: tabular-nums; }
+.sc.s5 { background: var(--good-soft); color: var(--good); }
+.sc.s4 { background: var(--accent-soft); color: var(--accent); }
+.sc.slow { background: var(--bad); color: var(--surface); }
+.pill { display: inline-block; font-size: 12px; font-weight: 600; padding: 2px 8px; border-radius: 999px; white-space: nowrap; }
+.pill.yes { background: var(--good-soft); color: var(--good); }
+.pill.no { background: var(--bad-soft); color: var(--bad); border: 1px solid var(--bad); }
+.pill.hold { background: var(--warn-soft); color: var(--warn); }
+.flag { display: inline-block; font-size: 11px; font-weight: 600; padding: 1px 6px; border-radius: 4px; margin-top: 3px; white-space: nowrap; }
+.flag.proof { background: var(--accent-soft); color: var(--accent); }
+.flag.confirm { background: var(--warn-soft); color: var(--warn); }
+.role { background: var(--surface-2); border-radius: 14px; padding: 18px; margin: 18px 0; }
+.role .table-wrap { background: var(--surface); }
+.role-head { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+p.why { color: var(--text); font-size: 14px; margin: 10px 0 0; }
+.grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 14px; }
+ul.tight { padding-left: 20px; margin: 8px 0; }
+ul.tight li { margin: 5px 0; }
+.kw { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0; }
+.kw span { font-size: 13px; background: var(--surface-2); border: 1px solid var(--line); border-radius: 6px; padding: 2px 8px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+.kw.neg span { background: var(--bad-soft); border-color: transparent; color: var(--bad); }
+.callout { background: var(--accent-soft); border-radius: 10px; padding: 14px 16px; margin: 14px 0; font-size: 15px; }
+.callout strong { color: var(--accent); }
+footer { margin-top: 64px; font-size: 13px; color: var(--faint); border-top: 1px solid var(--line); padding-top: 16px; }
+@media (max-width: 560px) { th, td { padding: 8px 8px; } td.copy { min-width: 220px; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">Campaign · Pass 2 · built on the ICP dossier</div>
+  <h1>Stack Consolidators: example campaign</h1>
+  <p class="meta">Brand: <strong>Loomrail</strong> (fictitious placeholder) · Landing page: <code>https://example.com/one-payment-stack</code> (placeholder) · Source: <code>output/icp-dossier.html</code> · Generated 24 September 2026.</p>
+  <div class="banner"><strong>Synthetic data, example copy.</strong> The brand, the customers and every quote are fictitious. Customer results used as proof come from the synthetic dossier. In a real campaign each one needs the customer's permission and evidence behind it before it runs.</div>
+  <div class="tiles">
+    <div class="tile"><div class="n">43</div><div class="l">assets shipped: 15 RSA headlines, 4 descriptions, 12 LinkedIn intros, 12 LinkedIn headlines</div></div>
+    <div class="tile"><div class="n">8</div><div class="l">drafts cut at the gate, each with the reason</div></div>
+    <div class="tile"><div class="n">4</div><div class="l">buying-group roles, each with its own reason to buy</div></div>
+    <div class="tile"><div class="n">10</div><div class="l">shipped assets with a product claim to confirm before launch</div></div>
+  </div>
+  <nav class="toc">
+    <a href="#scoring">Scoring</a>
+    <a href="#google">Google Search</a>
+    <a href="#linkedin">LinkedIn by role</a>
+    <a href="#audiences">Audience plan</a>
+    <a href="#prelaunch">Before launch</a>
+  </nav>
+</header>
+
+<section id="scoring">
+  <h2>How every asset was scored</h2>
+  <p class="lede">Three axes, 1 to 5, against the ICP dossier. <strong>The gate is the lowest of the three:</strong> any axis under 4 and the asset is cut. Cut drafts stay on the page, struck through, with the reason.</p>
+  <div class="rubric">
+    <div class="card"><h3>W · Their words</h3><ul>
+      <li><strong>5</strong> a verbatim phrase from a best customer</li>
+      <li><strong>4</strong> close to their phrasing, or from an AE note (not verbatim)</li>
+      <li><strong>3 or less</strong> marketer-speak, or words from the anti-ICP</li></ul></div>
+    <div class="card"><h3>O · Outcome-led</h3><ul>
+      <li><strong>5</strong> opens with the result they're buying</li>
+      <li><strong>4</strong> opens with their pain or trigger, result follows</li>
+      <li><strong>3 or less</strong> opens with the product, a category or an adjective</li></ul></div>
+    <div class="card"><h3>V · Voice</h3><ul>
+      <li><strong>5</strong> passes every rule in <code>voice/voice-rules.md</code></li>
+      <li><strong>4</strong> passes, but reads slightly like a brand</li>
+      <li><strong>3 or less</strong> hype word, em dash, banned phrase, or a claim with no proof</li></ul></div>
+  </div>
+  <p class="small" style="margin-top:12px">Flags on shipped lines: <span class="flag proof">customer proof</span> uses a customer result from the dossier (16 assets). <span class="flag confirm">confirm claim</span> states a product capability the dossier can't prove (10 assets). Character counts are computed, not estimated. The build fails if a shipped line breaks a limit or a voice rule.</p>
+</section>
+
+<section id="google">
+  <h2>Google Search · responsive search ad</h2>
+  <p class="lede">One ad group. Every headline has to stand on its own, because Google mixes them. The set covers the five angles: outcome, pain, proof, urgency (the three ICP triggers), and the business case. Nothing is pinned.</p>
+  <h4>Headlines (15, up to 30 characters)</h4>
+  <div class="table-wrap"><table><thead><tr><th>#</th><th>Copy</th><th>Chars</th><th>Angle</th><th title="Their words">W</th><th title="Outcome-led">O</th><th title="Voice">V</th><th>Gate</th></tr></thead><tbody><tr><td class="num idx">1</td><td class="copy">Four PSPs Down to One<div class="src">Luca Smit, Pentland Travel (review)</div></td><td class="num">21 / 30</td><td>Proof <span class="flag proof" title="Customer result from the dossier. Needs permission and substantiation before a real launch.">customer proof</span></td><td class="sco"><span class="sc s5">5</span></td><td class="sco"><span class="sc s5">5</span></td><td class="sco"><span class="sc s5">5</span></td><td><span class="pill yes">Ship</span></td></tr>
+<tr><td class="num idx">2</td><td class="copy">One Settlement File, Not Four<div class="src">Niels Marino, Barrow Gaming (call)</div></td><td class="num">29 / 30</td><td>Outcome </td><td class="sco"><span class="sc s5">5</span></td><td class="sco"><span class="sc s5">5</span></td><td class="sco"><span class="sc s5">5</span></td><td><span class="pill yes">Ship</span></td></tr>
+<tr><td class="num idx">3</td><td class="copy">See Your Real Approval Rate<div class="src">Niels Marino, Barrow Gaming (call)</div></td><td class="num">27 / 30</td><td>Outcome </td><td class="sco"><span class="sc s5">5</span></td><td class="sco"><span class="sc s5">5</span></td><td class="sco"><span class="sc s5">5</span></td><td><span class="pill yes">Ship</span></td></tr>
+<tr><td class="num idx">4</td><td class="copy">One Integration, Every Market<div class="src">Lotte Garcia, Wynford Interactive (review)</div></td><td class="num">29 / 30</td><td>Outcome <span class="flag confirm" title="Product capability the dossier cannot prove. Confirm with product before launch.">confirm claim</span></td><td class="sco"><span class="sc s5">5</span></td><td class="sco"><span class="sc s5">5</span></td><td class="sco"><span class="sc s5">5</span></td><td><span class="pill yes">Ship</span></td></tr>
+<tr><td class="num idx">5</td><td class="copy">LatAm Approvals: 61% to 78%<div class="src">Lotte Garcia, Wynford Interactive (review)</div></td><td class="num">27 / 30</td><td>Proof <span class="flag proof" title="Customer result from the dossier. Needs permission and substantiation before a real launch.">customer proof</span></td><td class="sco"><span class="sc s5">5</span></td><td class="sco"><span class="sc s5">5</span></td><td class="sco"><span class="sc s5">5</span></td><td><span class="pill yes">Ship</span></td></tr>
+<tr><td class="num idx">6</td><td class="copy">Same-Day Payouts, Most Markets<div class="src">Chloe Byrne, Esker Bet (review)</div></td><td class="num">30 / 30</td><td>Proof <span class="flag proof" title="Customer result from the dossier. Needs permission and substantiation before a real launch.">customer proof</span></td><td class="sco"><span class="sc s5">5</span></td><td class="sco"><span class="sc s5">5</span></td><td class="sco"><span class="sc s5">5</span></td><td><span class="pill yes">Ship</span></td></tr>
+<tr><td class="num idx">7</td><td class="copy">4-Day Withdrawals to Same Day<div class="src">Pablo Wagner, Garve Invest (review)</div></td><td class="num">29 / 30</td><td>Proof <span class="flag proof" title="Customer result from the dossier. Needs permission and substantiation before a real launch.">customer proof</span></td><td class="sco"><span class="sc s5">5</span></td><td class="sco"><span class="sc s5">5</span></td><td class="sco"><span class="sc s5">5</span></td><td><span class="pill yes">Ship</span></td></tr>
+<tr><td class="num idx">8</td><td class="copy">Stop Chasing Failed Payouts<div class="src">Victor Novak, Zennor Hub; Luca Evans, Tarrant Exchange</div></td><td class="num">27 / 30</td><td>Pain </td><td class="sco"><span class="sc s5">5</span></td><td class="sco"><span class="sc s5">5</span></td><td class="sco"><span class="sc s5">5</span></td><td><span class="pill yes">Ship</span></td></tr>
+<tr><td class="num idx">9</td><td class="copy">Pay FX Once, Not Twice<div class="src">Sara de Vries, Elvarn Travel (call)</div></td><td class="num">22 / 30</td><td>Outcome <span class="flag confirm" title="Product capability the dossier cannot prove. Confirm with product before launch.">confirm claim</span></td><td class="sco"><span class="sc s5">5</span></td><td class="sco"><span class="sc s5">5</span></td><td class="sco"><span class="sc s5">5</span></td><td><span class="pill yes">Ship</span></td></tr>
+<tr><td class="num idx">10</td><td class="copy">Pay Sellers in 55 Countries<div class="src">Victor Novak, Zennor Hub (review)</div></td><td class="num">27 / 30</td><td>Proof <span class="flag confirm" title="Product capability the dossier cannot prove. Confirm with product before launch.">confirm claim</span></td><td class="sco"><span class="sc s5">5</span></td><td class="sco"><span class="sc s5">5</span></td><td class="sco"><span class="sc s5">5</span></td><td><span class="pill yes">Ship</span></td></tr>
+<tr><td class="num idx">11</td><td class="copy">Local Methods Where Cards Fail<div class="src">Hugo Muller, Belmar Play; Adam Hughes, Carrow Studios (calls)</div></td><td class="num">30 / 30</td><td>Outcome <span class="flag confirm" title="Product capability the dossier cannot prove. Confirm with product before launch.">confirm claim</span></td><td class="sco"><span class="sc s4">4</span></td><td class="sco"><span class="sc s5">5</span></td><td class="sco"><span class="sc s5">5</span></td><td><span class="pill yes">Ship</span></td></tr>
+<tr><td class="num idx">12</td><td class="copy">New Markets, No New PSP<div class="src">Zoe Lindberg, Clyde Play (win/loss)</div></td><td class="num">23 / 30</td><td>Urgency </td><td class="sco"><span class="sc s4">4</span></td><td class="sco"><span class="sc s5">5</span></td><td class="sco"><span class="sc s5">5</span></td><td><span class="pill yes">Ship</span></td></tr>
+<tr><td class="num idx">13</td><td class="copy">Acquisition Doubled Your PSPs?<div class="src">Chloe Mulder, Inchcape Invest (call)</div></td><td class="num">30 / 30</td><td>Urgency </td><td class="sco"><span class="sc s5">5</span></td><td class="sco"><span class="sc s4">4</span></td><td class="sco"><span class="sc s5">5</span></td><td><span class="pill yes">Ship</span></td></tr>
+<tr><td class="num idx">14</td><td class="copy">Renewal Due? Switch to One PSP<div class="src">Rosa Vella, Jarrow Holidays (win/loss)</div></td><td class="num">30 / 30</td><td>Urgency </td><td class="sco"><span class="sc s4">4</span></td><td class="sco"><span class="sc s4">4</span></td><td class="sco"><span class="sc s5">5</span></td><td><span class="pill yes">Ship</span></td></tr>
+<tr><td class="num idx">15</td><td class="copy">Business Case in Your Numbers<div class="src">Pablo Wagner, Garve Invest (win/loss)</div></td><td class="num">29 / 30</td><td>Outcome </td><td class="sco"><span class="sc s4">4</span></td><td class="sco"><span class="sc s4">4</span></td><td class="sco"><span class="sc s5">5</span></td><td><span class="pill yes">Ship</span></td></tr>
+<tr class="cut"><td class="num idx">×</td><td class="copy"><s>All-in-One Payments Platform</s><div class="why"><strong>Cut:</strong> Product-led category label. No customer ever said it, and it says nothing about the result.</div></td><td class="num">28 / 30</td><td></td><td class="sco"><span class="sc slow">1</span></td><td class="sco"><span class="sc slow">2</span></td><td class="sco"><span class="sc s4">4</span></td><td><span class="pill no">Cut</span></td></tr>
+<tr class="cut"><td class="num idx">×</td><td class="copy"><s>Global Payments, Made Simple</s><div class="why"><strong>Cut:</strong> Marketer-speak. &quot;Made simple&quot; is a claim with no proof and no buyer in it.</div></td><td class="num">28 / 30</td><td></td><td class="sco"><span class="sc slow">1</span></td><td class="sco"><span class="sc slow">2</span></td><td class="sco"><span class="sc slow">3</span></td><td><span class="pill no">Cut</span></td></tr>
+<tr class="cut"><td class="num idx">×</td><td class="copy"><s>Loomrail: Built for Scale</s><div class="why"><strong>Cut:</strong> Leads with the product name, then an adjective. Breaks &quot;lead with the outcome&quot; and &quot;proof over claims&quot;.</div></td><td class="num">25 / 30</td><td></td><td class="sco"><span class="sc slow">1</span></td><td class="sco"><span class="sc slow">1</span></td><td class="sco"><span class="sc slow">3</span></td><td><span class="pill no">Cut</span></td></tr></tbody></table></div>
+  <h4>Descriptions (4, up to 90 characters)</h4>
+  <div class="table-wrap"><table><thead><tr><th>#</th><th>Copy</th><th>Chars</th><th>Angle</th><th title="Their words">W</th><th title="Outcome-led">O</th><th title="Voice">V</th><th>Gate</th></tr></thead><tbody><tr><td class="num idx">1</td><td class="copy">Four PSPs down to one: one contract, one settlement file, one approval rate you can trust.<div class="src">Luca Smit, Pentland (review); Hugo Muller, Belmar; Niels Marino, Barrow</div></td><td class="num">90 / 90</td><td>Proof <span class="flag proof" title="Customer result from the dossier. Needs permission and substantiation before a real launch.">customer proof</span></td><td class="sco"><span class="sc s5">5</span></td><td class="sco"><span class="sc s5">5</span></td><td class="sco"><span class="sc s5">5</span></td><td><span class="pill yes">Ship</span></td></tr>
+<tr><td class="num idx">2</td><td class="copy">Player payouts went from 3 days to same day in most markets. Stop chasing failed payouts.<div class="src">Chloe Byrne, Esker Bet (review); Victor Novak, Zennor Hub (review)</div></td><td class="num">89 / 90</td><td>Proof <span class="flag proof" title="Customer result from the dossier. Needs permission and substantiation before a real launch.">customer proof</span></td><td class="sco"><span class="sc s5">5</span></td><td class="sco"><span class="sc s5">5</span></td><td class="sco"><span class="sc s5">5</span></td><td><span class="pill yes">Ship</span></td></tr>
+<tr><td class="num idx">3</td><td class="copy">Pay FX once, not twice. One travel group&#x27;s FX savings paid for the switch in year one.<div class="src">Sara de Vries, Elvarn (call); Rosa Vella, Jarrow (review)</div></td><td class="num">86 / 90</td><td>Proof <span class="flag proof" title="Customer result from the dossier. Needs permission and substantiation before a real launch.">customer proof</span></td><td class="sco"><span class="sc s5">5</span></td><td class="sco"><span class="sc s5">5</span></td><td class="sco"><span class="sc s5">5</span></td><td><span class="pill yes">Ship</span></td></tr>
+<tr><td class="num idx">4</td><td class="copy">LatAm approval rate went from 61% to 78% in a quarter: local methods where cards fail.<div class="src">Lotte Garcia, Wynford (review); Hugo Muller, Belmar (call)</div></td><td class="num">86 / 90</td><td>Proof <span class="flag proof" title="Customer result from the dossier. Needs permission and substantiation before a real launch.">customer proof</span></td><td class="sco"><span class="sc s5">5</span></td><td class="sco"><span class="sc s5">5</span></td><td class="sco"><span class="sc s5">5</span></td><td><span class="pill yes">Ship</span></td></tr>
+<tr class="cut"><td class="num idx">×</td><td class="copy"><s>The all-in-one payment platform for global merchants. Book a demo today.</s><div class="why"><strong>Cut:</strong> Product first, buyer nowhere. &quot;Book a demo&quot; is an action with no outcome attached.</div></td><td class="num">72 / 90</td><td></td><td class="sco"><span class="sc slow">1</span></td><td class="sco"><span class="sc slow">1</span></td><td class="sco"><span class="sc s4">4</span></td><td><span class="pill no">Cut</span></td></tr></tbody></table></div>
+</section>
+
+<section id="linkedin">
+  <h2>LinkedIn · Sponsored Content by role</h2>
+  <p class="lede">Single-image ads. Each role in the ICP buying group gets its own reason to buy, from the dossier. Procurement and e-commerce aren't here on purpose: procurement decided every wrong-fit deal, and an e-commerce champion marks the average segment.</p>
+  
+  <div class="role" id="li-payments">
+    <div class="role-head">
+      <div><div class="eyebrow">Champion</div><h3>Payments leader</h3><div class="small">Head of Payments, Director of Payments, VP Payments</div></div>
+    </div>
+    <p class="why"><strong>Why this role buys:</strong> Owns the stack and runs the evaluation. Buys to stop onboarding a PSP per market, to see one real approval rate, and to stop chasing failed payouts. Builds the business case the CFO signs.</p>
+    <h4>Introductory text</h4>
+    <p class="small">The first 150 characters show before "see more". They're in full colour below; the rest is dimmed.</p>
+    <div class="table-wrap"><table><thead><tr><th>#</th><th>Copy</th><th>Chars</th><th>Angle</th><th title="Their words">W</th><th title="Outcome-led">O</th><th title="Voice">V</th><th>Gate</th></tr></thead><tbody><tr><td class="num idx">1</td><td class="copy"><span class="fold">Every new market, another PSP. Four dashboards, four settlement files, and nobody can tell you your real approval rate. One Director of Payments at a </span><span class="more">travel group took four PSPs down to one. Here&#x27;s how, and the two markets that still needed a workaround.</span><div class="src">Niels Marino, Barrow Gaming (call); Luca Smit, Pentland Travel (review)</div></td><td class="num">254</td><td>Pain <span class="flag proof" title="Customer result from the dossier. Needs permission and substantiation before a real launch.">customer proof</span></td><td class="sco"><span class="sc s5">5</span></td><td class="sco"><span class="sc s4">4</span></td><td class="sco"><span class="sc s5">5</span></td><td><span class="pill yes">Ship</span></td></tr>
+<tr><td class="num idx">2</td><td class="copy"><span class="fold">Seller payouts in 55 countries, paid from one place. &quot;My team stopped chasing failed payouts every Monday.&quot; That&#x27;s a Head of Payments at a marketplace</span><span class="more"> that moved to one provider. See what changed in their payout coverage.</span><div class="src">Victor Novak, Zennor Hub (review)</div></td><td class="num">221</td><td>Proof <span class="flag proof" title="Customer result from the dossier. Needs permission and substantiation before a real launch.">customer proof</span></td><td class="sco"><span class="sc s5">5</span></td><td class="sco"><span class="sc s5">5</span></td><td class="sco"><span class="sc s5">5</span></td><td><span class="pill yes">Ship</span></td></tr>
+<tr><td class="num idx">3</td><td class="copy"><span class="fold">Three new markets opening in one quarter, and onboarding three more PSPs isn&#x27;t an option. If your next licence round is coming, see how payments teams</span><span class="more"> have added regions without a new integration.</span><div class="src">Zoe Lindberg, Clyde Play (win/loss); Pablo Wagner, Garve Invest (review)</div></td><td class="num">196</td><td>Urgency </td><td class="sco"><span class="sc s5">5</span></td><td class="sco"><span class="sc s4">4</span></td><td class="sco"><span class="sc s5">5</span></td><td><span class="pill yes">Ship</span></td></tr></tbody></table></div>
+    <h4>Headlines</h4>
+    <div class="table-wrap"><table><thead><tr><th>#</th><th>Copy</th><th>Chars</th><th>Angle</th><th title="Their words">W</th><th title="Outcome-led">O</th><th title="Voice">V</th><th>Gate</th></tr></thead><tbody><tr><td class="num idx">1</td><td class="copy">Four PSPs down to one. One settlement file.<div class="src">Luca Smit, Pentland; Niels Marino, Barrow</div></td><td class="num">43 / 70</td><td>Proof <span class="flag proof" title="Customer result from the dossier. Needs permission and substantiation before a real launch.">customer proof</span></td><td class="sco"><span class="sc s5">5</span></td><td class="sco"><span class="sc s5">5</span></td><td class="sco"><span class="sc s5">5</span></td><td><span class="pill yes">Ship</span></td></tr>
+<tr><td class="num idx">2</td><td class="copy">Open your next market without onboarding another PSP<div class="src">Niels Marino, Barrow Gaming (call)</div></td><td class="num">52 / 70</td><td>Outcome </td><td class="sco"><span class="sc s5">5</span></td><td class="sco"><span class="sc s5">5</span></td><td class="sco"><span class="sc s5">5</span></td><td><span class="pill yes">Ship</span></td></tr>
+<tr><td class="num idx">3</td><td class="copy">Know your real approval rate, country by country<div class="src">Niels Marino, Barrow; Pablo Wagner, Garve</div></td><td class="num">48 / 70</td><td>Outcome </td><td class="sco"><span class="sc s5">5</span></td><td class="sco"><span class="sc s5">5</span></td><td class="sco"><span class="sc s5">5</span></td><td><span class="pill yes">Ship</span></td></tr>
+<tr class="cut"><td class="num idx">×</td><td class="copy"><s>Discover the future of payment orchestration</s><div class="why"><strong>Cut:</strong> Vague promise, category jargon, no proof. A payments leader would scroll past it.</div></td><td class="num">44 / 70</td><td></td><td class="sco"><span class="sc slow">1</span></td><td class="sco"><span class="sc slow">1</span></td><td class="sco"><span class="sc slow">3</span></td><td><span class="pill no">Cut</span></td></tr></tbody></table></div>
+  </div>
+
+  <div class="role" id="li-finance">
+    <div class="role-head">
+      <div><div class="eyebrow">Decision maker</div><h3>CFO or Finance Director</h3><div class="small">Chief Financial Officer, Finance Director</div></div>
+    </div>
+    <p class="why"><strong>Why this role buys:</strong> Signs on the payments leader's numbers. Cares about FX savings, the contract term (asked about term twice, price once) and a model to put in front of the board.</p>
+    <h4>Introductory text</h4>
+    <p class="small">The first 150 characters show before "see more". They're in full colour below; the rest is dimmed.</p>
+    <div class="table-wrap"><table><thead><tr><th>#</th><th>Copy</th><th>Chars</th><th>Angle</th><th title="Their words">W</th><th title="Outcome-led">O</th><th title="Voice">V</th><th>Gate</th></tr></thead><tbody><tr><td class="num idx">1</td><td class="copy"><span class="fold">FX on the way in, FX on the way out. On a thin margin, that&#x27;s the whole profit on some routes. One travel group&#x27;s FX savings paid for its switch in ye</span><span class="more">ar one. Get the FX savings model to take to your board.</span><div class="src">Sara de Vries, Elvarn Travel (call); Rosa Vella, Jarrow (review); Aaron Bianchi (AE note)</div></td><td class="num">205</td><td>Pain <span class="flag proof" title="Customer result from the dossier. Needs permission and substantiation before a real launch.">customer proof</span></td><td class="sco"><span class="sc s5">5</span></td><td class="sco"><span class="sc s4">4</span></td><td class="sco"><span class="sc s5">5</span></td><td><span class="pill yes">Ship</span></td></tr>
+<tr><td class="num idx">2</td><td class="copy"><span class="fold">&quot;The CFO signed because the numbers were ours.&quot; That&#x27;s a Head of Payments on how their business case got approved: approval rates by country, withdraw</span><span class="more">al times, FX. Get the template, built on your data, not ours.</span><div class="src">Pablo Wagner, Garve Invest (win/loss)</div></td><td class="num">211</td><td>Proof </td><td class="sco"><span class="sc s5">5</span></td><td class="sco"><span class="sc s4">4</span></td><td class="sco"><span class="sc s5">5</span></td><td><span class="pill yes">Ship</span></td></tr>
+<tr><td class="num idx">3</td><td class="copy"><span class="fold">&quot;We didn&#x27;t pick the cheapest rate. We picked the one that let us stop running four PSPs.&quot; Four PSPs became one at a travel company. See what that look</span><span class="more">s like on your P&amp;L.</span><div class="src">Luca Smit, Pentland Travel (win/loss, review)</div></td><td class="num">169</td><td>Outcome <span class="flag proof" title="Customer result from the dossier. Needs permission and substantiation before a real launch.">customer proof</span></td><td class="sco"><span class="sc s5">5</span></td><td class="sco"><span class="sc s5">5</span></td><td class="sco"><span class="sc s5">5</span></td><td><span class="pill yes">Ship</span></td></tr></tbody></table></div>
+    <h4>Headlines</h4>
+    <div class="table-wrap"><table><thead><tr><th>#</th><th>Copy</th><th>Chars</th><th>Angle</th><th title="Their words">W</th><th title="Outcome-led">O</th><th title="Voice">V</th><th>Gate</th></tr></thead><tbody><tr><td class="num idx">1</td><td class="copy">FX savings paid for the switch in year one. Model yours.<div class="src">Rosa Vella, Jarrow Holidays (review)</div></td><td class="num">56 / 70</td><td>Proof <span class="flag proof" title="Customer result from the dossier. Needs permission and substantiation before a real launch.">customer proof</span></td><td class="sco"><span class="sc s5">5</span></td><td class="sco"><span class="sc s5">5</span></td><td class="sco"><span class="sc s5">5</span></td><td><span class="pill yes">Ship</span></td></tr>
+<tr><td class="num idx">2</td><td class="copy">One contract across every market, not four<div class="src">Hugo Muller, Belmar Play (call)</div></td><td class="num">42 / 70</td><td>Outcome <span class="flag confirm" title="Product capability the dossier cannot prove. Confirm with product before launch.">confirm claim</span></td><td class="sco"><span class="sc s4">4</span></td><td class="sco"><span class="sc s5">5</span></td><td class="sco"><span class="sc s5">5</span></td><td><span class="pill yes">Ship</span></td></tr>
+<tr><td class="num idx">3</td><td class="copy">The business case, built on your own numbers<div class="src">Pablo Wagner, Garve Invest (win/loss)</div></td><td class="num">44 / 70</td><td>Outcome </td><td class="sco"><span class="sc s4">4</span></td><td class="sco"><span class="sc s4">4</span></td><td class="sco"><span class="sc s5">5</span></td><td><span class="pill yes">Ship</span></td></tr>
+<tr class="cut"><td class="num idx">×</td><td class="copy"><s>Reduce total cost of ownership with a unified payments platform</s><div class="why"><strong>Cut:</strong> Corporate-speak (&quot;total cost of ownership&quot;, &quot;unified platform&quot;). Leads with the product. No number.</div></td><td class="num">63 / 70</td><td></td><td class="sco"><span class="sc slow">1</span></td><td class="sco"><span class="sc slow">2</span></td><td class="sco"><span class="sc slow">3</span></td><td><span class="pill no">Cut</span></td></tr></tbody></table></div>
+  </div>
+
+  <div class="role" id="li-engineering">
+    <div class="role-head">
+      <div><div class="eyebrow">Evaluator</div><h3>Engineering</h3><div class="small">Chief Technology Officer, VP Engineering</div></div>
+    </div>
+    <p class="why"><strong>Why this role buys:</strong> Evaluator in 10 of 17 best accounts. Asks how many integrations it replaces, not how long one takes. Careful: when engineering <em>decides</em> on docs and integration speed, the deal is lost (3 of 3). Speak to consolidation, never to speed.</p>
+    <h4>Introductory text</h4>
+    <p class="small">The first 150 characters show before "see more". They're in full colour below; the rest is dimmed.</p>
+    <div class="table-wrap"><table><thead><tr><th>#</th><th>Copy</th><th>Chars</th><th>Angle</th><th title="Their words">W</th><th title="Outcome-led">O</th><th title="Voice">V</th><th>Gate</th></tr></thead><tbody><tr><td class="num idx">1</td><td class="copy"><span class="fold">The question isn&#x27;t how long one integration takes. It&#x27;s how many it replaces. A gaming operator was running three PSPs and a bank acquirer with no rou</span><span class="more">ting between them. See the before and after.</span><div class="src">Luca Ferrari, Barrow Gaming (AE note, not verbatim)</div></td><td class="num">194</td><td>Outcome </td><td class="sco"><span class="sc s4">4</span></td><td class="sco"><span class="sc s4">4</span></td><td class="sco"><span class="sc s5">5</span></td><td><span class="pill yes">Ship</span></td></tr>
+<tr><td class="num idx">2</td><td class="copy"><span class="fold">Two new regions, no new integration. That&#x27;s what a trading platform&#x27;s payments team got after moving to one provider. Read the technical breakdown: wh</span><span class="more">at was retired, and what stayed.</span><div class="src">Pablo Wagner, Garve Invest (review)</div></td><td class="num">182</td><td>Proof <span class="flag proof" title="Customer result from the dossier. Needs permission and substantiation before a real launch.">customer proof</span></td><td class="sco"><span class="sc s5">5</span></td><td class="sco"><span class="sc s5">5</span></td><td class="sco"><span class="sc s5">5</span></td><td><span class="pill yes">Ship</span></td></tr>
+<tr><td class="num idx">3</td><td class="copy"><span class="fold">An acquisition doubled their payment stack overnight. Same clients, two sets of rails. Here&#x27;s how a broker&#x27;s engineering team put both on one integrat</span><span class="more">ion.</span><div class="src">Chloe Mulder, Inchcape Invest (call)</div></td><td class="num">154</td><td>Pain <span class="flag confirm" title="Product capability the dossier cannot prove. Confirm with product before launch.">confirm claim</span></td><td class="sco"><span class="sc s5">5</span></td><td class="sco"><span class="sc s4">4</span></td><td class="sco"><span class="sc s5">5</span></td><td><span class="pill yes">Ship</span></td></tr></tbody></table></div>
+    <h4>Headlines</h4>
+    <div class="table-wrap"><table><thead><tr><th>#</th><th>Copy</th><th>Chars</th><th>Angle</th><th title="Their words">W</th><th title="Outcome-led">O</th><th title="Voice">V</th><th>Gate</th></tr></thead><tbody><tr><td class="num idx">1</td><td class="copy">Count the integrations it replaces, not the days it takes<div class="src">Luca Ferrari, Barrow Gaming (AE note)</div></td><td class="num">57 / 70</td><td>Outcome </td><td class="sco"><span class="sc s4">4</span></td><td class="sco"><span class="sc s5">5</span></td><td class="sco"><span class="sc s5">5</span></td><td><span class="pill yes">Ship</span></td></tr>
+<tr><td class="num idx">2</td><td class="copy">Two new regions. Zero new integrations.<div class="src">Pablo Wagner, Garve Invest (review)</div></td><td class="num">39 / 70</td><td>Proof <span class="flag proof" title="Customer result from the dossier. Needs permission and substantiation before a real launch.">customer proof</span></td><td class="sco"><span class="sc s5">5</span></td><td class="sco"><span class="sc s5">5</span></td><td class="sco"><span class="sc s5">5</span></td><td><span class="pill yes">Ship</span></td></tr>
+<tr><td class="num idx">3</td><td class="copy">Same clients, two sets of rails? Put them on one.<div class="src">Chloe Mulder, Inchcape Invest (call)</div></td><td class="num">49 / 70</td><td>Pain </td><td class="sco"><span class="sc s5">5</span></td><td class="sco"><span class="sc s4">4</span></td><td class="sco"><span class="sc s5">5</span></td><td><span class="pill yes">Ship</span></td></tr>
+<tr class="cut"><td class="num idx">×</td><td class="copy"><s>Get API keys and a sandbox in minutes</s><div class="why"><strong>Cut:</strong> Uses the anti-ICP&#x27;s words: engineering-led evaluations on docs and sandbox speed were lost 3 of 3. &quot;In minutes&quot; is also banned by the voice rules.</div></td><td class="num">37 / 70</td><td></td><td class="sco"><span class="sc slow">2</span></td><td class="sco"><span class="sc slow">2</span></td><td class="sco"><span class="sc slow">1</span></td><td><span class="pill no">Cut</span></td></tr></tbody></table></div>
+  </div>
+
+  <div class="role" id="li-risk">
+    <div class="role-head">
+      <div><div class="eyebrow">Evaluator</div><h3>Risk and fraud</h3><div class="small">Head of Risk &amp; Fraud, Chief Risk Officer</div></div>
+    </div>
+    <p class="why"><strong>Why this role buys:</strong> Evaluator in 8 of 17 best accounts, blocker in 2 lost look-alikes. Wants a named owner for fraud and to keep the rules they tuned. Run these to accounts already on the Tier 1 list or in pipeline: the job is to take the veto off the table, not to generate leads.</p>
+    <h4>Introductory text</h4>
+    <p class="small">The first 150 characters show before "see more". They're in full colour below; the rest is dimmed.</p>
+    <div class="table-wrap"><table><thead><tr><th>#</th><th>Copy</th><th>Chars</th><th>Angle</th><th title="Their words">W</th><th title="Outcome-led">O</th><th title="Voice">V</th><th>Gate</th></tr></thead><tbody><tr><td class="num idx">1</td><td class="copy"><span class="fold">&quot;Is fraud your product or a plug-in? I need to know who I&#x27;m calling at 2am.&quot; A Head of Risk &amp; Fraud asked us that on a demo. It&#x27;s the right question. </span><span class="more">Book 30 minutes with our risk team and get the answer before anything is signed.</span><div class="src">Mia Fernandez, Fintry Exchange (call)</div></td><td class="num">230</td><td>Pain </td><td class="sco"><span class="sc s5">5</span></td><td class="sco"><span class="sc s4">4</span></td><td class="sco"><span class="sc s5">5</span></td><td><span class="pill yes">Ship</span></td></tr>
+<tr><td class="num idx">2</td><td class="copy"><span class="fold">You spent years tuning your fraud rules. Keep them. One trading platform kept its rules engine for year one: platform first, fraud tooling reviewed la</span><span class="more">ter.</span><div class="src">Sophie Peters, Ullswater Bet (call); Nina Clarke, Dalby Invest (AE note)</div></td><td class="num">154</td><td>Outcome <span class="flag confirm" title="Product capability the dossier cannot prove. Confirm with product before launch.">confirm claim</span></td><td class="sco"><span class="sc s4">4</span></td><td class="sco"><span class="sc s5">5</span></td><td class="sco"><span class="sc s5">5</span></td><td><span class="pill yes">Ship</span></td></tr>
+<tr><td class="num idx">3</td><td class="copy"><span class="fold">Seller KYC, done once. Not once per PSP. That&#x27;s what the Head of Risk &amp; Fraud at a 42-country marketplace wanted. See how the checks run when there&#x27;s </span><span class="more">one provider, not several.</span><div class="src">Anna Garcia, Tarrant Exchange (AE note, not verbatim)</div></td><td class="num">176</td><td>Outcome <span class="flag confirm" title="Product capability the dossier cannot prove. Confirm with product before launch.">confirm claim</span></td><td class="sco"><span class="sc s4">4</span></td><td class="sco"><span class="sc s5">5</span></td><td class="sco"><span class="sc s5">5</span></td><td><span class="pill yes">Ship</span></td></tr></tbody></table></div>
+    <h4>Headlines</h4>
+    <div class="table-wrap"><table><thead><tr><th>#</th><th>Copy</th><th>Chars</th><th>Angle</th><th title="Their words">W</th><th title="Outcome-led">O</th><th title="Voice">V</th><th>Gate</th></tr></thead><tbody><tr><td class="num idx">1</td><td class="copy">Keep your fraud rules. Change the PSP.<div class="src">Sophie Peters, Ullswater Bet (call)</div></td><td class="num">38 / 70</td><td>Outcome <span class="flag confirm" title="Product capability the dossier cannot prove. Confirm with product before launch.">confirm claim</span></td><td class="sco"><span class="sc s4">4</span></td><td class="sco"><span class="sc s5">5</span></td><td class="sco"><span class="sc s5">5</span></td><td><span class="pill yes">Ship</span></td></tr>
+<tr><td class="num idx">2</td><td class="copy">Who picks up at 2am? Ask before you sign.<div class="src">Mia Fernandez, Fintry Exchange (call)</div></td><td class="num">41 / 70</td><td>Pain </td><td class="sco"><span class="sc s5">5</span></td><td class="sco"><span class="sc s4">4</span></td><td class="sco"><span class="sc s5">5</span></td><td><span class="pill yes">Ship</span></td></tr>
+<tr><td class="num idx">3</td><td class="copy">Seller KYC once, not once per PSP<div class="src">Anna Garcia, Tarrant Exchange (AE note)</div></td><td class="num">33 / 70</td><td>Outcome <span class="flag confirm" title="Product capability the dossier cannot prove. Confirm with product before launch.">confirm claim</span></td><td class="sco"><span class="sc s4">4</span></td><td class="sco"><span class="sc s5">5</span></td><td class="sco"><span class="sc s5">5</span></td><td><span class="pill yes">Ship</span></td></tr>
+<tr class="cut"><td class="num idx">×</td><td class="copy"><s>Best-in-class fraud prevention, built right in</s><div class="why"><strong>Cut:</strong> &quot;Best-in-class&quot; is a banned hype word, and it&#x27;s a claim with no proof. Risk leads distrust exactly this.</div></td><td class="num">46 / 70</td><td></td><td class="sco"><span class="sc slow">1</span></td><td class="sco"><span class="sc slow">2</span></td><td class="sco"><span class="sc slow">1</span></td><td><span class="pill no">Cut</span></td></tr></tbody></table></div>
+  </div>
+</section>
+
+<section id="audiences">
+  <h2>Audience plan</h2>
+
+  <h3 style="margin-top:20px">LinkedIn account list</h3>
+  <p>Build the list outside LinkedIn, from firmographic data, then upload it as a matched company list. The ICP rules, straight from the dossier:</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Rule</th><th>Value</th><th>Why</th></tr></thead>
+    <tbody>
+      <tr><td>Countries selling</td><td>15 or more</td><td>Best customers: 16 to 55. Average customers top out at 10.</td></tr>
+      <tr><td>Annual payment volume</td><td>£300m to £1bn</td><td>Best customers: £344m to £891m. Average customers top out at £248m.</td></tr>
+      <tr><td>Current setup</td><td>Multiple PSPs with no orchestration, or a legacy bank acquirer</td><td>All 17 best customers. None ran a single PSP or their own routing.</td></tr>
+      <tr><td>Vertical</td><td>iGaming, digital goods &amp; gaming, travel, marketplaces, online trading &amp; fintech</td><td>List filter only. Follows footprint.</td></tr>
+      <tr><td>Payments leader in seat</td><td>A Head, Director or VP of Payments on LinkedIn today</td><td>The separator: 16 of 17 best customers, 0 of 6 lost look-alikes.</td></tr>
+    </tbody>
+  </table></div>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Tier</th><th>Definition</th><th>What runs</th></tr></thead>
+    <tbody>
+      <tr><td><span class="pill yes">Tier 1</span></td><td>All five rules, plus a trigger in the last 60 to 300 days: acquired a smaller competitor, announced new markets or licences, or PSP contract up for renewal</td><td>All four roles. Urgency ads first. Sales outreach in parallel.</td></tr>
+      <tr><td><span class="pill yes">Tier 2</span></td><td>All five rules, no trigger on file</td><td>Payments leader and CFO ads only. Watch for a trigger to move up.</td></tr>
+      <tr><td><span class="pill hold">Hold</span></td><td>First four rules, but no payments leader in seat, or the Head of Payments left and wasn't replaced</td><td>No paid spend. Nurture. Move to Tier 1 or 2 when a payments leader is hired.</td></tr>
+    </tbody>
+  </table></div>
+  <p class="small">From the demo data: the 17 best customers show what the list should look like (use them to check the build, don't target them). The 6 lost look-alikes (Rannoch Market, Gilden Gaming, Ullswater Bet, Hawtrey Journeys, Lomond Studios, Hartley Trade) go on Hold until a payments leader is in seat.</p>
+
+  <h3 style="margin-top:28px">LinkedIn job titles per role</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Role</th><th>Job titles</th><th>Seniority</th><th>Ads</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Payments leader</strong><br><span class="small">Champion</span></td><td>Head of Payments, Director of Payments, VP Payments</td><td>Director, VP</td><td><a href="#li-payments">3 intros, 3 headlines</a></td></tr>
+      <tr><td><strong>CFO or Finance Director</strong><br><span class="small">Decision maker</span></td><td>Chief Financial Officer, Finance Director</td><td>CXO, Director</td><td><a href="#li-finance">3 intros, 3 headlines</a></td></tr>
+      <tr><td><strong>Engineering</strong><br><span class="small">Evaluator</span></td><td>Chief Technology Officer, VP Engineering</td><td>CXO, VP</td><td><a href="#li-engineering">3 intros, 3 headlines</a></td></tr>
+      <tr><td><strong>Risk and fraud</strong><br><span class="small">Evaluator</span></td><td>Head of Risk &amp; Fraud, Chief Risk Officer</td><td>Director, CXO</td><td><a href="#li-risk">3 intros, 3 headlines</a>. Tier 1 and pipeline accounts only.</td></tr>
+    </tbody>
+  </table></div>
+  <p class="small">Titles are the ones in the data. Add close variants (for example "Payments Director") only after checking they bring the same people. Target by title, not by LinkedIn job function: there is no "Payments" function, and "Finance" would pull in the finance managers and procurement roles below.</p>
+
+  <h3 style="margin-top:28px">Exclusions, from the anti-ICP</h3>
+  <div class="grid2">
+    <div class="card">
+      <h3 style="font-size:16px">Company exclusions</h3>
+      <ul class="tight">
+        <li><strong>10,001+ employees.</strong> Global in-house orchestrators run 40,000+ and route across tier-1 acquirers themselves. 4 of 4 lost.</li>
+        <li><strong>Under 501 employees.</strong> Too small for the platform. The smallest best customer has 720.</li>
+        <li><strong>Existing customers.</strong> All 40 won accounts: this is an acquisition campaign.</li>
+        <li><strong>Hold list.</strong> ICP-fit accounts with no payments leader in seat.</li>
+        <li><strong>Accounts with a live tender</strong> on lowest blended rate, or where the incumbent is invited to rebid. 0 of 14 tender deals became healthy customers.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3 style="font-size:16px">Title exclusions</h3>
+      <ul class="tight">
+        <li><strong>Procurement Manager, Category Manager - Finance &amp; Payments.</strong> Decision maker in all 8 wrong-fit customers.</li>
+        <li><strong>Finance Manager.</strong> Champion in all 4 too-small losses.</li>
+        <li><strong>E-commerce Manager, Head of E-commerce.</strong> Not excluded outright, just not targeted: champion in 14 of 15 average customers.</li>
+      </ul>
+      <p class="small">Company size bands are a stand-in for payment volume, which LinkedIn can't filter on. The account list does the real work. The size bands only catch accounts that slip through.</p>
+    </div>
+  </div>
+
+  <h3 style="margin-top:28px">Google keyword seeds</h3>
+  <p class="small">Phrase and exact match. Seeds come from the customers' own words and the three triggers. Category terms that no customer used are marked, so their search terms can be checked first.</p>
+  <h4>The stack</h4>
+  <div class="kw"><span>"multiple psps"</span><span>"consolidate payment providers"</span><span>"replace multiple psps"</span><span>"one psp for multiple countries"</span><span>"payment settlement reconciliation multiple providers"</span><span>"payment orchestration" · category term</span></div>
+  <h4>Approval rates and local methods</h4>
+  <div class="kw"><span>"approval rate by country"</span><span>"card decline rate latam"</span><span>"improve deposit approval rate"</span><span>"local payment methods brazil"</span><span>"local payment methods poland"</span></div>
+  <h4>Payouts and withdrawals</h4>
+  <div class="kw"><span>"same day player payouts"</span><span>"faster withdrawals trading platform"</span><span>"marketplace seller payouts"</span><span>"failed payouts"</span><span>"cross-border payouts provider"</span></div>
+  <h4>FX</h4>
+  <div class="kw"><span>"double fx conversion"</span><span>"fx fees cross-border payments"</span><span>"multi-currency acquiring travel"</span></div>
+  <h4>Triggers</h4>
+  <div class="kw"><span>"psp contract renewal"</span><span>"switching payment service provider"</span><span>"psp migration"</span><span>"payments integration after acquisition"</span><span>"payment provider new licensed markets"</span></div>
+  <h4>Vertical</h4>
+  <div class="kw"><span>"igaming payment provider"</span><span>"payment provider for online brokers"</span><span>"marketplace payment provider"</span><span>"travel payment provider"</span></div>
+
+  <h3 style="margin-top:28px">Google negative keywords</h3>
+  <div class="grid2">
+    <div>
+      <h4>Tender and rate shoppers</h4>
+      <div class="kw neg"><span>tender</span><span>rfp</span><span>blended rate</span><span>cheapest card processing</span><span>lowest transaction fee</span><span>price per transaction</span><span>price match</span></div>
+      <h4>Domestic only</h4>
+      <div class="kw neg"><span>domestic card acquiring</span><span>single currency</span><span>local payment provider</span></div>
+    </div>
+    <div>
+      <h4>Too small, self-serve</h4>
+      <div class="kw neg"><span>small business</span><span>take card payments on website</span><span>free payment gateway</span><span>no monthly fee</span><span>sole trader</span></div>
+      <h4>In-house orchestrators and dev-first evaluations</h4>
+      <div class="kw neg"><span>acquiring only</span><span>basis points acquiring</span><span>sandbox</span><span>api reference</span></div>
+      <h4>Hygiene</h4>
+      <div class="kw neg"><span>jobs</span><span>careers</span><span>salary</span><span>course</span><span>login</span></div>
+    </div>
+  </div>
+  <p class="small">"sandbox" and "api reference" are negatives on purpose. They match the words of the engineering-led evaluations that were lost 3 of 3. Review the search terms report after two weeks, in case they're blocking payments leaders doing their own research.</p>
+</section>
+
+<section id="prelaunch">
+  <h2>Before launch</h2>
+  <div class="callout"><strong>One page, one outcome.</strong> Every asset points to <code>https://example.com/one-payment-stack</code>: one payment stack for every market. The LinkedIn offers differ by role (FX savings model, business case template, technical breakdown, a call with the risk team). Each needs its own section on that page, or its own page, before the ads go live.</div>
+  <ul class="tight">
+    <li><strong>10 product claims to confirm</strong> (flagged <span class="flag confirm">confirm claim</span>): one integration for every market, single FX conversion, payout coverage in 55 countries, local methods where cards fail, one contract across markets, keeping the customer's fraud rules in year one, seller KYC done once, merging acquired stacks on one integration. The dossier shows customers wanted these. It doesn't prove the product does all of them.</li>
+    <li><strong>16 customer results</strong> (flagged <span class="flag proof">customer proof</span>): 61% to 78% LatAm approval rate, 3 days to same-day payouts, 4 days to same-day withdrawals, four PSPs down to one, FX savings paying for the switch in year one, sellers in 55 countries paid from one place. Real customers would need to approve each one, and there needs to be evidence behind it. None are named in the ads.</li>
+    <li><strong>Known friction, don't overclaim:</strong> Asia coverage thinner than Europe (Pentland Travel), a second licence that took longer to onboard than promised (Esker Bet), a reconciliation file format that took work (Jarrow Holidays). No asset promises the opposite.</li>
+    <li><strong>Small, in-sample ICP.</strong> The targeting rules come from 17 accounts and are measured on the same data. Treat the first quarter as a test of the list, not just the copy.</li>
+  </ul>
+</section>
+
+<footer>
+  Method adapted from the ad-copy skill by Nick Christensen (ship-icp-ads-automate-monitoring, MIT License, see THIRD-PARTY-NOTICES.md). Built on output/icp-dossier.html. All data synthetic. Loomrail and the landing page are placeholders.
+</footer>
+</div>
+</body>
+</html>

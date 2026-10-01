@@ -1,0 +1,519 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ICP Dossier</title>
+<meta name="description" content="ICP dossier built from a synthetic CRM export: the Stack Consolidators profile, segments, anti-ICP, verbatim customer language, pains, desires and triggers.">
+<style>
+:root {
+  --bg: #f7f6f3;
+  --surface: #ffffff;
+  --surface-2: #f0eee9;
+  --text: #1c1b19;
+  --muted: #5f5b53;
+  --faint: #8a857b;
+  --line: #dedad2;
+  --accent: #1f5f8b;
+  --accent-soft: #e3eef6;
+  --good: #1e6b45;
+  --good-soft: #e2f1e8;
+  --warn: #8a5a00;
+  --warn-soft: #fbf0d9;
+  --bad: #a3332b;
+  --bad-soft: #f8e4e2;
+  --gap: repeating-linear-gradient(135deg, transparent 0 6px, rgba(0,0,0,.05) 6px 8px);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #151514;
+    --surface: #1e1e1c;
+    --surface-2: #262623;
+    --text: #ecebe7;
+    --muted: #b1ada4;
+    --faint: #8b877e;
+    --line: #36352f;
+    --accent: #7fb7df;
+    --accent-soft: #1b2c38;
+    --good: #7fcfa2;
+    --good-soft: #17291f;
+    --warn: #e6b65c;
+    --warn-soft: #2d2412;
+    --bad: #ee8f86;
+    --bad-soft: #321a18;
+    --gap: repeating-linear-gradient(135deg, transparent 0 6px, rgba(255,255,255,.06) 6px 8px);
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #151514;
+  --surface: #1e1e1c;
+  --surface-2: #262623;
+  --text: #ecebe7;
+  --muted: #b1ada4;
+  --faint: #8b877e;
+  --line: #36352f;
+  --accent: #7fb7df;
+  --accent-soft: #1b2c38;
+  --good: #7fcfa2;
+  --good-soft: #17291f;
+  --warn: #e6b65c;
+  --warn-soft: #2d2412;
+  --bad: #ee8f86;
+  --bad-soft: #321a18;
+  --gap: repeating-linear-gradient(135deg, transparent 0 6px, rgba(255,255,255,.06) 6px 8px);
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 16px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+.wrap { max-width: 1040px; margin: 0 auto; padding: 32px 16px 80px; }
+header.top { margin-bottom: 28px; }
+.eyebrow { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+h1 { font-size: clamp(28px, 5vw, 40px); line-height: 1.15; margin: 6px 0 10px; letter-spacing: -.01em; }
+h2 { font-size: 24px; margin: 56px 0 6px; letter-spacing: -.01em; }
+h3 { font-size: 17px; margin: 28px 0 8px; }
+h2 + .lede { margin-top: 0; }
+.lede { color: var(--muted); max-width: 72ch; margin: 0 0 16px; }
+p { max-width: 75ch; }
+.banner {
+  background: var(--warn-soft); color: var(--text); border: 1px solid var(--line);
+  border-left: 4px solid var(--warn); border-radius: 8px; padding: 12px 14px; font-size: 14px; margin: 16px 0 0;
+}
+.meta { font-size: 14px; color: var(--muted); }
+nav.toc { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+nav.toc a {
+  font-size: 13px; color: var(--accent); text-decoration: none; background: var(--accent-soft);
+  padding: 4px 10px; border-radius: 999px;
+}
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 20px; }
+.icp-hero { border-top: 4px solid var(--accent); }
+.icp-name { font-size: clamp(24px, 4vw, 30px); font-weight: 700; margin: 2px 0 6px; }
+.icp-def { font-size: 18px; margin: 0; max-width: 70ch; }
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin: 16px 0 0; }
+.tile { background: var(--surface-2); border-radius: 10px; padding: 14px; }
+.tile .n { font-size: 28px; font-weight: 700; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.tile .l { font-size: 13px; color: var(--muted); margin-top: 4px; }
+.table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); margin: 10px 0; }
+table { border-collapse: collapse; width: 100%; font-size: 14px; }
+th, td { text-align: left; vertical-align: top; padding: 9px 12px; border-bottom: 1px solid var(--line); }
+th { background: var(--surface-2); font-weight: 600; font-size: 13px; white-space: nowrap; }
+tr:last-child td { border-bottom: 0; }
+td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+td.gap { background: var(--gap); min-width: 60px; }
+.best-col { background: var(--accent-soft); }
+.pill { display: inline-block; font-size: 12px; font-weight: 600; padding: 2px 8px; border-radius: 999px; white-space: nowrap; }
+.pill.yes { background: var(--good-soft); color: var(--good); }
+.pill.no { background: var(--bad-soft); color: var(--bad); }
+.pill.part { background: var(--warn-soft); color: var(--warn); }
+.pill.tier { background: var(--surface-2); color: var(--muted); font-weight: 500; }
+.small { font-size: 13px; color: var(--muted); }
+.grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 14px; }
+.seg h3 { margin-top: 0; }
+.seg .tag { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; }
+.seg.keep { border-left: 4px solid var(--good); }
+.seg.keep .tag { color: var(--good); }
+.seg.hold { border-left: 4px solid var(--warn); }
+.seg.hold .tag { color: var(--warn); }
+.seg.out { border-left: 4px solid var(--bad); }
+.seg.out .tag { color: var(--bad); }
+.seg dl { margin: 10px 0 0; display: grid; grid-template-columns: 110px 1fr; gap: 6px 12px; font-size: 14px; }
+.seg dt { color: var(--muted); }
+.seg dd { margin: 0; }
+blockquote {
+  margin: 0; padding: 14px 16px; background: var(--surface); border: 1px solid var(--line);
+  border-left: 3px solid var(--accent); border-radius: 8px;
+}
+blockquote p { margin: 0 0 6px; font-size: 16px; }
+blockquote cite { font-style: normal; font-size: 13px; color: var(--muted); display: block; }
+.quotes { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 10px; }
+.quotes.neg blockquote { border-left-color: var(--bad); }
+.quotes.mid blockquote { border-left-color: var(--warn); }
+.seg blockquote { margin-top: 12px; padding: 10px 12px; background: var(--surface-2); border: 0; border-left: 3px solid var(--line); }
+.seg blockquote p { font-size: 14px; }
+.ae-note { font-size: 14px; color: var(--muted); border-left: 3px dashed var(--line); padding: 4px 0 4px 12px; margin: 10px 0; }
+ul.tight { padding-left: 20px; margin: 8px 0; }
+ul.tight li { margin: 6px 0; }
+.pdt { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; }
+.pdt h3 { margin-top: 0; }
+.pdt ol { padding-left: 20px; margin: 0; }
+.pdt li { margin: 10px 0; }
+.src { font-size: 12px; color: var(--faint); display: block; }
+.legend { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; font-size: 13px; color: var(--muted); margin: 6px 0; }
+.legend .swatch { display: inline-block; width: 22px; height: 14px; border: 1px solid var(--line); background: var(--gap); vertical-align: -2px; margin-right: 6px; }
+.callout { background: var(--accent-soft); border-radius: 10px; padding: 14px 16px; margin: 14px 0; }
+.callout strong { color: var(--accent); }
+footer { margin-top: 64px; font-size: 13px; color: var(--faint); border-top: 1px solid var(--line); padding-top: 16px; }
+@media (max-width: 560px) {
+  .seg dl { grid-template-columns: 1fr; gap: 2px; }
+  .seg dt { margin-top: 6px; }
+  th, td { padding: 8px 10px; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <div class="eyebrow">ICP dossier · Pass 1</div>
+  <h1>Who to target, who to route, who to leave alone</h1>
+  <p class="meta">Built from <code>data/</code>: 60 accounts (40 won, 20 lost), 153 contacts, 49 public signals, 20 call notes, 14 win/loss interviews, 10 reviews. Public signals from <code>enrichment.csv</code> only, no web research. Generated 24 September 2026.</p>
+  <div class="banner"><strong>Synthetic data.</strong> Every company, person, quote and number here is fictitious, generated for a demo. The data was built from business assumptions, so this dossier can only confirm them. It shows the method, not a real market.</div>
+  <nav class="toc">
+    <a href="#icp">The ICP</a>
+    <a href="#buying-group">Buying group</a>
+    <a href="#segments">Segments and anti-ICP</a>
+    <a href="#words">Their words</a>
+    <a href="#pdt">Pains, desires, triggers</a>
+    <a href="#roster">The 17 accounts</a>
+    <a href="#gaps">Gaps and checks</a>
+  </nav>
+</header>
+
+<!-- ============ THE ICP ============ -->
+<section id="icp">
+  <div class="card icp-hero">
+    <div class="eyebrow">The ICP</div>
+    <div class="icp-name">Stack Consolidators</div>
+    <p class="icp-def">Cross-border merchants selling in 15+ countries with £300m to £1bn a year in payment volume, split across several PSPs or stuck on a legacy bank acquirer, with a Head, Director or VP of Payments in the seat who wants it to be one stack.</p>
+    <div class="tiles">
+      <div class="tile"><div class="n">17 of 40</div><div class="l">won accounts that stayed and grew (current ARR at 1.56x the signed ACV or more)</div></div>
+      <div class="tile"><div class="n">91%</div><div class="l">of current ARR: £68.8m of £75.7m across all won accounts</div></div>
+      <div class="tile"><div class="n">1.89x</div><div class="l">current ARR over ACV signed, £36.4m to £68.8m</div></div>
+      <div class="tile"><div class="n">0 of 6</div><div class="l">look-alike accounts without a payments leader were won</div></div>
+    </div>
+  </div>
+
+  <h3>How the best customers were picked</h3>
+  <p>Won accounts ranked by current ARR divided by ACV signed. The ranking breaks into three groups with no overlap:</p>
+  <ul class="tight">
+    <li><strong>Best (17):</strong> 1.56x to 2.35x. Stayed and grew.</li>
+    <li><strong>Average (15):</strong> 1.04x to 1.21x. Stayed, roughly flat.</li>
+    <li><strong>Wrong-fit (8):</strong> 0x to 0.77x. Five churned to zero, three contracted.</li>
+  </ul>
+  <p>The 20 lost deals split in two: <strong>6 look-alikes</strong> that match the best customers on footprint, volume and setup but were lost, and <strong>14 others</strong> that don't match.</p>
+
+  <h3>Account: what separates the best customers</h3>
+  <p class="lede">A trait is kept only if it separates the best customers from the rest. The last column says which comparison it passes.</p>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Trait</th><th class="best-col">Best (17)</th><th>Average (15)</th><th>Wrong-fit (8)</th><th>Lost look-alikes (6)</th><th>Verdict</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Countries selling</strong></td><td class="best-col num">16 to 55<br><span class="small">median 34</span></td><td class="num">3 to 10<br><span class="small">median 6</span></td><td class="num">1 to 2</td><td class="num">17 to 46<br><span class="small">median 23</span></td><td><span class="pill part">Keep</span> Separates from average and wrong-fit. Not from look-alikes.</td></tr>
+        <tr><td><strong>Annual TPV</strong></td><td class="best-col num">£344m to £891m<br><span class="small">median £659m</span></td><td class="num">£73m to £248m<br><span class="small">median £148m</span></td><td class="num">£15m to £40m</td><td class="num">£424m to £798m<br><span class="small">median £498m</span></td><td><span class="pill part">Keep</span> Clean gap to average (£248m vs £344m). Not from look-alikes.</td></tr>
+        <tr><td><strong>Current setup</strong></td><td class="best-col">Multiple PSPs, no orchestration: 11<br>Legacy bank acquirer: 6</td><td>Single PSP: 7<br>Multiple PSPs: 5<br>Legacy acquirer: 3</td><td>Single PSP: 8</td><td>Legacy acquirer: 5<br>Multiple PSPs: 1</td><td><span class="pill part">Keep</span> No best customer ran a single PSP or in-house orchestration.</td></tr>
+        <tr><td><strong>Payments leader in seat</strong><br><span class="small">Head, Director or VP of Payments</span></td><td class="best-col num">16 of 17</td><td class="num">1 of 15</td><td class="num">0 of 8</td><td class="num">0 of 6</td><td><span class="pill yes">The separator</span> The only trait that splits best customers from look-alikes.</td></tr>
+        <tr><td><strong>Lead source</strong></td><td class="best-col">Partner referral: 8<br>ABM intent: 5<br>Event: 4</td><td>Outbound SDR: 9<br>Inbound content: 4<br>Event 1, ABM 1</td><td>RFP / tender: 6<br>Pricing page: 2</td><td>Event: 4<br>SDR 1, ABM 1</td><td><span class="pill part">Partly</span> Partner referral: 8 of 8 became best customers. Event does not separate (4 best, 5 lost overall).</td></tr>
+        <tr><td><strong>Signal before pipeline</strong></td><td class="best-col num">15 of 17</td><td class="num">5 of 15</td><td class="num">3 of 8</td><td class="num">5 of 6</td><td><span class="pill part">Keep, by type</span> The type matters, not the presence. See triggers.</td></tr>
+        <tr><td><strong>Vertical</strong></td><td class="best-col">iGaming 5, digital goods &amp; gaming 3, travel 3, marketplaces 3, online trading 3</td><td>E-commerce retail 6, SaaS 3, subscription media 3, education 2, travel 1</td><td>E-commerce retail 4, SaaS 2, hospitality 2</td><td>Same five verticals as best</td><td><span class="pill tier">List filter only</span> Follows footprint. Doesn't separate from look-alikes.</td></tr>
+        <tr><td><strong>Headcount</strong></td><td class="best-col num">720 to 5,250</td><td class="num">250 to 1,950</td><td class="num">110 to 880</td><td class="num">1,000 to 4,890</td><td><span class="pill no">Drop</span> Overlaps with average. Use TPV and countries instead.</td></tr>
+        <tr><td><strong>Intent stage at creation</strong></td><td class="best-col">Decision 7, consideration 5, purchase 4, blank 1</td><td>Awareness 7, blank 4, decision 3, consideration 1</td><td>Purchase 5, decision 3</td><td>Decision 6</td><td><span class="pill no">Drop</span> Look-alikes were all at Decision stage and still lost.</td></tr>
+        <tr><td><strong>HQ country</strong></td><td class="best-col">7 countries, UK 5, SE 4</td><td>7 countries</td><td>6 countries</td><td>UK 4, SE 1, NL 1</td><td><span class="pill no">Drop</span> No pattern.</td></tr>
+        <tr><td><strong>Sales cycle, median</strong></td><td class="best-col num">169 days</td><td class="num">235 days</td><td class="num">107 days</td><td class="num">237 days</td><td><span class="small">Observation, not a filter. Fast wrong-fit cycles are tenders.</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout"><strong>What this means for the target list.</strong> Footprint, volume and setup find the right accounts. Filtering on 15+ countries, £300m to £1bn TPV and multiple PSPs or a legacy acquirer matches 23 accounts in this data: 17 best customers and 6 lost look-alikes (74%). The payments leader decides which of the 23 you win. Before an account gets routed to sales, check that someone with a Head, Director or VP of Payments title is in the seat, and has not just left.</div>
+
+  <h3>What was happening before it entered pipeline</h3>
+  <p>15 of 17 best customers had a public signal 60 to 300 days before the opportunity was created. Three types, and only these three:</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Signal before pipeline</th><th class="best-col">Best (17)</th><th>Elsewhere</th><th>Window</th><th>Confidence</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Acquired a smaller competitor, brand or broker</strong></td><td class="best-col num">7</td><td>2 lost, both a merger with a global peer at an in-house orchestrator (anti-ICP)</td><td class="num">79 to 300 days</td><td><span class="pill tier">Confirmed, all 7</span></td></tr>
+        <tr><td><strong>New markets or licences announced</strong></td><td class="best-col num">6</td><td>1 average (Mayfield Travel, 5 countries)</td><td class="num">60 to 282 days</td><td><span class="pill tier">Confirmed, all 6</span></td></tr>
+        <tr><td><strong>Main PSP contract up for renewal within 12 months</strong></td><td class="best-col num">6</td><td>1 average (Redwick Brands)</td><td class="num">62 to 229 days</td><td><span class="pill tier">Inferred 5, Likely 1</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="small">Some accounts had more than one. Dalby Invest and Skerry Interactive had no signal on file before pipeline. Signals dated after pipeline creation are not counted as triggers: see <a href="#pdt">triggers</a> for what they mean instead.</p>
+</section>
+
+<!-- ============ BUYING GROUP ============ -->
+<section id="buying-group">
+  <h2>The buying group</h2>
+  <p class="lede">The same people show up in the best customers and in the look-alikes. What changes is their role. From <code>contacts.csv</code>, <code>buying_role</code> as recorded by the rep.</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Role</th><th>Titles</th><th class="best-col">In best (17)</th><th>In lost look-alikes (6)</th><th>What to do</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Champion</strong></td><td>VP Payments, Director of Payments, Head of Payments</td><td class="best-col">16 of 17 champions are a payments leader. The exception, Skerry Interactive, had a Head of E-commerce.</td><td>No payments leader. No champion recorded.</td><td>Target first. They build the business case and run the evaluation.</td></tr>
+        <tr><td><strong>Decision maker</strong></td><td>CFO, Finance Director</td><td class="best-col">16 of 17. Farrow Play has no decision maker on file.</td><td>Finance 3, engineering 3</td><td>Signs on the payments leader's numbers. Wants FX savings, contract term, a board-ready model.</td></tr>
+        <tr><td><strong>Engineering</strong></td><td>CTO, VP Engineering</td><td class="best-col">Evaluator in 10</td><td><strong>Decision maker</strong> in 3 (Rannoch, Gilden, Lomond)</td><td>Fine as evaluator: asks how many integrations it replaces. Bad sign as decision maker: picks on docs and integration time.</td></tr>
+        <tr><td><strong>Risk</strong></td><td>Head of Risk &amp; Fraud, Chief Risk Officer</td><td class="best-col">Evaluator in 8. Never a blocker.</td><td><strong>Blocker</strong> in 2 (Ullswater, Hartley), both after a chargeback problem and a new Head of Risk</td><td>Offer to keep their rules engine in year one (it worked at Dalby Invest). Answer "who do I call at 2am".</td></tr>
+        <tr><td><strong>Procurement</strong></td><td>Procurement Manager, Category Manager</td><td class="best-col">0</td><td>0</td><td>Decision maker in all 8 wrong-fit customers. If procurement runs the deal, it's not the ICP.</td></tr>
+        <tr><td><strong>Digital</strong></td><td>E-commerce Manager, Head of E-commerce</td><td class="best-col">Champion in 1</td><td>Evaluator in all 6</td><td>Champion in 14 of 15 average customers. A digital champion means the average segment.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="small"><strong>Caveat:</strong> <code>buying_role</code> is set by the rep during the deal, so "champion" leans towards deals that went well. The title test is cleaner: a Head, Director or VP of Payments exists in 16 of 17 best accounts and 0 of 6 look-alikes. The one "Payments Manager" among the look-alikes (Hartley Trade) sits in Digital at manager level.</p>
+</section>
+
+<!-- ============ SEGMENTS ============ -->
+<section id="segments">
+  <h2>Segments and anti-ICP</h2>
+  <p class="lede">Below the ICP: one segment to serve, one to hold, and three to exclude from targeting and routing. Groups under five accounts are anecdotes and are flagged.</p>
+
+  <div class="grid2">
+    <div class="card seg keep">
+      <div class="tag">ICP · target</div>
+      <h3>Stack Consolidators</h3>
+      <dl>
+        <dt>Accounts</dt><dd>17 (all best customers)</dd>
+        <dt>Profile</dt><dd>15+ countries, £300m to £1bn TPV, multiple PSPs or legacy acquirer, payments leader in seat</dd>
+        <dt>Economics</dt><dd>ACV £1.3m to £3.5m, grows to 1.56x to 2.35x</dd>
+        <dt>Routing</dt><dd>Sales, via partner referral and ABM on the three triggers</dd>
+      </dl>
+    </div>
+
+    <div class="card seg keep">
+      <div class="tag">Serve, don't hunt</div>
+      <h3>Regional rate-switchers</h3>
+      <dl>
+        <dt>Accounts</dt><dd>15 (the average customers)</dd>
+        <dt>Profile</dt><dd>3 to 10 countries, £73m to £248m TPV, e-commerce retail, SaaS, subscription media, education. E-commerce lead as champion.</dd>
+        <dt>Economics</dt><dd>ACV £191k to £781k, flat at 1.04x to 1.21x</dd>
+        <dt>Why not ICP</dt><dd>They buy on rate and use part of the platform. Came in mostly by outbound SDR (9 of 15).</dd>
+        <dt>Routing</dt><dd>Take inbound, keep. No dedicated campaign. Watch at renewal: rate-led buyers can turn into wrong-fits.</dd>
+      </dl>
+      <blockquote><p>"Rate is better than our old acquirer. For three markets we probably didn't need a global platform."</p><cite>Niels Wagner, Payments Manager, Vantor Brands (review)</cite></blockquote>
+    </div>
+
+    <div class="card seg hold">
+      <div class="tag">Hold · nurture until a payments owner appears</div>
+      <h3>Look-alikes with no payments owner</h3>
+      <dl>
+        <dt>Accounts</dt><dd>6 lost, 0 won. <span class="small">Under 5 per sub-type: anecdote.</span></dd>
+        <dt>Profile</dt><dd>Same footprint, volume and setup as the ICP. Missing: a payments leader.</dd>
+        <dt>How they lose</dt><dd>Engineering decides on docs and integration time (3). Risk vetoes after a chargeback problem (2). Nobody owns payments when budget freezes (1).</dd>
+        <dt>Signal</dt><dd>Head of Payments left and was not backfilled (3 of 3 lost). New Head of Risk after a chargeback problem (2 of 2 lost).</dd>
+        <dt>Routing</dt><dd>Keep off the sales list. Nurture, and re-route when a payments leader is hired.</dd>
+      </dl>
+      <blockquote><p>"Good fit on paper. Budget froze in Q3 and nobody below me owned payments enough to push."</p><cite>Victor Dubois, Finance Director, Hawtrey Journeys (win/loss, lost)</cite></blockquote>
+    </div>
+
+    <div class="card seg out">
+      <div class="tag">Anti-ICP · exclude</div>
+      <h3>Domestic rate shoppers via tender</h3>
+      <dl>
+        <dt>Accounts</dt><dd>12 domestic tenders: 0 became healthy customers. 6 lost, 5 churned to zero, 1 contracted. Across all sources, 0 of 14 tender deals and 0 of 4 pricing-page leads became healthy customers.</dd>
+        <dt>Profile</dt><dd>1 to 5 countries, under £120m TPV, single PSP or a legacy bank acquirer. Procurement decides on blended rate.</dd>
+        <dt>Signal</dt><dd>Public tender with lowest blended rate as main criterion, or incumbent invited to rebid.</dd>
+        <dt>Why exclude</dt><dd>Won on price, lost on price at renewal. Never use cross-border or local methods.</dd>
+      </dl>
+      <blockquote><p>"Lowest price per transaction in the tender. Cross-border wasn't in scope."</p><cite>Alice Brennan, Procurement Manager, Irvine Software (win/loss, churned)</cite></blockquote>
+    </div>
+
+    <div class="card seg out">
+      <div class="tag">Anti-ICP · exclude</div>
+      <h3>Global in-house orchestrators</h3>
+      <dl>
+        <dt>Accounts</dt><dd>4 lost, 0 won. <span class="small">Under 5: anecdote.</span></dd>
+        <dt>Profile</dt><dd>40,000+ employees, £8bn+ TPV, 75 to 114 countries, own routing across tier-1 acquirers.</dd>
+        <dt>Why exclude</dt><dd>They want acquiring at tier-1 rates, not a platform. ACVs of £11.8m to £18.2m inflate pipeline and never close (9 to 13 months each).</dd>
+      </dl>
+      <blockquote><p>"We built our own routing. We want acquiring at the lowest rate, not another platform on top."</p><cite>Adam Wagner, Director of Payments, Dornoch Market (call, lost)</cite></blockquote>
+    </div>
+
+    <div class="card seg out">
+      <div class="tag">Anti-ICP · exclude</div>
+      <h3>Too small for the platform</h3>
+      <dl>
+        <dt>Accounts</dt><dd>4 lost, 0 won. <span class="small">Under 5: anecdote.</span></dd>
+        <dt>Profile</dt><dd>One market, under £5m TPV, under 100 employees. Finance manager as champion.</dd>
+        <dt>Why exclude</dt><dd>Lost to self-serve developer PSPs or never decided. ACVs of £3k to £14k.</dd>
+        <dt>Routing</dt><dd>Self-serve or partner, not sales.</dd>
+      </dl>
+      <blockquote><p>"We just need to take cards on our website. This looks like a lot."</p><cite>Jonas Byrne, Finance Manager, Kessock Cloud (call, lost)</cite></blockquote>
+    </div>
+  </div>
+
+  <p class="small" style="margin-top:14px">Also worth knowing: one wrong-fit churned when it was <em>acquired</em> and moved onto the parent's PSP (Irvine Software). Acquiring someone is an ICP trigger. Being acquired is a churn risk.</p>
+</section>
+
+<!-- ============ THEIR WORDS ============ -->
+<section id="words">
+  <h2>Their words</h2>
+  <p class="lede">Verbatim from call notes, win/loss interviews and reviews, grammar and case kept as written. ICP quotes come from 15 of the 17 best customers. Farrow Play and Skerry Interactive have nothing on file.</p>
+
+  <h3>One stack, not four</h3>
+  <div class="quotes">
+    <blockquote><p>"Every time we open a regulated market we onboard another PSP. I have four dashboards, four settlement files and nobody can tell me our real approval rate."</p><cite>Niels Marino, Director of Payments, Barrow Gaming · call</cite></blockquote>
+    <blockquote><p>"The acquisition doubled our payment stack overnight. Same clients, two sets of rails."</p><cite>Chloe Mulder, Head of Payments, Inchcape Invest · call</cite></blockquote>
+    <blockquote><p>"We had three new markets opening in one quarter. Onboarding three more PSPs wasn't an option."</p><cite>Zoe Lindberg, Head of Payments, Clyde Play · win/loss</cite></blockquote>
+    <blockquote><p>"We didn't pick the cheapest rate. We picked the one that let us stop running four PSPs."</p><cite>Luca Smit, Director of Payments, Pentland Travel · win/loss</cite></blockquote>
+    <blockquote><p>"Four PSPs down to one. Asia coverage is still thinner than Europe, two markets needed a workaround."</p><cite>Luca Smit, Director of Payments, Pentland Travel · review</cite></blockquote>
+  </div>
+
+  <h3>Money that doesn't land</h3>
+  <div class="quotes">
+    <blockquote><p>"Our bank acquirer declines anything that looks unusual. In LatAm we lose one deposit in three at the card step."</p><cite>Hugo Muller, Director of Payments, Belmar Play · call</cite></blockquote>
+    <blockquote><p>"My players in Brazil and Poland don't want to type a card number. If the method isn't there, the purchase isn't either."</p><cite>Adam Hughes, VP Payments, Carrow Studios · call</cite></blockquote>
+    <blockquote><p>"approval rate in LatAm went from 61% to 78% in the first quarter. one integration, local methods in every market we sell"</p><cite>Lotte Garcia, VP Payments, Wynford Interactive · review</cite></blockquote>
+  </div>
+
+  <h3>Money going out</h3>
+  <div class="quotes">
+    <blockquote><p>"Deposits are instant, withdrawals take four days. Guess which one the clients remember."</p><cite>Leah Moreau, VP Payments, Dalby Invest · call</cite></blockquote>
+    <blockquote><p>"Paying sellers is harder than taking the money. Half my team's week is chasing failed payouts."</p><cite>Luca Evans, VP Payments, Tarrant Exchange · call</cite></blockquote>
+    <blockquote><p>"Coverage for seller payouts was the whole decision. 55 countries, and some of them the big providers just don't pay out to."</p><cite>Victor Novak, Head of Payments, Zennor Hub · win/loss</cite></blockquote>
+    <blockquote><p>"Sellers in 55 countries paid from one place. My team stopped chasing failed payouts every Monday."</p><cite>Victor Novak, Head of Payments, Zennor Hub · review</cite></blockquote>
+    <blockquote><p>"Player payouts same day in most markets now, was 3 days. Onboarding the second licence took longer than we were told."</p><cite>Chloe Byrne, VP Payments, Esker Bet · review</cite></blockquote>
+    <blockquote><p>"Withdrawals went from 4 days to same day for most clients. We added two new regions without a new integration."</p><cite>Pablo Wagner, Head of Payments, Garve Invest · review</cite></blockquote>
+  </div>
+
+  <h3>FX and margin</h3>
+  <div class="quotes">
+    <blockquote><p>"We pay FX on the way in and FX on the way out. On a thin travel margin that's the whole profit on some routes."</p><cite>Sara de Vries, Director of Payments, Elvarn Travel · call</cite></blockquote>
+    <blockquote><p>"FX savings paid for the switch in year one. Reporting is good, the reconciliation file format took some work."</p><cite>Rosa Vella, VP Payments, Jarrow Holidays · review</cite></blockquote>
+  </div>
+
+  <h3>How it gets bought</h3>
+  <div class="quotes">
+    <blockquote><p>"Our PSP contract was up in six months. That's what got it on the board agenda."</p><cite>Rosa Vella, VP Payments, Jarrow Holidays · win/loss</cite></blockquote>
+    <blockquote><p>"The partner who ran our booking engine rebuild introduced you. That shortened everything."</p><cite>Rosa Vella, VP Payments, Jarrow Holidays · win/loss</cite></blockquote>
+    <blockquote><p>"I built the business case myself: approval rates by country, withdrawal times, FX. The CFO signed because the numbers were ours."</p><cite>Pablo Wagner, Head of Payments, Garve Invest · win/loss</cite></blockquote>
+    <blockquote><p>"Is fraud your product or a plug-in? I need to know who I'm calling at 2am."</p><cite>Mia Fernandez, Head of Risk &amp; Fraud, Fintry Exchange · call</cite></blockquote>
+  </div>
+  <p class="ae-note">From the AE's notes, not verbatim: Luca Ferrari (VP Engineering, Barrow Gaming) asked how many integrations it would replace, not how long one would take. Nora Girard (CFO, Inchcape Invest) asked about the contract term twice, price once. Aaron Bianchi (Finance Director, Elvarn Travel) asked for a model of FX savings he could put in front of the board. Nina Clarke (Head of Risk &amp; Fraud, Dalby Invest) kept her rules engine for the first year: platform first, fraud tooling later.</p>
+
+  <h3>Words that mean: not the ICP</h3>
+  <p class="small">Listen for these on discovery calls. Each one maps to a segment above.</p>
+  <div class="quotes neg">
+    <blockquote><p>"Send me the blended rate. The team has already agreed the requirements."</p><cite>Maria Hansen, Procurement Manager, Torrin Retail · call · <em>tender, churned</em></cite></blockquote>
+    <blockquote><p>"The incumbent came back 12% lower once they saw the tender. Not worth switching for five markets."</p><cite>Emma Brennan, Procurement Manager, Prentice Retail · win/loss · <em>tender, lost</em></cite></blockquote>
+    <blockquote><p>"Guests are almost all Dutch. We don't really need other currencies."</p><cite>Emma Kowalski, Finance Manager, Vale Hotels · call · <em>domestic, churned</em></cite></blockquote>
+    <blockquote><p>"At our volume we buy acquiring by the basis point. We already run our own routing."</p><cite>Ines Andersson, CFO, Whinfell Retail · win/loss · <em>in-house orchestrator, lost</em></cite></blockquote>
+    <blockquote><p>"Give me the API reference and a sandbox. We'll decide by how long the integration takes."</p><cite>Martin Bakker, VP Engineering, Gilden Gaming · call · <em>no payments owner, lost</em></cite></blockquote>
+    <blockquote><p>"The other provider had the better docs and a two-week integration. Nobody on our side was looking at approval rates."</p><cite>Martin Bakker, VP Engineering, Gilden Gaming · win/loss · <em>no payments owner, lost</em></cite></blockquote>
+    <blockquote><p>"We spent two years tuning our fraud rules. I'm not replacing them to change a PSP."</p><cite>Sophie Peters, Head of Risk &amp; Fraud, Ullswater Bet · call · <em>risk veto, lost</em></cite></blockquote>
+    <blockquote><p>"Risk had a veto this year after the chargeback problem. It was never going to move."</p><cite>Clara Camilleri, CFO, Ullswater Bet · win/loss · <em>risk veto, lost</em></cite></blockquote>
+  </div>
+
+  <h3>Words from the middle</h3>
+  <div class="quotes mid">
+    <blockquote><p>"It works, it's just expensive and slow to change anything. We want a better rate and a nicer checkout."</p><cite>Eva Bakker, E-commerce Manager, Islay Academy · call · <em>average</em></cite></blockquote>
+    <blockquote><p>"Honestly the main thing is the fee. Our current PSP is fine."</p><cite>Hugo Romano, E-commerce Manager, Corrin Store · call · <em>average</em></cite></blockquote>
+    <blockquote><p>"Procurement liked the rate. It's fine. We're mostly in Sweden, so we don't use half of it."</p><cite>Oliver Fernandez, Head of E-commerce, Redwick Brands · win/loss · <em>average</em></cite></blockquote>
+    <blockquote><p>"Solid and reliable. Subscriptions renew fine. Not dramatically different from before."</p><cite>Maria Girard, E-commerce Manager, Yelland Media · review · <em>average</em></cite></blockquote>
+  </div>
+</section>
+
+<!-- ============ PAINS DESIRES TRIGGERS ============ -->
+<section id="pdt">
+  <h2>Pains, desires, triggers</h2>
+  <p class="lede">For Stack Consolidators only. Each line names the accounts it comes from.</p>
+  <div class="pdt">
+    <div class="card">
+      <h3>Pains</h3>
+      <ol>
+        <li>Every new market means another PSP. Four dashboards, four settlement files, no real approval rate.<span class="src">Barrow Gaming, Clyde Play, Pentland Travel</span></li>
+        <li>An acquisition doubles the stack: same clients, two sets of rails.<span class="src">Inchcape Invest</span></li>
+        <li>The card step fails where cards underperform. One deposit in three lost in LatAm. No local methods, no purchase.<span class="src">Belmar Play, Carrow Studios, Wynford Interactive</span></li>
+        <li>Payouts and withdrawals take three to four days, and the team spends its week chasing failed ones.<span class="src">Dalby Invest, Tarrant Exchange, Esker Bet, Garve Invest, Zennor Hub</span></li>
+        <li>FX paid twice on thin margins.<span class="src">Elvarn Travel, Jarrow Holidays</span></li>
+      </ol>
+    </div>
+    <div class="card">
+      <h3>Desires</h3>
+      <ol>
+        <li>One integration and one contract for every market.<span class="src">Belmar Play, Pentland Travel, Wynford Interactive</span></li>
+        <li>Open new markets without a new integration.<span class="src">Clyde Play, Garve Invest</span></li>
+        <li>Local methods where cards don't work.<span class="src">Belmar Play, Carrow Studios, Wynford Interactive</span></li>
+        <li>Same-day payouts, including to countries the big providers skip.<span class="src">Esker Bet, Garve Invest, Zennor Hub</span></li>
+        <li>A business case in their own numbers the CFO will sign.<span class="src">Garve Invest; Elvarn Travel (AE note)</span></li>
+        <li>Fraud with a named owner, and the option to keep existing rules in year one.<span class="src">Fintry Exchange; Dalby Invest (AE note)</span></li>
+      </ol>
+    </div>
+    <div class="card">
+      <h3>Triggers</h3>
+      <ol>
+        <li><strong>Acquired a smaller competitor, brand or broker.</strong> 7 of 17, 79 to 300 days before pipeline. Confirmed tier.<span class="src">Belmar, Esker, Jarrow, Fintry, Clyde, Inchcape, Zennor</span></li>
+        <li><strong>New markets or licences announced.</strong> 6 of 17, 60 to 282 days before. Confirmed tier.<span class="src">Wynford, Esker, Farrow, Tarrant, Carrow, Garve</span></li>
+        <li><strong>PSP contract up for renewal within 12 months.</strong> 6 of 17, 62 to 229 days before. Mostly Inferred tier.<span class="src">Pentland, Barrow, Garve, Fintry, Elvarn, Clyde</span></li>
+      </ol>
+      <p class="small" style="margin-top:14px"><strong>Anti-triggers</strong> (lost or churned every time): Head of Payments left and not backfilled (3 of 3). New Head of Risk after a chargeback problem (2 of 2). Public tender on blended rate or incumbent rebid (7 of 7 lost or wrong-fit). Merger with a global peer at an in-house orchestrator (2 of 2).</p>
+      <p class="small"><strong>Not a trigger:</strong> checkout replatform appears only in average customers (3).</p>
+      <p class="small"><strong>After the deal, an expansion signal:</strong> 8 of 17 best customers announced new markets after close. No average customer had any signal after close.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ROSTER ============ -->
+<section id="roster">
+  <h2>The 17 accounts</h2>
+  <p class="lede">The best customers, ranked by current ARR over ACV. Build look-alike lists from these rows.</p>
+  <div class="legend"><span><span class="swatch"></span>Blank: no signal in the data. Left empty on purpose.</span></div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Account</th><th>Vertical</th><th>Countries</th><th>TPV</th><th>Setup</th><th>Source</th><th>ACV → ARR</th><th>Growth</th><th>Signal before pipeline</th><th>Words on file</th></tr></thead>
+      <tbody>
+        <tr><td>Elvarn Travel<br><span class="small">ACC-0053</span></td><td>Travel</td><td class="num">32</td><td class="num">£747m</td><td>Multiple PSPs</td><td>Event</td><td class="num">£2.85m → £6.70m</td><td class="num">2.35x</td><td>PSP renewal, 62d <span class="pill tier">Inferred</span></td><td>Call</td></tr>
+        <tr><td>Garve Invest<br><span class="small">ACC-0043</span></td><td>Online trading</td><td class="num">54</td><td class="num">£777m</td><td>Multiple PSPs</td><td>Partner</td><td class="num">£3.06m → £7.07m</td><td class="num">2.31x</td><td>PSP renewal, 229d <span class="pill tier">Inferred</span><br>New markets, 187d <span class="pill tier">Confirmed</span></td><td>Interview, review</td></tr>
+        <tr><td>Dalby Invest<br><span class="small">ACC-0040</span></td><td>Online trading</td><td class="num">47</td><td class="num">£599m</td><td>Legacy acquirer</td><td>Partner</td><td class="num">£2.20m → £4.97m</td><td class="num">2.26x</td><td class="gap"></td><td>Call</td></tr>
+        <tr><td>Zennor Hub<br><span class="small">ACC-0059</span></td><td>Marketplaces</td><td class="num">55</td><td class="num">£386m</td><td>Multiple PSPs</td><td>Partner</td><td class="num">£1.44m → £3.22m</td><td class="num">2.24x</td><td>Acquisition, 171d <span class="pill tier">Confirmed</span></td><td>Interview, review</td></tr>
+        <tr><td>Fintry Exchange<br><span class="small">ACC-0045</span></td><td>Marketplaces</td><td class="num">34</td><td class="num">£416m</td><td>Multiple PSPs</td><td>ABM intent</td><td class="num">£1.28m → £2.51m</td><td class="num">1.97x</td><td>Acquisition, 200d <span class="pill tier">Confirmed</span><br>PSP renewal, 83d <span class="pill tier">Inferred</span></td><td>Call</td></tr>
+        <tr><td>Inchcape Invest<br><span class="small">ACC-0057</span></td><td>Online trading</td><td class="num">16</td><td class="num">£859m</td><td>Multiple PSPs</td><td>ABM intent</td><td class="num">£2.57m → £4.92m</td><td class="num">1.92x</td><td>Acquisition, 104d <span class="pill tier">Confirmed</span></td><td>Call</td></tr>
+        <tr><td>Carrow Studios<br><span class="small">ACC-0033</span></td><td>Digital goods &amp; gaming</td><td class="num">32</td><td class="num">£530m</td><td>Multiple PSPs</td><td>Event</td><td class="num">£1.53m → £2.90m</td><td class="num">1.89x</td><td>New markets, 135d <span class="pill tier">Confirmed</span></td><td>Call</td></tr>
+        <tr><td>Clyde Play<br><span class="small">ACC-0054</span></td><td>iGaming</td><td class="num">53</td><td class="num">£752m</td><td>Legacy acquirer</td><td>ABM intent</td><td class="num">£2.46m → £4.48m</td><td class="num">1.82x</td><td>Acquisition, 274d <span class="pill tier">Confirmed</span><br>PSP renewal, 108d <span class="pill tier">Inferred</span></td><td>Interview</td></tr>
+        <tr><td>Jarrow Holidays<br><span class="small">ACC-0031</span></td><td>Travel</td><td class="num">26</td><td class="num">£646m</td><td>Legacy acquirer</td><td>Partner</td><td class="num">£1.99m → £3.61m</td><td class="num">1.82x</td><td>Acquisition, 79d <span class="pill tier">Confirmed</span></td><td>Interview, review</td></tr>
+        <tr><td>Barrow Gaming<br><span class="small">ACC-0030</span></td><td>iGaming</td><td class="num">55</td><td class="num">£814m</td><td>Multiple PSPs</td><td>ABM intent</td><td class="num">£2.72m → £4.92m</td><td class="num">1.81x</td><td>PSP renewal, 219d <span class="pill tier">Likely</span></td><td>Call</td></tr>
+        <tr><td>Skerry Interactive<br><span class="small">ACC-0055</span></td><td>Digital goods &amp; gaming</td><td class="num">28</td><td class="num">£576m</td><td>Multiple PSPs</td><td>Partner</td><td class="num">£1.53m → £2.59m</td><td class="num">1.70x</td><td class="gap"></td><td class="gap"></td></tr>
+        <tr><td>Belmar Play<br><span class="small">ACC-0006</span></td><td>iGaming</td><td class="num">48</td><td class="num">£871m</td><td>Legacy acquirer</td><td>Partner</td><td class="num">£2.79m → £4.69m</td><td class="num">1.68x</td><td>Acquisition, 300d <span class="pill tier">Confirmed</span></td><td>Call</td></tr>
+        <tr><td>Pentland Travel<br><span class="small">ACC-0007</span></td><td>Travel</td><td class="num">19</td><td class="num">£659m</td><td>Multiple PSPs</td><td>ABM intent</td><td class="num">£1.69m → £2.83m</td><td class="num">1.67x</td><td>PSP renewal, 180d <span class="pill tier">Inferred</span></td><td>Interview, review</td></tr>
+        <tr><td>Wynford Interactive<br><span class="small">ACC-0003</span></td><td>Digital goods &amp; gaming</td><td class="num">37</td><td class="num">£891m</td><td>Legacy acquirer</td><td>Event</td><td class="num">£3.46m → £5.67m</td><td class="num">1.64x</td><td>New markets, 282d <span class="pill tier">Confirmed</span></td><td>Review</td></tr>
+        <tr><td>Esker Bet<br><span class="small">ACC-0011</span></td><td>iGaming</td><td class="num">26</td><td class="num">£344m</td><td>Legacy acquirer</td><td>Event</td><td class="num">£1.33m → £2.16m</td><td class="num">1.63x</td><td>Acquisition, 204d <span class="pill tier">Confirmed</span><br>New markets, 183d <span class="pill tier">Confirmed</span></td><td>Review</td></tr>
+        <tr><td>Farrow Play<br><span class="small">ACC-0018</span></td><td>iGaming</td><td class="num">34</td><td class="num">£420m</td><td>Multiple PSPs</td><td>Partner</td><td class="num">£1.45m → £2.33m</td><td class="num">1.60x</td><td>New licences, 260d <span class="pill tier">Confirmed</span></td><td class="gap"></td></tr>
+        <tr><td>Tarrant Exchange<br><span class="small">ACC-0023</span></td><td>Marketplaces</td><td class="num">42</td><td class="num">£702m</td><td>Multiple PSPs</td><td>Partner</td><td class="num">£2.07m → £3.23m</td><td class="num">1.56x</td><td>New markets, 60d <span class="pill tier">Confirmed</span></td><td>Call</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="small">"d" = days before the opportunity was created. Setup "Multiple PSPs" = multiple PSPs with no orchestration.</p>
+</section>
+
+<!-- ============ GAPS ============ -->
+<section id="gaps">
+  <h2>Gaps and checks</h2>
+  <p class="lede">What the data doesn't say, and where sources disagree. Read before building campaigns on this.</p>
+
+  <h3>Blank on purpose</h3>
+  <ul class="tight">
+    <li><strong>Farrow Play (ACC-0018):</strong> one contact on file (the champion). No decision maker, no call, interview or review. Intent stage blank.</li>
+    <li><strong>Skerry Interactive (ACC-0055):</strong> the one best customer championed by a Head of E-commerce rather than a payments leader. No signal before pipeline, no words on file. Why it worked is unknown.</li>
+    <li><strong>Dalby Invest (ACC-0040):</strong> no public signal before pipeline. The only signal on file (fraud analytics hiring) came two years after.</li>
+    <li><strong>Intent stage</strong> is blank for 7 of 60 accounts.</li>
+  </ul>
+
+  <h3>Where the sources disagree</h3>
+  <ul class="tight">
+    <li><strong>Belmar Play:</strong> Hugo Muller says the brand is live in "about 60 markets". The CRM says 48. It may have grown after a licence round, or one of the two is wrong.</li>
+    <li><strong>Jarrow Holidays:</strong> the interview names a PSP renewal as the trigger ("up in six months"). The enrichment file only has the acquisition.</li>
+    <li><strong>Clyde Play:</strong> the interview names three new markets in one quarter. The enrichment file has no market launch before pipeline.</li>
+    <li>So the enrichment file misses triggers the customers name themselves. <strong>Trigger counts here are a floor.</strong></li>
+  </ul>
+
+  <h3>Limits</h3>
+  <ul class="tight">
+    <li><strong>Synthetic and circular.</strong> The data was generated from assumptions, so the ICP confirms them.</li>
+    <li><strong>Small sample.</strong> 17 best customers, 6 look-alikes. Every anti-ICP group except tenders has fewer than five accounts: treat them as anecdotes until more deals close.</li>
+    <li><strong>In-sample numbers.</strong> The 74% list precision, and the 16 of 16 once a payments leader is required, are fitted and measured on the same 60 accounts. Expect lower on new accounts.</li>
+    <li><strong>Confidence tiers.</strong> Acquisitions and market launches are Confirmed. PSP renewals are mostly Inferred, from job postings and analyst notes: verify before acting on them.</li>
+    <li><strong>Buying roles are rep-assigned.</strong> Use titles, not roles, when building the list.</li>
+  </ul>
+  <p>Phone calls stay irreplaceable. This tells you who to call, not what they'll say.</p>
+</section>
+
+<footer>
+  Method adapted from the icp-synthesis skill by Nick Christensen (ship-icp-ads-automate-monitoring, MIT License, see THIRD-PARTY-NOTICES.md). Sources: data/accounts.csv, contacts.csv, enrichment.csv, call-notes.md, win-loss-interviews.md, reviews.md. All data synthetic.
+</footer>
+
+</div>
+</body>
+</html>
